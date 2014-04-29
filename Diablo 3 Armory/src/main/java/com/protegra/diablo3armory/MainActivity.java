@@ -120,7 +120,6 @@ public class MainActivity extends ActionBarActivity {
             } else {
                 // good battleTag
             }
-
         } catch (MalformedURLException e) {
             // URL is invalid
         } catch (SocketTimeoutException e) {
