@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -23,7 +24,6 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends ActionBarActivity {
     //public final static String EXTRA_MESSAGE = "com.protegra.diablo3armory.MESSAGE";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,15 +54,36 @@ public class MainActivity extends ActionBarActivity {
 
     public void searchHero(View view) throws IOException, ExecutionException, InterruptedException {
         EditText editText = (EditText) findViewById(R.id.hero_text);
-        String battleTag = editText.getText() != null ? editText.getText().toString() : "";
 
-        String domain = "http://us.battle.net";
+        String battleTag = editText.getText() != null ? editText.getText().toString() : "";
+        String selectedRegionUrl = getRegionUrl((RadioGroup) findViewById(R.id.regions_radio_group));
 
         // instead of hard coding the host we should use a radio button to choose host
         if (isNetworkAvailable()) {
-            getCareer(domain, battleTag);
+            getCareer(selectedRegionUrl, battleTag);
         }
     }
+
+    private String getRegionUrl(RadioGroup regionsRadioGroup) {
+        int id = regionsRadioGroup.getCheckedRadioButtonId();
+        String regionUrl = "";
+
+        switch(id)
+        {
+            case R.id.NA_region_radio_button:
+                regionUrl = getResources().getString(R.string.NA_region_url);
+                break;
+            case R.id.EU_region_radio_button:
+                regionUrl = getResources().getString(R.string.EU_region_url);
+                break;
+            case R.id.SEA_region_radio_button:
+                regionUrl = getResources().getString(R.string.SEA_region_url);
+                break;
+        }
+
+        return regionUrl;
+    }
+
 
     public boolean isNetworkAvailable() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -97,6 +118,7 @@ public class MainActivity extends ActionBarActivity {
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
+
         public PlaceholderFragment() {
         }
 

@@ -3,9 +3,15 @@
 
     <string name="app_name">Diablo 3 Armory</string>
     <string name="action_settings">Settings</string>
-    <string name="hero_text">hero-1234</string>
+    <string name="hero_text">Enter battletag (eg. hero-1234)</string>
     <string name="button_submit">Submit</string>
     <string name="title_activity_search_hero">SearchHeroActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="NA_region_string">Americas (NA)</string>
+    <string name="EU_region_string">Europe (EU)</string>
+    <string name="SEA_region_string">Asia (SEA)</string>
+    <string name="NA_region_url">http://us.battle.net</string>
+    <string name="EU_region_url">http://eu.battle.net</string>
+    <string name="SEA_region_url">http://sea.battle.net</string>
 
 </resources>
