@@ -1,5 +1,7 @@
 package com.protegra.diablo3armory;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Build;
 
@@ -20,6 +22,30 @@ public class GetProfileTask extends AsyncTask <String, Integer, JSONObject> {
     private static final int DATA_RETRIEVAL_TIMEOUT = 10000;
     private static final String NOT_FOUND_CODE = "NOTFOUND";
 
+    private ProgressDialog progress;
+
+    public GetProfileTask(Activity activity) {
+        progress = new ProgressDialog(activity);
+        progress.setMessage(activity.getResources().getString(R.string.profile_loading_message));
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+    }
+
+    @Override
+    protected void onPreExecute(){
+        progress.show();
+        super.onPreExecute();
+    }
+
+    @Override
+    protected void onPostExecute(JSONObject object){
+        super.onPostExecute(object);
+
+        if (progress.isShowing())
+        {
+            progress.dismiss();
+        }
+    }
+
     @Override
     protected JSONObject doInBackground(String [] objects) {
         disableConnectionReuseIfNecessary();
@@ -29,6 +55,7 @@ public class GetProfileTask extends AsyncTask <String, Integer, JSONObject> {
         JSONObject jObject = null;
 
         HttpURLConnection urlConnection = null;
+
         try {
             // create connection
             URL urlToRequest = new URL(serviceUrl);

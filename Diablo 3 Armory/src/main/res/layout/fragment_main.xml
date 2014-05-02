@@ -21,13 +21,13 @@
             android:hint="@string/hero_text"
             android:inputType="textNoSuggestions"
             android:gravity="center"
-            android:maxLines="1"/>
+            android:maxLines="1"
+            android:layout_weight="1" />
 
-        <ImageButton android:id="@+id/button_submit"
+        <Button android:id="@+id/button_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_send"
-            android:background="@android:color/transparent"
+            android:text="@string/button_submit"
             android:onClick="searchHero"/>
     </LinearLayout>
 
@@ -50,9 +50,15 @@
             android:layout_height="match_parent"
             android:text="@string/EU_region_string"/>
         <RadioButton
-            android:id="@+id/SEA_region_radio_button"
+            android:id="@+id/TW_region_radio_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/SEA_region_string"/>
+            android:text="@string/TW_region_string"/>
+        <RadioButton
+            android:id="@+id/KR_region_radio_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/KR_region_string"/>
+
     </RadioGroup>
 </RelativeLayout>
