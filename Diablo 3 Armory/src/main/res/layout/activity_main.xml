@@ -1,7 +1,64 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="horizontal"
     tools:context="com.protegra.diablo3armory.MainActivity"
-    tools:ignore="MergeRootFrame" />
+    tools:ignore="MergeRootFrame" >
+
+    <LinearLayout
+        android:id="@+id/text_button_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <EditText android:id="@+id/hero_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/hero_text"
+            android:inputType="textNoSuggestions"
+            android:gravity="center"
+            android:maxLines="1"
+            android:layout_weight="1" />
+
+        <Button android:id="@+id/button_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_submit"
+            android:onClick="searchHero"/>
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/regions_radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkedButton="@+id/NA_region_radio_button"
+        android:layout_below="@+id/text_button_layout"
+        android:layout_centerHorizontal="true">
+
+        <RadioButton
+            android:id="@+id/NA_region_radio_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/NA_region_string"/>
+        <RadioButton
+            android:id="@+id/EU_region_radio_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/EU_region_string"/>
+        <RadioButton
+            android:id="@+id/TW_region_radio_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/TW_region_string"/>
+        <RadioButton
+            android:id="@+id/KR_region_radio_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/KR_region_string"/>
+    </RadioGroup>
+</RelativeLayout>
