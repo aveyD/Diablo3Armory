@@ -1,9 +1,11 @@
-package com.protegra.diablo3armory;
+package com.protegra.diablo3armory.activity.handlers.mainActivityHandlers;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Build;
+
+import com.protegra.diablo3armory.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,14 +19,14 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.Scanner;
 
-public class GetProfileTask extends AsyncTask <String, Integer, JSONObject> {
+public class GetProfileWebServiceTask extends AsyncTask <String, Integer, JSONObject> {
     private static final int CONNECTION_TIMEOUT = 10000;
     private static final int DATA_RETRIEVAL_TIMEOUT = 10000;
     private static final String NOT_FOUND_CODE = "NOTFOUND";
 
     private ProgressDialog progress;
 
-    public GetProfileTask(Activity activity) {
+    public GetProfileWebServiceTask(Activity activity) {
         progress = new ProgressDialog(activity);
         progress.setMessage(activity.getResources().getString(R.string.profile_loading_message));
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
