@@ -7,7 +7,9 @@ import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -28,6 +30,9 @@ public class SearchHeroButtonHandler extends EventHandler {
     }
 
     public void searchHero() throws IOException, ExecutionException, InterruptedException {
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.search_hero_progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+
         EditText editText = (EditText) findViewById(R.id.hero_text);
 
         String battleTag = editText.getText() != null ? editText.getText().toString() : "";
@@ -39,13 +44,15 @@ public class SearchHeroButtonHandler extends EventHandler {
                 getCareer(selectedRegionUrl, battleTag);
             }
             else{
-                Toast.makeText(activity, "No network available", Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, getResources().getString(R.string.no_network_available), Toast.LENGTH_LONG).show();
             }
         }
         else
         {
-            displayInvalidBatletagFormatAlert();
+            displayInvalidBattletagFormatAlert();
         }
+
+        progressBar.setVisibility(View.GONE);
     }
 
     private String getRegionUrl(RadioGroup regionsRadioGroup) {
@@ -54,16 +61,16 @@ public class SearchHeroButtonHandler extends EventHandler {
 
         switch(id)
         {
-            case R.id.NA_region_radio_button:
+            case R.id.na_region_radio_button:
                 regionUrl = getResources().getString(R.string.na_region_url);
                 break;
-            case R.id.EU_region_radio_button:
+            case R.id.eu_region_radio_button:
                 regionUrl = getResources().getString(R.string.eu_region_url);
                 break;
-            case R.id.TW_region_radio_button:
+            case R.id.tw_region_radio_button:
                 regionUrl = getResources().getString(R.string.tw_region_url);
                 break;
-            case R.id.KR_region_radio_button:
+            case R.id.kr_region_radio_button:
                 regionUrl = getResources().getString(R.string.kr_region_string);
                 break;
         }
@@ -90,9 +97,9 @@ public class SearchHeroButtonHandler extends EventHandler {
     }
 
     private JSONObject getProfile(String url) throws InterruptedException, ExecutionException {
-        GetProfileWebServiceTask profile = new GetProfileWebServiceTask(activity);
-
+        GetProfileWebServiceTask profile = new GetProfileWebServiceTask();
         AsyncTask<String, Integer, JSONObject> task = profile.execute(url);
+
         return task.get();
     }
 
@@ -103,7 +110,7 @@ public class SearchHeroButtonHandler extends EventHandler {
         Toast.makeText(activity, resultMessage, Toast.LENGTH_LONG).show();
     }
 
-    private void displayInvalidBatletagFormatAlert() {
+    private void displayInvalidBattletagFormatAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setMessage(getResources().getString(R.string.valid_battletag_format_blurb))
                 .setTitle(getResources().getString(R.string.invalid_battletag_format))

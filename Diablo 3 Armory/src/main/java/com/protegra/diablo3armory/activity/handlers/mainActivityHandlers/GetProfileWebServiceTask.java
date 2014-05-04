@@ -1,11 +1,7 @@
 package com.protegra.diablo3armory.activity.handlers.mainActivityHandlers;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Build;
-
-import com.protegra.diablo3armory.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,8 +10,6 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.Scanner;
 
@@ -24,81 +18,28 @@ public class GetProfileWebServiceTask extends AsyncTask <String, Integer, JSONOb
     private static final int DATA_RETRIEVAL_TIMEOUT = 10000;
     private static final String NOT_FOUND_CODE = "NOTFOUND";
 
-    private ProgressDialog progress;
-
-    public GetProfileWebServiceTask(Activity activity) {
-        progress = new ProgressDialog(activity);
-        progress.setMessage(activity.getResources().getString(R.string.profile_loading_message));
-        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-    }
-
-    @Override
-    protected void onPreExecute(){
-        progress.show();
-        super.onPreExecute();
-    }
-
-    @Override
-    protected void onPostExecute(JSONObject object){
-        super.onPostExecute(object);
-
-        if (progress.isShowing())
-        {
-            progress.dismiss();
-        }
-    }
-
     @Override
     protected JSONObject doInBackground(String [] objects) {
-        disableConnectionReuseIfNecessary();
-        //enableHttpResponseCache();
+        disableConnectionReuseForEclairAndLower();
 
         String serviceUrl = objects[0];
         JSONObject jObject = null;
-
         HttpURLConnection urlConnection = null;
 
         try {
-            // create connection
-            URL urlToRequest = new URL(serviceUrl);
-            urlConnection = (HttpURLConnection) urlToRequest.openConnection();
-            urlConnection.setConnectTimeout(CONNECTION_TIMEOUT);
-            urlConnection.setReadTimeout(DATA_RETRIEVAL_TIMEOUT);
-            urlConnection.setDoInput(true);
-            urlConnection.setRequestProperty("Content-Type", "application/json");
-            urlConnection.setInstanceFollowRedirects(true);
-            urlConnection.setRequestMethod("GET");
-            urlConnection.setRequestProperty("Content-length", "0");
-
+            urlConnection = createConnection(serviceUrl);
             urlConnection.connect();
 
-            // handle issues
-//            int statusCode = urlConnection.getResponseCode();
-//            if (statusCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
-//                // handle unauthorized (if service requires user login)
-//            } else if (statusCode != HttpURLConnection.HTTP_OK) {
-//                // handle any other errors, like 404, 500,..
-//            }
-
-            // create JSON object from content
-            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-
-            jObject = new JSONObject(getResponseText(in));
+            jObject = getJsonObject(urlConnection);
 
             if (jObject.get("code").equals(NOT_FOUND_CODE)) {
-                // bad battleTag
                 jObject = null;
             }
-        } catch (MalformedURLException e) {
-            // URL is invalid
-        } catch (SocketTimeoutException e) {
-            // data retrieval or connection timed out
-        } catch (IOException e) {
-            // could not read response body
-            // (could not create input stream)
-        } catch (JSONException e) {
-            // response body is no valid JSON string
-        } finally {
+        }
+        catch (Exception e) {
+            //do nothing
+        }
+        finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
             }
@@ -107,30 +48,34 @@ public class GetProfileWebServiceTask extends AsyncTask <String, Integer, JSONOb
         return jObject;
     }
 
-    /**
-     * required in order to prevent issues in earlier Android version.
-     */
-    private static void disableConnectionReuseIfNecessary() {
+    private static void disableConnectionReuseForEclairAndLower() {
         // see HttpURLConnection API doc
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
             System.setProperty("http.keepAlive", "false");
         }
     }
 
-    private static String getResponseText(InputStream inStream) {
-        // very nice trick from
-        // http://weblogs.java.net/blog/pat/archive/2004/10/stupid_scanner_1.html
-        return new Scanner(inStream).useDelimiter("\\A").next();
+    private HttpURLConnection createConnection(String serviceUrl) throws IOException {
+        URL urlToRequest = new URL(serviceUrl);
+
+        HttpURLConnection urlConnection = (HttpURLConnection) urlToRequest.openConnection();
+        urlConnection.setConnectTimeout(CONNECTION_TIMEOUT);
+        urlConnection.setReadTimeout(DATA_RETRIEVAL_TIMEOUT);
+        urlConnection.setDoInput(true);
+        urlConnection.setRequestProperty("Content-Type", "application/json");
+        urlConnection.setInstanceFollowRedirects(true);
+        urlConnection.setRequestMethod("GET");
+        urlConnection.setRequestProperty("Content-length", "0");
+
+        return urlConnection;
     }
 
-//    private void enableHttpResponseCache() {
-//        try {
-//            long httpCacheSize = 10 * 1024 * 1024; // 10 MiB
-//            File httpCacheDir = new File(getCacheDir(), "http");
-//            Class.forName("android.net.http.HttpResponseCache")
-//                    .getMethod("install", File.class, long.class)
-//                    .invoke(null, httpCacheDir, httpCacheSize);
-//        } catch (Exception httpResponseCacheNotAvailable) {
-//        }
-//    }
+    private JSONObject getJsonObject(HttpURLConnection urlConnection) throws IOException, JSONException {
+        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+        return new JSONObject(getResponseText(in));
+    }
+
+    private static String getResponseText(InputStream inStream) {
+        return new Scanner(inStream).useDelimiter("\\A").next();
+    }
 }

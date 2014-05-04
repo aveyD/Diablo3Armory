@@ -11,6 +11,19 @@
     tools:ignore="MergeRootFrame" >
 
     <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center">
+
+        <ProgressBar
+            android:id="@+id/search_hero_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            style="@android:style/Widget.ProgressBar"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/text_button_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -36,29 +49,30 @@
         android:id="@+id/regions_radio_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checkedButton="@+id/NA_region_radio_button"
+        android:checkedButton="@+id/na_region_radio_button"
         android:layout_below="@+id/text_button_layout"
         android:layout_centerHorizontal="true">
 
         <RadioButton
-            android:id="@+id/NA_region_radio_button"
+            android:id="@+id/na_region_radio_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/na_region_string"/>
         <RadioButton
-            android:id="@+id/EU_region_radio_button"
+            android:id="@+id/eu_region_radio_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/eu_region_string"/>
         <RadioButton
-            android:id="@+id/TW_region_radio_button"
+            android:id="@+id/tw_region_radio_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/tw_region_string"/>
         <RadioButton
-            android:id="@+id/KR_region_radio_button"
+            android:id="@+id/kr_region_radio_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/kr_region_string"/>
     </RadioGroup>
+
 </RelativeLayout>
