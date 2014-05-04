@@ -9,7 +9,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="NA_region_string">Americas (NA)</string>
     <string name="EU_region_string">Europe (EU)</string>
-    <string name="TW_region_string">Taiwan (TW))</string>
+    <string name="TW_region_string">Taiwan (TW)</string>
     <string name="KR_region_string">Korea (KR)</string>
     <string name="NA_region_url">http://us.battle.net</string>
     <string name="EU_region_url">http://eu.battle.net</string>
