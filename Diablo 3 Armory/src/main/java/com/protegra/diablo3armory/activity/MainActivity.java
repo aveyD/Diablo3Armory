@@ -9,12 +9,13 @@ import android.view.View;
 import com.protegra.diablo3armory.R;
 import com.protegra.diablo3armory.activity.handlers.mainActivityHandlers.SearchHeroButtonHandler;
 
+import org.json.JSONException;
+
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 
 public class MainActivity extends ActionBarActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +38,7 @@ public class MainActivity extends ActionBarActivity {
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
-    public void searchHero(View view) throws IOException, ExecutionException, InterruptedException {
+    public void searchHero(View view) throws IOException, ExecutionException, InterruptedException, JSONException {
         SearchHeroButtonHandler handler = getSearchHeroHandler();
         handler.searchHero();
     }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="heroes">heroes</string>
+    <string name="time_played">timePlayed</string>
+    <string name="progression">progression</string>
+    <string name="battle_tag">battleTag</string>
+    <string name="last_updated">last_updated</string>
+    <string name="kills">kills</string>
+    <string name="paragon_level">paragonLevel</string>
+    <string name="paragon_level_hardcore">paragonLevelHardcore</string>
+    <string name="fallen_heroes">fallenHeroes</string>
+    <string name="last_hero_played">lastHeroPlayed</string>
+</resources>

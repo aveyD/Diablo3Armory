@@ -2,18 +2,15 @@ package com.protegra.diablo3armory.domain;
 
 import java.util.Date;
 
-/**
- * Created by David on 28/04/2014.
- */
 public class Hero {
     private int paragonLevel;
     private String name;
-    private int id;
+    private Long id;
     private int level;
     private boolean hardcore;
-    private int gender;
+    private Gender gender;
     private boolean dead;
-    private String heroClass;
+    private HeroClass heroClass;
     private Date lastUpdated;
 
     private Item head;
@@ -54,11 +51,9 @@ public class Hero {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
-    }
+    public Long getId() { return id; }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -78,11 +73,11 @@ public class Hero {
         this.hardcore = hardcore;
     }
 
-    public int getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -94,11 +89,11 @@ public class Hero {
         this.dead = dead;
     }
 
-    public String getHeroClass() {
+    public HeroClass getHeroClass() {
         return heroClass;
     }
 
-    public void setHeroClass(String heroClass) {
+    public void setHeroClass(HeroClass heroClass) {
         this.heroClass = heroClass;
     }
 

@@ -1,7 +1,12 @@
 package com.protegra.diablo3armory.activity.handlers.mainActivityHandlers;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.view.View;
+import android.widget.ProgressBar;
+
+import com.protegra.diablo3armory.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +22,24 @@ public class GetProfileWebServiceTask extends AsyncTask <String, Integer, JSONOb
     private static final int CONNECTION_TIMEOUT = 10000;
     private static final int DATA_RETRIEVAL_TIMEOUT = 10000;
     private static final String NOT_FOUND_CODE = "NOTFOUND";
+
+    private ProgressBar progress;
+
+    public GetProfileWebServiceTask(Activity activity) {
+        this.progress = (ProgressBar) activity.findViewById(R.id.search_hero_progressbar);
+    }
+
+    @Override
+    protected void onPreExecute(){
+        progress.setVisibility(View.VISIBLE);
+        super.onPreExecute();
+    }
+
+    @Override
+    protected void onPostExecute(JSONObject object){
+        super.onPostExecute(object);
+        progress.setVisibility(View.GONE);
+    }
 
     @Override
     protected JSONObject doInBackground(String [] objects) {

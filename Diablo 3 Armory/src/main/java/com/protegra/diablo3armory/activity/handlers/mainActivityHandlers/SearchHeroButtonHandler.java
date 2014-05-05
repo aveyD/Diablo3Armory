@@ -7,16 +7,16 @@ import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.protegra.diablo3armory.R;
 import com.protegra.diablo3armory.activity.handlers.EventHandler;
-import com.protegra.diablo3armory.util.BattletagUtil;
+import com.protegra.diablo3armory.helpers.BattletagUtil;
+import com.protegra.diablo3armory.helpers.CareerCreator;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -29,10 +29,7 @@ public class SearchHeroButtonHandler extends EventHandler {
         super(activity);
     }
 
-    public void searchHero() throws IOException, ExecutionException, InterruptedException {
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.search_hero_progressbar);
-        progressBar.setVisibility(View.VISIBLE);
-
+    public void searchHero() throws IOException, ExecutionException, InterruptedException, JSONException {
         EditText editText = (EditText) findViewById(R.id.hero_text);
 
         String battleTag = editText.getText() != null ? editText.getText().toString() : "";
@@ -51,8 +48,6 @@ public class SearchHeroButtonHandler extends EventHandler {
         {
             displayInvalidBattletagFormatAlert();
         }
-
-        progressBar.setVisibility(View.GONE);
     }
 
     private String getRegionUrl(RadioGroup regionsRadioGroup) {
@@ -71,7 +66,7 @@ public class SearchHeroButtonHandler extends EventHandler {
                 regionUrl = getResources().getString(R.string.tw_region_url);
                 break;
             case R.id.kr_region_radio_button:
-                regionUrl = getResources().getString(R.string.kr_region_string);
+                regionUrl = getResources().getString(R.string.kr_region_url);
                 break;
         }
 
@@ -87,7 +82,7 @@ public class SearchHeroButtonHandler extends EventHandler {
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    private void getCareer(String domain, String hero) throws IOException, ExecutionException, InterruptedException {
+    private void getCareer(String domain, String hero) throws IOException, ExecutionException, InterruptedException, JSONException {
         String url = domain + "/api/d3/profile/" +  hero + "/";
 
         JSONObject result = getProfile(url);
@@ -97,15 +92,22 @@ public class SearchHeroButtonHandler extends EventHandler {
     }
 
     private JSONObject getProfile(String url) throws InterruptedException, ExecutionException {
-        GetProfileWebServiceTask profile = new GetProfileWebServiceTask();
+        GetProfileWebServiceTask profile = new GetProfileWebServiceTask(activity);
         AsyncTask<String, Integer, JSONObject> task = profile.execute(url);
 
         return task.get();
     }
 
-    private void showResultToast(String hero, JSONObject result) {
+    //TODO: Throwaway method.  Do the actual work instead of calling this method.
+    private void showResultToast(String hero, JSONObject result) throws JSONException {
         String resultMessage = hero + " ";
         resultMessage += (result != null) ? "was found!" : "not found";
+
+        //Parse the json object
+        if (result != null) {
+            CareerCreator creator = new CareerCreator();
+            creator.createCareer(result);
+        }
 
         Toast.makeText(activity, resultMessage, Toast.LENGTH_LONG).show();
     }

@@ -2,19 +2,17 @@ package com.protegra.diablo3armory.domain;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
-/**
- * Created by David on 28/04/2014.
- */
 public class Career {
-    private List<Hero> heroes;
-    private Date lastHeroPlayed;
+    private Map<Long, Hero> heroes;
+    private Hero lastHeroPlayed;
     private Date lastUpdated;
     private Kills kills;
     private TimePlayed timePlayed;
     private List<Hero> fallenHeroes;
-    private int paragonLevel;
-    private int paragonLevelHardcore;
+    private Integer paragonLevel;
+    private Integer paragonLevelHardcore;
     private String battleTag;
     private CareerProgression progression;
 
@@ -26,19 +24,19 @@ public class Career {
         return null;
     }
 
-    public List<Hero> getHeroes() {
+    public Map<Long, Hero> getHeroes() {
         return heroes;
     }
 
-    public void setHeroes(List<Hero> heroes) {
+    public void setHeroes(Map<Long, Hero> heroes) {
         this.heroes = heroes;
     }
 
-    public Date getLastHeroPlayed() {
+    public Hero getLastHeroPlayed() {
         return lastHeroPlayed;
     }
 
-    public void setLastHeroPlayed(Date lastHeroPlayed) {
+    public void setLastHeroPlayed(Hero lastHeroPlayed) {
         this.lastHeroPlayed = lastHeroPlayed;
     }
 
@@ -74,19 +72,19 @@ public class Career {
         this.fallenHeroes = fallenHeroes;
     }
 
-    public int getParagonLevel() {
+    public Integer getParagonLevel() {
         return paragonLevel;
     }
 
-    public void setParagonLevel(int paragonLevel) {
+    public void setParagonLevel(Integer paragonLevel) {
         this.paragonLevel = paragonLevel;
     }
 
-    public int getParagonLevelHardcore() {
+    public Integer getParagonLevelHardcore() {
         return paragonLevelHardcore;
     }
 
-    public void setParagonLevelHardcore(int paragonLevelHardcore) {
+    public void setParagonLevelHardcore(Integer paragonLevelHardcore) {
         this.paragonLevelHardcore = paragonLevelHardcore;
     }
 

@@ -1,4 +1,4 @@
-package com.protegra.diablo3armory.util;
+package com.protegra.diablo3armory.helpers;
 
 public final class BattletagUtil {
 
