@@ -65,11 +65,11 @@ public class CareerCreator {
         return date;
     }
 
-    private Map<Long, Hero> getHeroes(JSONArray heroes) throws JSONException {
+    private Map<Long, Hero> getHeroes(JSONArray heroesJson) throws JSONException {
         Map<Long, Hero> heroesMap = new HashMap<Long, Hero>();
 
-        for (int i = 0; i < heroes.length(); i++) {
-            JSONObject json = heroes.getJSONObject(i);
+        for (int i = 0; i < heroesJson.length(); i++) {
+            JSONObject json = heroesJson.getJSONObject(i);
 
             Hero hero = new Hero();
             Long id = json.getLong("id");
@@ -89,15 +89,25 @@ public class CareerCreator {
         return heroesMap;
     }
 
-    private Hero getLastHeroPlayed(Long lastHeroPlayed, Map<Long, Hero> heroes) {
-        return null;
+    private Hero getLastHeroPlayed(Long lastHeroPlayedId, Map<Long, Hero> heroes) {
+        return heroes.get(lastHeroPlayedId);
     }
 
-    private Kills getKills(JSONObject kills) {
-        return null;
+    private Kills getKills(JSONObject kills) throws JSONException {
+        Kills kill = new Kills();
+
+        kill.setMonsterKills(kills.getInt("monsters"));
+        kill.setEliteKills(kills.getInt("elites"));
+        kill.setHardcoreMonsterKills(kills.getInt("hardcoreMonsters"));
+
+        return kill;
     }
 
-    private TimePlayed getTimePlayed(JSONObject timePlayed) {
+    private TimePlayed getTimePlayed(JSONObject timePlayedJson) {
+        TimePlayed time = new TimePlayed();
+
+        //time.set
+
         return null;
     }
 

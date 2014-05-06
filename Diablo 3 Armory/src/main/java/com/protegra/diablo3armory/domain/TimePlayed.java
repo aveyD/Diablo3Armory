@@ -4,9 +4,9 @@ package com.protegra.diablo3armory.domain;
  * Created by David on 01/05/2014.
  */
 public class TimePlayed {
-    private double barbarian;
-    private double crusader;
-    private double demonHunter;
+    private double barbarian = 0;
+    private double crusader = 0;
+    private double demonHunter = 0;
     private double monk;
     private double witchDoctor;
     private double wizard;
