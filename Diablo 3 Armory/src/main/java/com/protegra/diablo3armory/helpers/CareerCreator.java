@@ -1,10 +1,13 @@
 package com.protegra.diablo3armory.helpers;
 
+import com.protegra.diablo3armory.domain.ActiveHero;
 import com.protegra.diablo3armory.domain.Career;
 import com.protegra.diablo3armory.domain.CareerProgression;
+import com.protegra.diablo3armory.domain.FallenHero;
 import com.protegra.diablo3armory.domain.Gender;
-import com.protegra.diablo3armory.domain.Hero;
 import com.protegra.diablo3armory.domain.HeroClass;
+import com.protegra.diablo3armory.domain.Item;
+import com.protegra.diablo3armory.domain.ItemLoadout;
 import com.protegra.diablo3armory.domain.Kills;
 import com.protegra.diablo3armory.domain.TimePlayed;
 
@@ -14,7 +17,6 @@ import org.json.JSONObject;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class CareerCreator {
@@ -25,10 +27,10 @@ public class CareerCreator {
 
         Career career = new Career();
 
-        Map<Long, Hero> heroes = getHeroes(object.getJSONArray("heroes"));
-        career.setHeroes(heroes);
+        Map<Long, ActiveHero> activeHeroes = getHeroes(object.getJSONArray("heroes"));
+        career.setActiveHeroes(activeHeroes);
 
-        Hero lastHeroPlayed = getLastHeroPlayed(object.getLong("lastHeroPlayed"), heroes);
+        ActiveHero lastHeroPlayed = getLastHeroPlayed(object.getLong("lastHeroPlayed"), activeHeroes);
         career.setLastHeroPlayed(lastHeroPlayed);
 
         Date lastUpdated = getDate(object.getLong("lastUpdated"));
@@ -40,7 +42,7 @@ public class CareerCreator {
         TimePlayed timePlayed = getTimePlayed(object.getJSONObject("timePlayed"));
         career.setTimePlayed(timePlayed);
 
-        List<Hero> fallenHeroes = getFallenHeroes(object.getJSONArray("fallenHeroes"));
+        Map<Long, FallenHero> fallenHeroes = getFallenHeroes(object.getJSONArray("fallenHeroes"));
         career.setFallenHeroes(fallenHeroes);
 
         Integer paragonLevel = object.getInt("paragonLevel");
@@ -65,13 +67,13 @@ public class CareerCreator {
         return date;
     }
 
-    private Map<Long, Hero> getHeroes(JSONArray heroesJson) throws JSONException {
-        Map<Long, Hero> heroesMap = new HashMap<Long, Hero>();
+    private Map<Long, ActiveHero> getHeroes(JSONArray heroesJson) throws JSONException {
+        Map<Long, ActiveHero> heroesMap = new HashMap<Long, ActiveHero>();
 
         for (int i = 0; i < heroesJson.length(); i++) {
             JSONObject json = heroesJson.getJSONObject(i);
 
-            Hero hero = new Hero();
+            ActiveHero hero = new ActiveHero();
             Long id = json.getLong("id");
 
             hero.setId(id);
@@ -89,7 +91,7 @@ public class CareerCreator {
         return heroesMap;
     }
 
-    private Hero getLastHeroPlayed(Long lastHeroPlayedId, Map<Long, Hero> heroes) {
+    private ActiveHero getLastHeroPlayed(Long lastHeroPlayedId, Map<Long, ActiveHero> heroes) {
         return heroes.get(lastHeroPlayedId);
     }
 
@@ -103,19 +105,72 @@ public class CareerCreator {
         return kill;
     }
 
-    private TimePlayed getTimePlayed(JSONObject timePlayedJson) {
+    private TimePlayed getTimePlayed(JSONObject timePlayedJson) throws JSONException {
         TimePlayed time = new TimePlayed();
 
-        //time.set
+        time.setBarbarian(timePlayedJson.getDouble(HeroClass.BARBARIAN.getValue()));
+        time.setCrusader(timePlayedJson.getDouble(HeroClass.CRUSADER.getValue()));
+        time.setDemonHunter(timePlayedJson.getDouble(HeroClass.DEMON_HUNTER.getValue()));
+        time.setMonk(timePlayedJson.getDouble(HeroClass.MONK.getValue()));
+        time.setWitchDoctor(timePlayedJson.getDouble(HeroClass.WITCH_DOCTOR.getValue()));
+        time.setWizard(timePlayedJson.getDouble(HeroClass.WIZARD.getValue()));
+
+        return time;
+    }
+
+    private Map<Long, FallenHero> getFallenHeroes(JSONArray fallenHeroesJson) throws JSONException {
+        Map<Long, FallenHero> heroesMap = new HashMap<Long, FallenHero>();
+
+        for (int i = 0; i < fallenHeroesJson.length(); i++) {
+            JSONObject json = fallenHeroesJson.getJSONObject(i);
+
+            FallenHero hero = new FallenHero();
+            Long id = json.getLong("heroId");
+
+            hero.setId(id);
+            hero.setLevel(json.getInt("level"));
+            hero.setName(json.getString("name"));
+            hero.setHeroClass(HeroClass.getHeroClass(json.getString("class")));
+            hero.setGender(Gender.getGender(json.getInt("gender")));
+            hero.setItemLoadout(getItemLoadout(json.getJSONObject(("items"))));
+
+            heroesMap.put(id, hero);
+        }
+
+        return heroesMap;
+    }
+
+    private ItemLoadout getItemLoadout(JSONObject itemLoadoutJson) throws JSONException {
+
+        ItemLoadout itemLoadout = new ItemLoadout();
+
+        Item icon = getItem(itemLoadoutJson.getJSONObject("torso"));
+
+        return itemLoadout;
+    }
+
+    private Item getItem(JSONObject itemJson) throws JSONException {
+        Item item = new Item();
+
+        item.setId(itemJson.getString("id"));
+        item.setIcon(itemJson.getString("icon"));
+        setCraftedBy(item, itemJson.getJSONArray("craftedBy"));
 
         return null;
     }
 
-    private List<Hero> getFallenHeroes(JSONArray fallenHeroes) {
-        return null;
+    private void setCraftedBy(Item item, JSONArray craftedByJson) {
     }
 
-    private CareerProgression getCareerProgression(JSONObject progression) {
-        return null;
+    private CareerProgression getCareerProgression(JSONObject progressionJson) throws JSONException {
+        CareerProgression progression = new CareerProgression();
+
+        progression.setAct1(progressionJson.getBoolean("act1"));
+        progression.setAct2(progressionJson.getBoolean("act2"));
+        progression.setAct3(progressionJson.getBoolean("act3"));
+        progression.setAct4(progressionJson.getBoolean("act4"));
+        progression.setAct5(progressionJson.getBoolean("act5"));
+
+        return progression;
     }
 }

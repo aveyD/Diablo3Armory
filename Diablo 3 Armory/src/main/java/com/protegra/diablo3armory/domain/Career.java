@@ -1,42 +1,34 @@
 package com.protegra.diablo3armory.domain;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 public class Career {
-    private Map<Long, Hero> heroes;
-    private Hero lastHeroPlayed;
+    private Map<Long, ActiveHero> activeHeroes;
+    private Map<Long, FallenHero> fallenHeroes;
+
+    private ActiveHero lastHeroPlayed;
     private Date lastUpdated;
     private Kills kills;
     private TimePlayed timePlayed;
-    private List<Hero> fallenHeroes;
     private Integer paragonLevel;
     private Integer paragonLevelHardcore;
     private String battleTag;
     private CareerProgression progression;
 
-    public static boolean hasSavedCareer(String battleTag) {
-        return false;
+    public Map<Long, ActiveHero> getActiveHeroes() {
+        return activeHeroes;
     }
 
-    public static Career getSavedCareer(String battleTag) {
-        return null;
+    public void setActiveHeroes(Map<Long, ActiveHero> activeHeroes) {
+        this.activeHeroes = activeHeroes;
     }
 
-    public Map<Long, Hero> getHeroes() {
-        return heroes;
-    }
-
-    public void setHeroes(Map<Long, Hero> heroes) {
-        this.heroes = heroes;
-    }
-
-    public Hero getLastHeroPlayed() {
+    public ActiveHero getLastHeroPlayed() {
         return lastHeroPlayed;
     }
 
-    public void setLastHeroPlayed(Hero lastHeroPlayed) {
+    public void setLastHeroPlayed(ActiveHero lastHeroPlayed) {
         this.lastHeroPlayed = lastHeroPlayed;
     }
 
@@ -64,11 +56,11 @@ public class Career {
         this.timePlayed = timePlayed;
     }
 
-    public List<Hero> getFallenHeroes() {
+    public Map<Long, FallenHero> getFallenHeroes() {
         return fallenHeroes;
     }
 
-    public void setFallenHeroes(List<Hero> fallenHeroes) {
+    public void setFallenHeroes(Map<Long, FallenHero> fallenHeroes) {
         this.fallenHeroes = fallenHeroes;
     }
 
