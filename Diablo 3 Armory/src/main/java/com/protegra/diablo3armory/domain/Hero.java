@@ -5,8 +5,6 @@ public abstract class Hero {
     private String name;
     private int level;
     private boolean hardcore;
-    private ItemLoadout itemLoadout;
-    private Stats stats;
     private HeroClass heroClass;
     private Gender gender;
     private int eliteKills;
@@ -57,27 +55,11 @@ public abstract class Hero {
         this.heroClass = heroClass;
     }
 
-    public Stats getStats() {
-        return stats;
-    }
-
-    public void setStats(Stats stats) {
-        this.stats = stats;
-    }
-
     public int getEliteKills() {
         return eliteKills;
     }
 
     public void setEliteKills(int eliteKills) {
         this.eliteKills = eliteKills;
-    }
-
-    public ItemLoadout getItemLoadout() {
-        return itemLoadout;
-    }
-
-    public void setItemLoadout(ItemLoadout itemLoadout) {
-        this.itemLoadout = itemLoadout;
     }
 }

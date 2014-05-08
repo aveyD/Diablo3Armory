@@ -3,20 +3,27 @@ package com.protegra.diablo3armory.helpers;
 import com.protegra.diablo3armory.domain.ActiveHero;
 import com.protegra.diablo3armory.domain.Career;
 import com.protegra.diablo3armory.domain.CareerProgression;
+import com.protegra.diablo3armory.domain.CraftedBy;
+import com.protegra.diablo3armory.domain.Death;
 import com.protegra.diablo3armory.domain.FallenHero;
 import com.protegra.diablo3armory.domain.Gender;
 import com.protegra.diablo3armory.domain.HeroClass;
 import com.protegra.diablo3armory.domain.Item;
-import com.protegra.diablo3armory.domain.ItemLoadout;
+import com.protegra.diablo3armory.domain.ItemLoadoutFallenHero;
+import com.protegra.diablo3armory.domain.ItemWearable;
 import com.protegra.diablo3armory.domain.Kills;
+import com.protegra.diablo3armory.domain.RandomAffix;
+import com.protegra.diablo3armory.domain.Reagent;
 import com.protegra.diablo3armory.domain.TimePlayed;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CareerCreator {
@@ -84,6 +91,7 @@ public class CareerCreator {
             hero.setGender(Gender.getGender(json.getInt("gender")));
             hero.setParagonLevel(json.getInt("paragonLevel"));
             hero.setDead(json.getBoolean("dead"));
+            hero.setHardcore(json.getBoolean("hardcore"));
 
             heroesMap.put(id, hero);
         }
@@ -132,7 +140,10 @@ public class CareerCreator {
             hero.setName(json.getString("name"));
             hero.setHeroClass(HeroClass.getHeroClass(json.getString("class")));
             hero.setGender(Gender.getGender(json.getInt("gender")));
-            hero.setItemLoadout(getItemLoadout(json.getJSONObject(("items"))));
+            setItemLoadoutFallenHero(hero, json.getJSONObject("items"));
+            hero.setHardcore(json.getBoolean("hardcore"));
+            setDeath(hero, json.getJSONObject("death"));
+            setEliteKills(hero, json.getJSONObject("kills"));
 
             heroesMap.put(id, hero);
         }
@@ -140,26 +151,148 @@ public class CareerCreator {
         return heroesMap;
     }
 
-    private ItemLoadout getItemLoadout(JSONObject itemLoadoutJson) throws JSONException {
-
-        ItemLoadout itemLoadout = new ItemLoadout();
-
-        Item icon = getItem(itemLoadoutJson.getJSONObject("torso"));
-
-        return itemLoadout;
+    private void setEliteKills(FallenHero hero, JSONObject killsJson) throws JSONException {
+        hero.setEliteKills(killsJson.getInt("elites"));
     }
 
-    private Item getItem(JSONObject itemJson) throws JSONException {
+    private void setDeath(FallenHero hero, JSONObject deathJson) throws JSONException {
+        Death death = new Death();
+
+        death.setKiller(deathJson.getInt("killer"));
+        death.setLocation(deathJson.getInt("location"));
+
+        Date date = getDate(deathJson.getLong("time"));
+        death.setTime(date);
+
+        hero.setDeath(death);
+    }
+
+    private void setItemLoadoutFallenHero(FallenHero fallenHero, JSONObject itemLoadoutJson) throws JSONException {
+
+        ItemLoadoutFallenHero itemLoadoutFallenHero = new ItemLoadoutFallenHero();
+
+        ItemWearable item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("torso"));
+        itemLoadoutFallenHero.setTorso(item);
+
+        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("neck"));
+        itemLoadoutFallenHero.setNeck(item);
+
+        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("leftFinger"));
+        itemLoadoutFallenHero.setLeftFinger(item);
+
+        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("mainHand"));
+        itemLoadoutFallenHero.setMainHand(item);
+
+        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("bracers"));
+        itemLoadoutFallenHero.setBracers(item);
+
+        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("hands"));
+        itemLoadoutFallenHero.setHands(item);
+
+        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("rightFinger"));
+        itemLoadoutFallenHero.setRightFinger(item);
+
+        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("feet"));
+        itemLoadoutFallenHero.setFeet(item);
+
+        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("waist"));
+        itemLoadoutFallenHero.setWaist(item);
+
+        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("legs"));
+        itemLoadoutFallenHero.setLegs(item);
+
+        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("offHand"));
+        itemLoadoutFallenHero.setOffHand(item);
+
+        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("head"));
+        itemLoadoutFallenHero.setHead(item);
+
+        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("shoulders"));
+        itemLoadoutFallenHero.setShoulders(item);
+
+        fallenHero.setItemLoadoutFallenHero(itemLoadoutFallenHero);
+    }
+
+    private ItemWearable getItemWearableFallenHero(JSONObject itemJson) throws JSONException {
+        ItemWearable item = new ItemWearable();
+
+        setItemFields(itemJson, item);
+
+        setCraftedBy(item, itemJson.getJSONArray("craftedBy"));
+        setRandomAffixes(item, itemJson.getJSONArray("randomAffixes"));
+
+        return item;
+    }
+
+    private void setRandomAffixes(Item item, JSONArray randomAffixesJson) throws JSONException {
+        List<RandomAffix> randomAffixes = new ArrayList<RandomAffix>();
+
+        //TODO: Need to figure out what to parse for random affixes
+        for (int i = 0; i < randomAffixesJson.length(); i++) {
+            JSONObject currObject = randomAffixesJson.getJSONObject(i);
+        }
+    }
+
+    private void setCraftedBy(ItemWearable item, JSONArray craftedByJson) throws JSONException {
+        List<CraftedBy> craftedByList = new ArrayList<CraftedBy>();
+
+        for (int i = 0; i < craftedByJson.length(); i++){
+            JSONObject currObject = craftedByJson.getJSONObject(i);
+
+            CraftedBy craftedBy = new CraftedBy();
+
+            craftedBy.setId(currObject.getString("id"));
+            craftedBy.setSlug("slug");
+            setReagents(craftedBy, currObject.getJSONArray("reagents"));
+            craftedBy.setCost(currObject.getLong("cost"));
+            setItemProduced(craftedBy, currObject.getJSONObject("itemProduced"));
+            craftedBy.setName(currObject.getString("name"));
+
+            craftedByList.add(craftedBy);
+        }
+
+        item.setCraftedByList(craftedByList);
+    }
+
+    private void setItemProduced(CraftedBy craftedBy, JSONObject itemJson) throws JSONException {
         Item item = new Item();
 
-        item.setId(itemJson.getString("id"));
-        item.setIcon(itemJson.getString("icon"));
-        setCraftedBy(item, itemJson.getJSONArray("craftedBy"));
+       setItemFields(itemJson, item);
 
-        return null;
+        craftedBy.setItemProduced(item);
     }
 
-    private void setCraftedBy(Item item, JSONArray craftedByJson) {
+    private void setItemFields(JSONObject itemJson, Item item) throws JSONException {
+        item.setId(itemJson.getString("id"));
+        item.setIcon(itemJson.getString("icon"));
+        item.setTooltipParams(itemJson.getString("tooltipParams"));
+        item.setDisplayColor(itemJson.getString("displayColor"));
+        item.setName(itemJson.getString("name"));
+    }
+
+    private void setReagents(CraftedBy craftedBy, JSONArray reagentsJson) throws JSONException {
+        List<Reagent> reagents = new ArrayList<Reagent>();
+
+        for (int i = 0; i < reagentsJson.length(); i++) {
+            JSONObject currObject = reagentsJson.getJSONObject(i);
+
+            Reagent reagent = new Reagent();
+
+            reagent.setQuantity(currObject.getInt("quantity"));
+            setReagentItem(reagent, currObject.getJSONObject("item"));
+
+            reagents.add(reagent);
+        }
+
+        craftedBy.setReagents(reagents);
+    }
+
+    private void setReagentItem(Reagent reagent, JSONObject itemJson) throws JSONException {
+        Item item = new Item();
+
+        setItemFields(itemJson, item);
+
+        reagent.setReagentItem(item);
     }
 
     private CareerProgression getCareerProgression(JSONObject progressionJson) throws JSONException {

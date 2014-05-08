@@ -8,7 +8,8 @@ public class ActiveHero extends Hero {
     private Date lastUpdated;
     private FollowerMaster followerMaster;
     private HeroProgression progression;
-
+    private ItemLoadoutActiveHero itemLoadoutActiveHero;
+    private Stats stats;
 
     public int getParagonLevel() {
         return paragonLevel;
@@ -48,5 +49,21 @@ public class ActiveHero extends Hero {
 
     public void setProgression(HeroProgression progression) {
         this.progression = progression;
+    }
+
+    public ItemLoadoutActiveHero getItemLoadoutActiveHero() {
+        return itemLoadoutActiveHero;
+    }
+
+    public void setItemLoadoutActiveHero(ItemLoadoutActiveHero itemLoadoutActiveHero) {
+        this.itemLoadoutActiveHero = itemLoadoutActiveHero;
+    }
+
+    public Stats getStats() {
+        return stats;
+    }
+
+    public void setStats(Stats stats) {
+        this.stats = stats;
     }
 }
