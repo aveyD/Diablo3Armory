@@ -67,13 +67,6 @@ public class CareerCreator {
         return career;
     }
 
-    private Date getDate(Long longDate) throws JSONException {
-        Date date = new Date();
-        date.setTime(longDate * TIME_MULTIPLER);
-
-        return date;
-    }
-
     private Map<Long, ActiveHero> getHeroes(JSONArray heroesJson) throws JSONException {
         Map<Long, ActiveHero> heroesMap = new HashMap<Long, ActiveHero>();
 
@@ -97,6 +90,13 @@ public class CareerCreator {
         }
 
         return heroesMap;
+    }
+
+    private Date getDate(Long longDate) throws JSONException {
+        Date date = new Date();
+        date.setTime(longDate * TIME_MULTIPLER);
+
+        return date;
     }
 
     private ActiveHero getLastHeroPlayed(Long lastHeroPlayedId, Map<Long, ActiveHero> heroes) {
@@ -151,22 +151,6 @@ public class CareerCreator {
         return heroesMap;
     }
 
-    private void setEliteKills(FallenHero hero, JSONObject killsJson) throws JSONException {
-        hero.setEliteKills(killsJson.getInt("elites"));
-    }
-
-    private void setDeath(FallenHero hero, JSONObject deathJson) throws JSONException {
-        Death death = new Death();
-
-        death.setKiller(deathJson.getInt("killer"));
-        death.setLocation(deathJson.getInt("location"));
-
-        Date date = getDate(deathJson.getLong("time"));
-        death.setTime(date);
-
-        hero.setDeath(death);
-    }
-
     private void setItemLoadoutFallenHero(FallenHero fallenHero, JSONObject itemLoadoutJson) throws JSONException {
 
         ItemLoadoutFallenHero itemLoadoutFallenHero = new ItemLoadoutFallenHero();
@@ -217,20 +201,18 @@ public class CareerCreator {
         ItemWearable item = new ItemWearable();
 
         setItemFields(itemJson, item);
-
         setCraftedBy(item, itemJson.getJSONArray("craftedBy"));
         setRandomAffixes(item, itemJson.getJSONArray("randomAffixes"));
 
         return item;
     }
 
-    private void setRandomAffixes(Item item, JSONArray randomAffixesJson) throws JSONException {
-        List<RandomAffix> randomAffixes = new ArrayList<RandomAffix>();
-
-        //TODO: Need to figure out what to parse for random affixes
-        for (int i = 0; i < randomAffixesJson.length(); i++) {
-            JSONObject currObject = randomAffixesJson.getJSONObject(i);
-        }
+    private void setItemFields(JSONObject itemJson, Item item) throws JSONException {
+        item.setId(itemJson.getString("id"));
+        item.setIcon(itemJson.getString("icon"));
+        item.setTooltipParams(itemJson.getString("tooltipParams"));
+        item.setDisplayColor(itemJson.getString("displayColor"));
+        item.setName(itemJson.getString("name"));
     }
 
     private void setCraftedBy(ItemWearable item, JSONArray craftedByJson) throws JSONException {
@@ -252,22 +234,6 @@ public class CareerCreator {
         }
 
         item.setCraftedByList(craftedByList);
-    }
-
-    private void setItemProduced(CraftedBy craftedBy, JSONObject itemJson) throws JSONException {
-        Item item = new Item();
-
-       setItemFields(itemJson, item);
-
-        craftedBy.setItemProduced(item);
-    }
-
-    private void setItemFields(JSONObject itemJson, Item item) throws JSONException {
-        item.setId(itemJson.getString("id"));
-        item.setIcon(itemJson.getString("icon"));
-        item.setTooltipParams(itemJson.getString("tooltipParams"));
-        item.setDisplayColor(itemJson.getString("displayColor"));
-        item.setName(itemJson.getString("name"));
     }
 
     private void setReagents(CraftedBy craftedBy, JSONArray reagentsJson) throws JSONException {
@@ -293,6 +259,39 @@ public class CareerCreator {
         setItemFields(itemJson, item);
 
         reagent.setReagentItem(item);
+    }
+
+    private void setItemProduced(CraftedBy craftedBy, JSONObject itemJson) throws JSONException {
+        Item item = new Item();
+
+        setItemFields(itemJson, item);
+
+        craftedBy.setItemProduced(item);
+    }
+
+    private void setRandomAffixes(Item item, JSONArray randomAffixesJson) throws JSONException {
+        List<RandomAffix> randomAffixes = new ArrayList<RandomAffix>();
+
+        //TODO: Need to figure out what to parse for random affixes
+        for (int i = 0; i < randomAffixesJson.length(); i++) {
+            JSONObject currObject = randomAffixesJson.getJSONObject(i);
+        }
+    }
+
+    private void setDeath(FallenHero hero, JSONObject deathJson) throws JSONException {
+        Death death = new Death();
+
+        death.setKiller(deathJson.getInt("killer"));
+        death.setLocation(deathJson.getInt("location"));
+
+        Date date = getDate(deathJson.getLong("time"));
+        death.setTime(date);
+
+        hero.setDeath(death);
+    }
+
+    private void setEliteKills(FallenHero hero, JSONObject killsJson) throws JSONException {
+        hero.setEliteKills(killsJson.getInt("elites"));
     }
 
     private CareerProgression getCareerProgression(JSONObject progressionJson) throws JSONException {
