@@ -1,5 +1,6 @@
 package com.protegra.diablo3armory.domain;
 
+import com.protegra.diablo3armory.domain.enums.Gender;
 import com.protegra.diablo3armory.domain.enums.HeroType;
 
 import java.io.Serializable;

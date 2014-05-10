@@ -2,14 +2,13 @@ package com.protegra.diablo3armory.activity;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.protegra.diablo3armory.R;
-import com.protegra.diablo3armory.activity.handlers.mainActivityHandlers.HeroArrayAdapter;
+import com.protegra.diablo3armory.activity.handlers.heroListActivityHandlers.HeroArrayAdapter;
 import com.protegra.diablo3armory.domain.ActiveHero;
 import com.protegra.diablo3armory.domain.CareerProfile;
 

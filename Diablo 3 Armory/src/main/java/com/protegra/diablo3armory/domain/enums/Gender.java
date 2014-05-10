@@ -1,13 +1,13 @@
-package com.protegra.diablo3armory.domain;
+package com.protegra.diablo3armory.domain.enums;
 
 public enum Gender {
-    MALE("male", 0),
-    FEMALE("female", 1);
+    MALE(0, "male"),
+    FEMALE(1, "female");
 
     private String toString;
     private int value;
 
-    private Gender (String toString, int value){
+    private Gender(int value, String toString){
         this.value = value;
         this.toString = toString;
     }

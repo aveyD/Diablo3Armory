@@ -7,7 +7,7 @@ import com.protegra.diablo3armory.domain.CareerProfile;
 import com.protegra.diablo3armory.domain.CraftedBy;
 import com.protegra.diablo3armory.domain.Death;
 import com.protegra.diablo3armory.domain.FallenHero;
-import com.protegra.diablo3armory.domain.Gender;
+import com.protegra.diablo3armory.domain.enums.Gender;
 import com.protegra.diablo3armory.domain.enums.HeroType;
 import com.protegra.diablo3armory.domain.Item;
 import com.protegra.diablo3armory.domain.ItemLoadoutFallenHero;
