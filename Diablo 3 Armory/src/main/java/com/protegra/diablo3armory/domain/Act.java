@@ -1,11 +1,9 @@
 package com.protegra.diablo3armory.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by David on 01/05/2014.
- */
-public class Act {
+public class Act implements Serializable {
     private boolean completed;
     private List<Quest> completedQuests;
 

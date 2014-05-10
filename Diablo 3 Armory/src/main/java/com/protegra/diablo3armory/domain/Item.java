@@ -1,6 +1,8 @@
 package com.protegra.diablo3armory.domain;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
     private String id;
     private String name;
     private String icon;

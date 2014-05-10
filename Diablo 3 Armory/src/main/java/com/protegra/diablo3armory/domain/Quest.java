@@ -1,9 +1,8 @@
 package com.protegra.diablo3armory.domain;
 
-/**
- * Created by David on 01/05/2014.
- */
-public class Quest {
+import java.io.Serializable;
+
+public class Quest implements Serializable {
     private String slug;
     private String name;
 

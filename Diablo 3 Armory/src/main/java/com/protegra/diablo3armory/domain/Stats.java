@@ -3,10 +3,11 @@ package com.protegra.diablo3armory.domain;
 import com.protegra.diablo3armory.domain.enums.StatDoubleType;
 import com.protegra.diablo3armory.domain.enums.StatIntegerType;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Stats {
+public class Stats implements Serializable {
 
     private Map<StatIntegerType, Integer> intStatsByStatType = new HashMap<StatIntegerType, Integer>();
     private Map<StatDoubleType, Double> doubleStatsByStatType = new HashMap<StatDoubleType, Double>();

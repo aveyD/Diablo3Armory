@@ -1,6 +1,6 @@
 package com.protegra.diablo3armory.domain;
 
-public class FallenHero extends Hero {
+public class FallenHero extends Hero{
     private ItemLoadoutFallenHero itemLoadoutFallenHero;
     private Death death;
 

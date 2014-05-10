@@ -3,7 +3,7 @@ package com.protegra.diablo3armory.helpers;
 import com.protegra.diablo3armory.domain.ActProgression;
 import com.protegra.diablo3armory.domain.enums.ActType;
 import com.protegra.diablo3armory.domain.ActiveHero;
-import com.protegra.diablo3armory.domain.Career;
+import com.protegra.diablo3armory.domain.CareerProfile;
 import com.protegra.diablo3armory.domain.CraftedBy;
 import com.protegra.diablo3armory.domain.Death;
 import com.protegra.diablo3armory.domain.FallenHero;
@@ -33,41 +33,41 @@ public class CareerCreator {
 
     private static final long TIME_MULTIPLER = 1000;
 
-    public Career createCareer(JSONObject object) throws JSONException {
+    public CareerProfile createCareer(JSONObject object) throws JSONException {
 
-        Career career = new Career();
+        CareerProfile careerProfile = new CareerProfile();
 
         Map<Long, ActiveHero> activeHeroes = getHeroes(object.getJSONArray("heroes"));
-        career.setActiveHeroes(activeHeroes);
+        careerProfile.setActiveHeroes(activeHeroes);
 
         ActiveHero lastHeroPlayed = getLastHeroPlayed(object.getLong("lastHeroPlayed"), activeHeroes);
-        career.setLastHeroPlayed(lastHeroPlayed);
+        careerProfile.setLastHeroPlayed(lastHeroPlayed);
 
         Date lastUpdated = getDate(object.getLong("lastUpdated"));
-        career.setLastUpdated(lastUpdated);
+        careerProfile.setLastUpdated(lastUpdated);
 
         Kills kills = getKills(object.getJSONObject("kills"));
-        career.setKills(kills);
+        careerProfile.setKills(kills);
 
         TimePlayed timePlayed = getTimePlayed(object.getJSONObject("timePlayed"));
-        career.setTimePlayed(timePlayed);
+        careerProfile.setTimePlayed(timePlayed);
 
         Map<Long, FallenHero> fallenHeroes = getFallenHeroes(object.getJSONArray("fallenHeroes"));
-        career.setFallenHeroes(fallenHeroes);
+        careerProfile.setFallenHeroes(fallenHeroes);
 
         Integer paragonLevel = object.getInt("paragonLevel");
-        career.setParagonLevel(paragonLevel);
+        careerProfile.setParagonLevel(paragonLevel);
 
         Integer paragonLevelHardcore = object.getInt("paragonLevelHardcore");
-        career.setParagonLevelHardcore(paragonLevelHardcore);
+        careerProfile.setParagonLevelHardcore(paragonLevelHardcore);
 
         String battleTag = object.getString("battleTag");
-        career.setBattleTag(battleTag);
+        careerProfile.setBattleTag(battleTag);
 
         ActProgression progression = getCareerProgression(object.getJSONObject("progression"));
-        career.setProgression(progression);
+        careerProfile.setProgression(progression);
 
-        return career;
+        return careerProfile;
     }
 
     private Map<Long, ActiveHero> getHeroes(JSONArray heroesJson) throws JSONException {

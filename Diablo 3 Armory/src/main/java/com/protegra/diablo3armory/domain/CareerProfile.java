@@ -1,11 +1,13 @@
 package com.protegra.diablo3armory.domain;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
-public class Career {
-    private Map<Long, ActiveHero> activeHeroes;
-    private Map<Long, FallenHero> fallenHeroes;
+public class CareerProfile implements Serializable{
+    private Map<Long, ActiveHero> activeHeroes = new HashMap<Long, ActiveHero>();
+    private Map<Long, FallenHero> fallenHeroes = new HashMap<Long, FallenHero>();
 
     private ActiveHero lastHeroPlayed;
     private Date lastUpdated;

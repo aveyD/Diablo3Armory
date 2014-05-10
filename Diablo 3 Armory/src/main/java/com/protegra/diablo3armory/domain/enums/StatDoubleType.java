@@ -3,6 +3,7 @@ package com.protegra.diablo3armory.domain.enums;
 import java.util.EnumSet;
 
 public enum StatDoubleType {
+
     CRIT_DAMAGE("critDamage"),
     BLOCK_CHANCE("blockChance"),
     DAMAGE("damage"),

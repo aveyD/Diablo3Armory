@@ -2,7 +2,9 @@ package com.protegra.diablo3armory.domain;
 
 import com.protegra.diablo3armory.domain.enums.HeroType;
 
-public abstract class Hero {
+import java.io.Serializable;
+
+public abstract class Hero implements Serializable{
     private Long id;
     private String name;
     private int level;

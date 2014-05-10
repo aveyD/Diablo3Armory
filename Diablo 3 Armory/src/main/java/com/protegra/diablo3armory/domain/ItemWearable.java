@@ -2,7 +2,7 @@ package com.protegra.diablo3armory.domain;
 
 import java.util.List;
 
-public class ItemWearable extends Item{
+public class ItemWearable extends Item {
     private RandomAffix randomAffix;
     private List<CraftedBy> craftedByList;
 

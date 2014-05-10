@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -12,7 +13,9 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.protegra.diablo3armory.R;
+import com.protegra.diablo3armory.activity.HeroListActivity;
 import com.protegra.diablo3armory.activity.handlers.EventHandler;
+import com.protegra.diablo3armory.domain.CareerProfile;
 import com.protegra.diablo3armory.helpers.BattletagUtil;
 import com.protegra.diablo3armory.helpers.CareerCreator;
 
@@ -50,6 +53,15 @@ public class SearchHeroButtonHandler extends EventHandler {
         }
     }
 
+    public boolean isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+
+        // if no network is available networkInfo will be null
+        // otherwise check if we are connected
+        return networkInfo != null && networkInfo.isConnected();
+    }
+
     private String getRegionUrl(RadioGroup regionsRadioGroup) {
         int id = regionsRadioGroup.getCheckedRadioButtonId();
         String regionUrl = "";
@@ -73,22 +85,21 @@ public class SearchHeroButtonHandler extends EventHandler {
         return regionUrl;
     }
 
-    public boolean isNetworkAvailable() {
-        ConnectivityManager cm = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-
-        // if no network is available networkInfo will be null
-        // otherwise check if we are connected
-        return networkInfo != null && networkInfo.isConnected();
-    }
-
-    private void getCareer(String domain, String hero) throws IOException, ExecutionException, InterruptedException, JSONException {
-        String url = domain + "/api/d3/profile/" +  hero + "/";
+    private void getCareer(String domain, String profileName) throws IOException, ExecutionException, InterruptedException, JSONException {
+        String url = domain + "/api/d3/profile/" +  profileName + "/";
 
         JSONObject result = getProfile(url);
 
-        //TODO: Remove the toasts and make an intent call to a character screen activity
-        showResultToast(hero, result);
+        if (result != null) {
+            CareerCreator creator = new CareerCreator();
+            CareerProfile profile = creator.createCareer(result);
+
+            startHeroListActivity(profile);
+        }
+        else
+        {
+            Toast.makeText(activity, profileName + " not found!", Toast.LENGTH_LONG).show();
+        }
     }
 
     private JSONObject getProfile(String url) throws InterruptedException, ExecutionException {
@@ -98,18 +109,10 @@ public class SearchHeroButtonHandler extends EventHandler {
         return task.get();
     }
 
-    //TODO: Throwaway method.  Do the actual work instead of calling this method.
-    private void showResultToast(String hero, JSONObject result) throws JSONException {
-        String resultMessage = hero + " ";
-        resultMessage += (result != null) ? "was found!" : "not found";
-
-        //Parse the json object
-        if (result != null) {
-            CareerCreator creator = new CareerCreator();
-            creator.createCareer(result);
-        }
-
-        Toast.makeText(activity, resultMessage, Toast.LENGTH_LONG).show();
+    private void startHeroListActivity(CareerProfile profile) {
+        Intent intent = new Intent(activity, HeroListActivity.class);
+        intent.putExtra(activity.getResources().getString(R.string.career_profile_search), profile);
+        activity.startActivity(intent);
     }
 
     private void displayInvalidBattletagFormatAlert() {

@@ -2,10 +2,11 @@ package com.protegra.diablo3armory.domain;
 
 import com.protegra.diablo3armory.domain.enums.KillType;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Kills {
+public class Kills implements Serializable {
     private Map<KillType, Integer> killsByKillType = new HashMap<KillType, Integer>();
 
     public Kills(){

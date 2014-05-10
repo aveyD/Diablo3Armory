@@ -1,8 +1,9 @@
 package com.protegra.diablo3armory.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Follower {
+public class Follower implements Serializable {
     private String slug;
     private int level;
     private Item special;

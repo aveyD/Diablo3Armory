@@ -2,10 +2,11 @@ package com.protegra.diablo3armory.domain;
 
 import com.protegra.diablo3armory.domain.enums.ActType;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ActProgression {
+public class ActProgression implements Serializable{
     private Map<ActType, Boolean> careerProgression = new HashMap<ActType, Boolean>();
 
     public ActProgression(){

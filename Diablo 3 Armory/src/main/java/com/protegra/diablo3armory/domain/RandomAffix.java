@@ -1,4 +1,6 @@
 package com.protegra.diablo3armory.domain;
 
-public class RandomAffix {
+import java.io.Serializable;
+
+public class RandomAffix implements Serializable {
 }

@@ -1,6 +1,8 @@
 package com.protegra.diablo3armory.domain;
 
-public class Reagent {
+import java.io.Serializable;
+
+public class Reagent implements Serializable {
     private int quantity = 0;
     private Item reagentItem;
 

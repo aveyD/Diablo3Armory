@@ -1,6 +1,8 @@
 package com.protegra.diablo3armory.domain;
 
-public class WeaponType {
+import java.io.Serializable;
+
+public class WeaponType implements Serializable {
     private boolean twoHanded;
     private String id;
 

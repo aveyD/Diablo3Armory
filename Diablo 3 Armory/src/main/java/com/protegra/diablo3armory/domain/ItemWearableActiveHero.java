@@ -1,6 +1,6 @@
 package com.protegra.diablo3armory.domain;
 
-public class ItemWearableActiveHero extends ItemWearable{
+public class ItemWearableActiveHero extends ItemWearable {
     // advanced item info
     private int requiredLevel;
     private int itemLevel;

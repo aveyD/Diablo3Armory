@@ -1,9 +1,8 @@
 package com.protegra.diablo3armory.domain;
 
-/**
- * Created by David on 01/05/2014.
- */
-public class Skill {
+import java.io.Serializable;
+
+public class Skill implements Serializable {
     private String slug;
     private String name;
     private String icon;

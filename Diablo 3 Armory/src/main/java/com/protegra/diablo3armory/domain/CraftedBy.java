@@ -1,8 +1,9 @@
 package com.protegra.diablo3armory.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class CraftedBy {
+public class CraftedBy implements Serializable {
     private String id;
     private String slug;
     private List<Reagent> reagents;

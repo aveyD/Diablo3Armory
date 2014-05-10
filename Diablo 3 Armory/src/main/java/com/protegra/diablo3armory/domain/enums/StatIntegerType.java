@@ -4,7 +4,6 @@ import java.util.EnumSet;
 
 public enum StatIntegerType {
 
-    //Integer values
     LIFE("life"),
     ARMOR("armor"),
     STRENGTH("strength"),

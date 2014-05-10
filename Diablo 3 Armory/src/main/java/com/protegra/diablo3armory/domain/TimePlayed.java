@@ -2,10 +2,11 @@ package com.protegra.diablo3armory.domain;
 
 import com.protegra.diablo3armory.domain.enums.HeroType;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TimePlayed {
+public class TimePlayed implements Serializable{
     private Map<HeroType, Double> timePlayedByHero = new HashMap<HeroType, Double>();
 
     public TimePlayed(){

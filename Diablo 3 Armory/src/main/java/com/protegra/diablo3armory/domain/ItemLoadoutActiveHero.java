@@ -2,10 +2,11 @@ package com.protegra.diablo3armory.domain;
 
 import com.protegra.diablo3armory.domain.enums.ItemWearableType;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItemLoadoutActiveHero {
+public class ItemLoadoutActiveHero implements Serializable {
     private Map<ItemWearableType, ItemWearableActiveHero> itemLoadoutFallenHero = new HashMap<ItemWearableType, ItemWearableActiveHero>();
 
     public ItemWearable getItemFallenHero(ItemWearableType itemWearableType) {

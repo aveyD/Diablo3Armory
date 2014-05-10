@@ -1,8 +1,9 @@
 package com.protegra.diablo3armory.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Death {
+public class Death implements Serializable {
     private long killer = 0;
     private int location = 0;
     private Date time = new Date();
