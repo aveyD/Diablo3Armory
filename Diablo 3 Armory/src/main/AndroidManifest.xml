@@ -14,7 +14,7 @@
         <activity
             android:name="com.protegra.diablo3armory.activity.MainActivity"
             android:label="@string/title_activity_main_activity" >
-            <intent-filter>
+            <intent-filter android:label="@string/app_name">
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
