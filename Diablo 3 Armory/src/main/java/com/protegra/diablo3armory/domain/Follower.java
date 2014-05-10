@@ -2,9 +2,6 @@ package com.protegra.diablo3armory.domain;
 
 import java.util.List;
 
-/**
- * Created by David on 01/05/2014.
- */
 public class Follower {
     private String slug;
     private int level;

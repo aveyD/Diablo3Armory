@@ -1,34 +1,24 @@
 package com.protegra.diablo3armory.domain;
 
-/**
- * Created by David on 01/05/2014.
- */
+import com.protegra.diablo3armory.domain.enums.KillType;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Kills {
-    private int monsterKills;
-    private int eliteKills;
-    private int hardcoreMonsterKills;
+    private Map<KillType, Integer> killsByKillType = new HashMap<KillType, Integer>();
 
-    public int getMonsterKills() {
-        return monsterKills;
+    public Kills(){
+        for (KillType killType : KillType.ALL){
+            killsByKillType.put(killType, Integer.valueOf(0));
+        }
     }
 
-    public void setMonsterKills(int monsterKills) {
-        this.monsterKills = monsterKills;
+    public Integer getKills(KillType killType){
+        return killsByKillType.get(killType);
     }
 
-    public int getEliteKills() {
-        return eliteKills;
-    }
-
-    public void setEliteKills(int eliteKills) {
-        this.eliteKills = eliteKills;
-    }
-
-    public int getHardcoreMonsterKills() {
-        return hardcoreMonsterKills;
-    }
-
-    public void setHardcoreMonsterKills(int hardcoreMonsterKills) {
-        this.hardcoreMonsterKills = hardcoreMonsterKills;
+    public void setKills(KillType killType, Integer kills){
+        killsByKillType.put(killType, kills);
     }
 }

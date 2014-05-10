@@ -1,11 +1,13 @@
 package com.protegra.diablo3armory.domain;
 
+import com.protegra.diablo3armory.domain.enums.HeroType;
+
 public abstract class Hero {
     private Long id;
     private String name;
     private int level;
     private boolean hardcore;
-    private HeroClass heroClass;
+    private HeroType heroType;
     private Gender gender;
     private int eliteKills;
 
@@ -47,12 +49,12 @@ public abstract class Hero {
         this.gender = gender;
     }
 
-    public HeroClass getHeroClass() {
-        return heroClass;
+    public HeroType getHeroType() {
+        return heroType;
     }
 
-    public void setHeroClass(HeroClass heroClass) {
-        this.heroClass = heroClass;
+    public void setHeroType(HeroType heroType) {
+        this.heroType = heroType;
     }
 
     public int getEliteKills() {

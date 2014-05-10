@@ -9,7 +9,7 @@ public class ItemWearableActiveHero extends ItemWearable{
     private boolean accountBound;
     private String flavorText;
     private String typeName;
-    private Type type;
+    private WeaponType weaponType;
     //Armor armor;
 
     // TODO: more to come
@@ -70,11 +70,11 @@ public class ItemWearableActiveHero extends ItemWearable{
         this.typeName = typeName;
     }
 
-    public Type getType() {
-        return type;
+    public WeaponType getWeaponType() {
+        return weaponType;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setWeaponType(WeaponType weaponType) {
+        this.weaponType = weaponType;
     }
 }

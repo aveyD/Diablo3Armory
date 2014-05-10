@@ -7,7 +7,7 @@ public class ActiveHero extends Hero {
     private boolean dead;
     private Date lastUpdated;
     private FollowerMaster followerMaster;
-    private HeroProgression progression;
+    private ActProgression progression;
     private ItemLoadoutActiveHero itemLoadoutActiveHero;
     private Stats stats;
 
@@ -43,11 +43,11 @@ public class ActiveHero extends Hero {
         this.followerMaster = followerMaster;
     }
 
-    public HeroProgression getProgression() {
+    public ActProgression getProgression() {
         return progression;
     }
 
-    public void setProgression(HeroProgression progression) {
+    public void setProgression(ActProgression progression) {
         this.progression = progression;
     }
 

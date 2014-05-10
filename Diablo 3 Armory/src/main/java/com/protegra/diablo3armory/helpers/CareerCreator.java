@@ -1,21 +1,23 @@
 package com.protegra.diablo3armory.helpers;
 
+import com.protegra.diablo3armory.domain.ActProgression;
+import com.protegra.diablo3armory.domain.enums.ActType;
 import com.protegra.diablo3armory.domain.ActiveHero;
 import com.protegra.diablo3armory.domain.Career;
-import com.protegra.diablo3armory.domain.CareerProgression;
 import com.protegra.diablo3armory.domain.CraftedBy;
 import com.protegra.diablo3armory.domain.Death;
 import com.protegra.diablo3armory.domain.FallenHero;
 import com.protegra.diablo3armory.domain.Gender;
-import com.protegra.diablo3armory.domain.HeroClass;
+import com.protegra.diablo3armory.domain.enums.HeroType;
 import com.protegra.diablo3armory.domain.Item;
 import com.protegra.diablo3armory.domain.ItemLoadoutFallenHero;
 import com.protegra.diablo3armory.domain.ItemWearable;
-import com.protegra.diablo3armory.domain.ItemWearableType;
+import com.protegra.diablo3armory.domain.enums.ItemWearableType;
 import com.protegra.diablo3armory.domain.Kills;
 import com.protegra.diablo3armory.domain.RandomAffix;
 import com.protegra.diablo3armory.domain.Reagent;
 import com.protegra.diablo3armory.domain.TimePlayed;
+import com.protegra.diablo3armory.domain.enums.KillType;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +25,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +64,7 @@ public class CareerCreator {
         String battleTag = object.getString("battleTag");
         career.setBattleTag(battleTag);
 
-        CareerProgression progression = getCareerProgression(object.getJSONObject("progression"));
+        ActProgression progression = getCareerProgression(object.getJSONObject("progression"));
         career.setProgression(progression);
 
         return career;
@@ -82,7 +83,7 @@ public class CareerCreator {
             hero.setLevel(json.getInt("level"));
             hero.setName(json.getString("name"));
             hero.setLastUpdated(getDate(json.getLong("last-updated")));
-            hero.setHeroClass(HeroClass.getHeroClass(json.getString("class")));
+            hero.setHeroType(HeroType.getHeroClass(json.getString("class")));
             hero.setGender(Gender.getGender(json.getInt("gender")));
             hero.setParagonLevel(json.getInt("paragonLevel"));
             hero.setDead(json.getBoolean("dead"));
@@ -105,25 +106,24 @@ public class CareerCreator {
         return heroes.get(lastHeroPlayedId);
     }
 
-    private Kills getKills(JSONObject kills) throws JSONException {
-        Kills kill = new Kills();
+    private Kills getKills(JSONObject killsJson) throws JSONException {
+        Kills kills = new Kills();
 
-        kill.setMonsterKills(kills.getInt("monsters"));
-        kill.setEliteKills(kills.getInt("elites"));
-        kill.setHardcoreMonsterKills(kills.getInt("hardcoreMonsters"));
+        for (KillType killType : KillType.ALL){
+            int killCount = killsJson.getInt(killType.getValue());
+            kills.setKills(killType, Integer.valueOf(killCount));
+        }
 
-        return kill;
+        return kills;
     }
 
     private TimePlayed getTimePlayed(JSONObject timePlayedJson) throws JSONException {
         TimePlayed time = new TimePlayed();
 
-        time.setBarbarian(timePlayedJson.getDouble(HeroClass.BARBARIAN.getValue()));
-        time.setCrusader(timePlayedJson.getDouble(HeroClass.CRUSADER.getValue()));
-        time.setDemonHunter(timePlayedJson.getDouble(HeroClass.DEMON_HUNTER.getValue()));
-        time.setMonk(timePlayedJson.getDouble(HeroClass.MONK.getValue()));
-        time.setWitchDoctor(timePlayedJson.getDouble(HeroClass.WITCH_DOCTOR.getValue()));
-        time.setWizard(timePlayedJson.getDouble(HeroClass.WIZARD.getValue()));
+        for (HeroType heroType : HeroType.ALL){
+            double timePlayed = timePlayedJson.getDouble(heroType.getValue());
+            time.setTimePlayed(heroType, Double.valueOf(timePlayed));
+        }
 
         return time;
     }
@@ -140,7 +140,7 @@ public class CareerCreator {
             hero.setId(id);
             hero.setLevel(json.getInt("level"));
             hero.setName(json.getString("name"));
-            hero.setHeroClass(HeroClass.getHeroClass(json.getString("class")));
+            hero.setHeroType(HeroType.getHeroClass(json.getString("class")));
             hero.setGender(Gender.getGender(json.getInt("gender")));
             setItemLoadoutFallenHero(hero, json.getJSONObject("items"));
             hero.setHardcore(json.getBoolean("hardcore"));
@@ -157,9 +157,7 @@ public class CareerCreator {
 
         ItemLoadoutFallenHero itemLoadoutFallenHero = new ItemLoadoutFallenHero();
 
-        EnumSet<ItemWearableType> enumSet = EnumSet.allOf(ItemWearableType.class);
-
-        for (ItemWearableType itemWearableType : enumSet){
+        for (ItemWearableType itemWearableType : ItemWearableType.ALL){
             JSONObject itemJson = itemLoadoutJson.getJSONObject(itemWearableType.getValue());
             ItemWearable itemWearable = getItemWearableFallenHero(itemJson);
 
@@ -266,14 +264,13 @@ public class CareerCreator {
         hero.setEliteKills(killsJson.getInt("elites"));
     }
 
-    private CareerProgression getCareerProgression(JSONObject progressionJson) throws JSONException {
-        CareerProgression progression = new CareerProgression();
+    private ActProgression getCareerProgression(JSONObject progressionJson) throws JSONException {
+        ActProgression progression = new ActProgression();
 
-        progression.setAct1(progressionJson.getBoolean("act1"));
-        progression.setAct2(progressionJson.getBoolean("act2"));
-        progression.setAct3(progressionJson.getBoolean("act3"));
-        progression.setAct4(progressionJson.getBoolean("act4"));
-        progression.setAct5(progressionJson.getBoolean("act5"));
+        for (ActType actType : ActType.ALL){
+            boolean isCompleted = progressionJson.getBoolean(actType.getValue());
+            progression.setCareerProgression(actType, Boolean.valueOf(isCompleted));
+        }
 
         return progression;
     }

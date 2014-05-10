@@ -14,7 +14,7 @@ public class Career {
     private Integer paragonLevel;
     private Integer paragonLevelHardcore;
     private String battleTag;
-    private CareerProgression progression;
+    private ActProgression progression;
 
     public Map<Long, ActiveHero> getActiveHeroes() {
         return activeHeroes;
@@ -88,11 +88,11 @@ public class Career {
         this.battleTag = battleTag;
     }
 
-    public CareerProgression getProgression() {
+    public ActProgression getProgression() {
         return progression;
     }
 
-    public void setProgression(CareerProgression progression) {
+    public void setProgression(ActProgression progression) {
         this.progression = progression;
     }
 }

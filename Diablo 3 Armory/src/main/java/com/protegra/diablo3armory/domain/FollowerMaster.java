@@ -1,31 +1,18 @@
 package com.protegra.diablo3armory.domain;
 
+import com.protegra.diablo3armory.domain.enums.FollowerType;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class FollowerMaster {
-    private Follower templar;
-    private Follower scoundrel;
-    private Follower enchantress;
+    private Map<FollowerType, Follower> followersByFollowerType = new HashMap<FollowerType, Follower>();
 
-    public Follower getTemplar() {
-        return templar;
+    public Follower getFollower(FollowerType followerType){
+        return followersByFollowerType.get(followerType);
     }
 
-    public void setTemplar(Follower templar) {
-        this.templar = templar;
-    }
-
-    public Follower getScoundrel() {
-        return scoundrel;
-    }
-
-    public void setScoundrel(Follower scoundrel) {
-        this.scoundrel = scoundrel;
-    }
-
-    public Follower getEnchantress() {
-        return enchantress;
-    }
-
-    public void setEnchantress(Follower enchantress) {
-        this.enchantress = enchantress;
+    public void setFollower(FollowerType followerType, Follower follower){
+        followersByFollowerType.put(followerType, follower);
     }
 }

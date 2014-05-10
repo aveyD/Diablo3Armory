@@ -1,61 +1,24 @@
 package com.protegra.diablo3armory.domain;
 
-/**
- * Created by David on 01/05/2014.
- */
+import com.protegra.diablo3armory.domain.enums.HeroType;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class TimePlayed {
-    private double barbarian = 0;
-    private double crusader = 0;
-    private double demonHunter = 0;
-    private double monk;
-    private double witchDoctor;
-    private double wizard;
+    private Map<HeroType, Double> timePlayedByHero = new HashMap<HeroType, Double>();
 
-    public double getBarbarian() {
-        return barbarian;
+    public TimePlayed(){
+        for (HeroType heroType : HeroType.ALL){
+            timePlayedByHero.put(heroType, Double.valueOf(0));
+        }
     }
 
-    public void setBarbarian(double barbarian) {
-        this.barbarian = barbarian;
+    public Double getTimePlayed(HeroType heroType){
+        return timePlayedByHero.get(heroType);
     }
 
-    public double getCrusader() {
-        return crusader;
-    }
-
-    public void setCrusader(double crusader) {
-        this.crusader = crusader;
-    }
-
-    public double getDemonHunter() {
-        return demonHunter;
-    }
-
-    public void setDemonHunter(double demonHunter) {
-        this.demonHunter = demonHunter;
-    }
-
-    public double getMonk() {
-        return monk;
-    }
-
-    public void setMonk(double monk) {
-        this.monk = monk;
-    }
-
-    public double getWitchDoctor() {
-        return witchDoctor;
-    }
-
-    public void setWitchDoctor(double witchDoctor) {
-        this.witchDoctor = witchDoctor;
-    }
-
-    public double getWizard() {
-        return wizard;
-    }
-
-    public void setWizard(double wizard) {
-        this.wizard = wizard;
+    public void setTimePlayed(HeroType heroType, Double timePlayed){
+        timePlayedByHero.put(heroType, timePlayed);
     }
 }

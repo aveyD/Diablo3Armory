@@ -1,5 +1,7 @@
 package com.protegra.diablo3armory.domain;
 
+import com.protegra.diablo3armory.domain.enums.ItemWearableType;
+
 import java.util.HashMap;
 import java.util.Map;
 

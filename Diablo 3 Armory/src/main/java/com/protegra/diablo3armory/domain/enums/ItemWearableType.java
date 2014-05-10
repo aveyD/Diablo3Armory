@@ -1,4 +1,6 @@
-package com.protegra.diablo3armory.domain;
+package com.protegra.diablo3armory.domain.enums;
+
+import java.util.EnumSet;
 
 public enum ItemWearableType {
 
@@ -15,6 +17,8 @@ public enum ItemWearableType {
     OFFHAND("offHand"),
     HEAD("head"),
     SHOULDERS("shoulders");
+
+    public static final EnumSet<ItemWearableType> ALL = EnumSet.allOf(ItemWearableType.class);
 
     private String value;
 
