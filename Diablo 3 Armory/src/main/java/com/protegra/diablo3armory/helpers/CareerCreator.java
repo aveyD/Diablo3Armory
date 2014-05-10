@@ -11,6 +11,7 @@ import com.protegra.diablo3armory.domain.HeroClass;
 import com.protegra.diablo3armory.domain.Item;
 import com.protegra.diablo3armory.domain.ItemLoadoutFallenHero;
 import com.protegra.diablo3armory.domain.ItemWearable;
+import com.protegra.diablo3armory.domain.ItemWearableType;
 import com.protegra.diablo3armory.domain.Kills;
 import com.protegra.diablo3armory.domain.RandomAffix;
 import com.protegra.diablo3armory.domain.Reagent;
@@ -22,6 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -155,44 +157,14 @@ public class CareerCreator {
 
         ItemLoadoutFallenHero itemLoadoutFallenHero = new ItemLoadoutFallenHero();
 
-        ItemWearable item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("torso"));
-        itemLoadoutFallenHero.setTorso(item);
+        EnumSet<ItemWearableType> enumSet = EnumSet.allOf(ItemWearableType.class);
 
-        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("neck"));
-        itemLoadoutFallenHero.setNeck(item);
+        for (ItemWearableType itemWearableType : enumSet){
+            JSONObject itemJson = itemLoadoutJson.getJSONObject(itemWearableType.getValue());
+            ItemWearable itemWearable = getItemWearableFallenHero(itemJson);
 
-        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("leftFinger"));
-        itemLoadoutFallenHero.setLeftFinger(item);
-
-        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("mainHand"));
-        itemLoadoutFallenHero.setMainHand(item);
-
-        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("bracers"));
-        itemLoadoutFallenHero.setBracers(item);
-
-        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("hands"));
-        itemLoadoutFallenHero.setHands(item);
-
-        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("rightFinger"));
-        itemLoadoutFallenHero.setRightFinger(item);
-
-        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("feet"));
-        itemLoadoutFallenHero.setFeet(item);
-
-        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("waist"));
-        itemLoadoutFallenHero.setWaist(item);
-
-        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("legs"));
-        itemLoadoutFallenHero.setLegs(item);
-
-        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("offHand"));
-        itemLoadoutFallenHero.setOffHand(item);
-
-        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("head"));
-        itemLoadoutFallenHero.setHead(item);
-
-        item = getItemWearableFallenHero(itemLoadoutJson.getJSONObject("shoulders"));
-        itemLoadoutFallenHero.setShoulders(item);
+            itemLoadoutFallenHero.setItemFallenHero(itemWearableType, itemWearable);
+        }
 
         fallenHero.setItemLoadoutFallenHero(itemLoadoutFallenHero);
     }
