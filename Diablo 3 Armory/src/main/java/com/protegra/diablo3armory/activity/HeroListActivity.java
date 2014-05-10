@@ -32,7 +32,7 @@ public class HeroListActivity extends ActionBarActivity {
 
         String heroString = "Active Heroes:\n";
         for (Map.Entry<Long, ActiveHero> entry: profile.getActiveHeroes().entrySet()){
-            heroString += entry.getValue().getName() + "\n";
+            heroString += entry.getValue().getName() + " - " + entry.getKey() + "\n";
         }
 
         view.setText(heroString);
