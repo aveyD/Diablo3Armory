@@ -1,5 +1,6 @@
 package com.protegra.diablo3armory.activity;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -8,19 +9,33 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.protegra.diablo3armory.R;
+import com.protegra.diablo3armory.activity.handlers.mainActivityHandlers.HeroArrayAdapter;
 import com.protegra.diablo3armory.domain.ActiveHero;
 import com.protegra.diablo3armory.domain.CareerProfile;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-public class HeroListActivity extends ActionBarActivity {
+public class HeroListActivity extends ListActivity
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hero_list);
 
-        testIntentPassing();
+//        testIntentPassing();
+        testListStuff();
+    }
+
+    // TODO: this isn't working yet
+    private void testListStuff() {
+        Intent intent = getIntent();
+        CareerProfile profile = (CareerProfile) intent.getSerializableExtra(getResources().getString(R.string.career_profile_search));
+        List<ActiveHero> activeHeroes = new ArrayList<ActiveHero>(profile.getActiveHeroes().values());
+        HeroArrayAdapter adapter = new HeroArrayAdapter(this, activeHeroes);
+        setListAdapter(adapter);
     }
 
     //TODO: Stub for testing intent passing of serializable object
@@ -28,9 +43,9 @@ public class HeroListActivity extends ActionBarActivity {
         Intent intent = getIntent();
         CareerProfile profile = (CareerProfile) intent.getSerializableExtra(getResources().getString(R.string.career_profile_search));
 
-        TextView view = (TextView) findViewById(R.id.hero_list_activity_text);
+        TextView view = (TextView) findViewById(R.id.hero_name);
 
-        String heroString = "Active Heroes:\n";
+        String heroString = "";
         for (Map.Entry<Long, ActiveHero> entry: profile.getActiveHeroes().entrySet()){
             heroString += entry.getValue().getName() + " - " + entry.getKey() + "\n";
         }
