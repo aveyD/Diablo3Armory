@@ -26,18 +26,18 @@
         android:layout_toRightOf="@id/hero_class_icon"
         android:gravity="center_vertical"
         android:text="Hero Name"
-        android:textSize="21sp" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/hero_level_and_class"
         android:layout_width="fill_parent"
-        android:layout_height="26dip"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/hero_class_icon"
         android:ellipsize="marquee"
         android:singleLine="true"
         android:text="Level - Hero Class"
-        android:textSize="12sp" />
+        android:textSize="18sp" />
 
 </RelativeLayout>

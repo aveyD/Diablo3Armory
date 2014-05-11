@@ -7,18 +7,18 @@ import static com.protegra.diablo3armory.domain.enums.HeroType.*;
 import static com.protegra.diablo3armory.domain.enums.Gender.*;
 
 public enum HeroGenderType {
-    BARBARIAN_MALE(BARBARIAN, MALE, "barb_male"),
-    BARBARIAN_FEMALE(BARBARIAN, FEMALE, "barb_female"),
-    CRUSADER_MALE(CRUSADER, MALE, "crusader_male"),
-    CRUSADER_FEMALE(CRUSADER, FEMALE, "crusader_female"),
-    DEMON_HUNTER_MALE(DEMON_HUNTER, MALE, "demon_hunter_male"),
-    DEMON_HUNTER_FEMALE(DEMON_HUNTER, FEMALE, "demon_hunter_female"),
-    MONK_MALE(MONK, MALE, "monk_male"),
-    MONK_FEMALE(MONK, FEMALE, "monk_female"),
-    WITCH_DOCTOR_MALE(WITCH_DOCTOR, MALE, "witch_doctor_male"),
-    WITCH_DOCTOR_FEMALE(WITCH_DOCTOR, FEMALE, "witch_doctor_female"),
-    WIZARD_MALE(WIZARD, MALE, "wizard_male"),
-    WIZARD_FEMALE(WIZARD, FEMALE, "wizard_female");
+    BARBARIAN_MALE(BARBARIAN, MALE, "ic_barb_male"),
+    BARBARIAN_FEMALE(BARBARIAN, FEMALE, "ic_barb_female"),
+    CRUSADER_MALE(CRUSADER, MALE, "ic_crusader_male"),
+    CRUSADER_FEMALE(CRUSADER, FEMALE, "ic_crusader_female"),
+    DEMON_HUNTER_MALE(DEMON_HUNTER, MALE, "ic_demon_hunter_male"),
+    DEMON_HUNTER_FEMALE(DEMON_HUNTER, FEMALE, "ic_demon_hunter_female"),
+    MONK_MALE(MONK, MALE, "ic_monk_male"),
+    MONK_FEMALE(MONK, FEMALE, "ic_monk_female"),
+    WITCH_DOCTOR_MALE(WITCH_DOCTOR, MALE, "ic_witch_doctor_male"),
+    WITCH_DOCTOR_FEMALE(WITCH_DOCTOR, FEMALE, "ic_witch_doctor_female"),
+    WIZARD_MALE(WIZARD, MALE, "ic_wizard_male"),
+    WIZARD_FEMALE(WIZARD, FEMALE, "ic_wizard_female");
 
     public static final EnumSet<HeroGenderType> ALL = EnumSet.allOf(HeroGenderType.class);
 
