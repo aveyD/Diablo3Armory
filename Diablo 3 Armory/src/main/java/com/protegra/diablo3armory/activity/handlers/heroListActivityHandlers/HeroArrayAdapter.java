@@ -48,8 +48,11 @@ public class HeroArrayAdapter extends ArrayAdapter<ActiveHero>
         }
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.heroClassIcon.setImageResource(getHeroClassIcon(position));
-        holder.heroName.setText(list.get(position).getName());
+
+        String name = list.get(position).getName();
+        holder.heroName.setText(name);
         holder.heroLevelAndClass.setText(getHeroLevelAndClass(position));
+
         return view;
     }
 
@@ -58,6 +61,7 @@ public class HeroArrayAdapter extends ArrayAdapter<ActiveHero>
                 .append(list.get(position).getLevel())
                 .append(" - ")
                 .append(list.get(position).getHeroType().getToString());
+
         return levelAndClass.toString();
     }
 
