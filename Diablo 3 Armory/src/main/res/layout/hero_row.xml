@@ -18,9 +18,8 @@
 
     <TextView
         android:id="@+id/hero_name"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
         android:layout_toRightOf="@id/hero_class_icon"
@@ -29,15 +28,42 @@
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/hero_level_and_class"
+        android:id="@+id/hero_paragon_level"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_toRightOf="@id/hero_name"
+        android:gravity="center_vertical"
+        android:text="(Paragon Level)"
+        android:textSize="20sp"
+        android:paddingLeft="10sp"
+        android:textColor="@color/paragon_blue"/>
+
+    <TextView
+        android:id="@+id/hero_level_and_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_toRightOf="@id/hero_class_icon"
         android:ellipsize="marquee"
         android:singleLine="true"
         android:text="Level - Hero Class"
         android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/hero_is_hardcore"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/hero_level_and_class"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="Hardcore"
+        android:textSize="18sp"
+        android:paddingLeft="5sp"
+        android:textColor="@color/hardcore_red"/>
 
 </RelativeLayout>

@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.protegra.diablo3armory.R;
 import com.protegra.diablo3armory.activity.handlers.heroListActivityHandlers.HeroArrayAdapter;
@@ -66,5 +69,12 @@ public class HeroListActivity extends ListActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        Toast.makeText(this.getBaseContext(), "click", Toast.LENGTH_LONG).show();
     }
 }

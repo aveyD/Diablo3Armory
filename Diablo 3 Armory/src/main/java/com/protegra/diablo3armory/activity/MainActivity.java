@@ -44,8 +44,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     //For mocking purposes
-    SearchHeroButtonHandler getSearchHeroHandler()
-    {
+    SearchHeroButtonHandler getSearchHeroHandler() {
         return new SearchHeroButtonHandler(this);
     }
 }

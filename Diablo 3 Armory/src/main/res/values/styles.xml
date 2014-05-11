@@ -1,8 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
     </style>
+
+    <color name="paragon_blue">#0099cc</color>
+    <color name="hardcore_red">#E60101</color>
 
 </resources>

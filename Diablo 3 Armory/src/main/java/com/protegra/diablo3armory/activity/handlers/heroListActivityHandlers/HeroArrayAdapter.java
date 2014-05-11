@@ -32,7 +32,7 @@ public class HeroArrayAdapter extends ArrayAdapter<ActiveHero>
         Collections.sort(list, new Comparator<ActiveHero>() {
             @Override
             public int compare(final ActiveHero hero1, final ActiveHero hero2) {
-                int value1 = Integer.compare(hero2.getLevel(), hero1.getLevel());
+                int value1 = Double.compare(hero2.getLevel(), hero1.getLevel());
                 if (value1 == 0) {
                     return hero2.getLastUpdated().compareTo(hero1.getLastUpdated());
                 }
@@ -46,7 +46,9 @@ public class HeroArrayAdapter extends ArrayAdapter<ActiveHero>
     static class ViewHolder {
         protected ImageView heroClassIcon;
         protected TextView heroName;
+        protected TextView heroParagonLevel;
         protected TextView heroLevelAndClass;
+        protected TextView heroIsHardcore;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -57,7 +59,9 @@ public class HeroArrayAdapter extends ArrayAdapter<ActiveHero>
             final ViewHolder viewHolder = new ViewHolder();
             viewHolder.heroClassIcon = (ImageView) view.findViewById(R.id.hero_class_icon);
             viewHolder.heroName = (TextView) view.findViewById(R.id.hero_name);
+            viewHolder.heroParagonLevel = (TextView) view.findViewById(R.id.hero_paragon_level);
             viewHolder.heroLevelAndClass = (TextView) view.findViewById(R.id.hero_level_and_class);
+            viewHolder.heroIsHardcore = (TextView) view.findViewById(R.id.hero_is_hardcore);
             view.setTag(viewHolder);
         } else {
             view = convertView;
@@ -67,7 +71,16 @@ public class HeroArrayAdapter extends ArrayAdapter<ActiveHero>
 
         String name = list.get(position).getName();
         holder.heroName.setText(name);
+        String paragonLevel = "(" + list.get(position).getParagonLevel() + ")";
+        holder.heroParagonLevel.setText(paragonLevel);
         holder.heroLevelAndClass.setText(getHeroLevelAndClass(position));
+
+        if (list.get(position).isHardcore()) {
+            holder.heroIsHardcore.setText("Hardcore");
+        }
+        else {
+            holder.heroIsHardcore.setText("");
+        }
 
         return view;
     }
@@ -77,6 +90,9 @@ public class HeroArrayAdapter extends ArrayAdapter<ActiveHero>
                 .append(list.get(position).getLevel())
                 .append(" - ")
                 .append(list.get(position).getHeroType().getToString());
+        if (list.get(position).isHardcore()) {
+            levelAndClass.append(" -");
+        }
 
         return levelAndClass.toString();
     }
