@@ -22,7 +22,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/hero_class_icon"
-        android:ellipsize="marquee"
         android:singleLine="true"
         android:text="Level - Hero Class"
         android:textSize="12sp" />
@@ -34,6 +33,7 @@
         android:layout_above="@id/hero_level_and_class"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:ellipsize="marquee"
         android:layout_alignWithParentIfMissing="true"
         android:layout_toRightOf="@id/hero_class_icon"
         android:gravity="center_vertical"

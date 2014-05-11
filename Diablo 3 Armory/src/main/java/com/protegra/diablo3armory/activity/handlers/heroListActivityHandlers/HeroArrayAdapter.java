@@ -14,6 +14,8 @@ import com.protegra.diablo3armory.domain.enums.Gender;
 import com.protegra.diablo3armory.domain.enums.HeroGenderType;
 import com.protegra.diablo3armory.domain.enums.HeroType;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class HeroArrayAdapter extends ArrayAdapter<ActiveHero>
@@ -21,9 +23,23 @@ public class HeroArrayAdapter extends ArrayAdapter<ActiveHero>
     private final List<ActiveHero> list;
     private final Activity context;
 
-    public HeroArrayAdapter(Activity context, List<ActiveHero> list) {
+    public HeroArrayAdapter(Activity context, List<ActiveHero> list)
+    {
         super(context, R.layout.hero_row, list);
         this.context = context;
+
+        // sort by level then last updated
+        Collections.sort(list, new Comparator<ActiveHero>() {
+            @Override
+            public int compare(final ActiveHero hero1, final ActiveHero hero2) {
+                int value1 = Integer.compare(hero2.getLevel(), hero1.getLevel());
+                if (value1 == 0) {
+                    return hero2.getLastUpdated().compareTo(hero1.getLastUpdated());
+                }
+                return value1;
+            }
+        });
+
         this.list = list;
     }
 
