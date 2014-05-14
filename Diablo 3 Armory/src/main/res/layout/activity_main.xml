@@ -7,7 +7,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="horizontal"
-    tools:context="com.protegra.diablo3armory.activity.MainActivity"
+    tools:context="com.somethingnifty.diablo3armory.activity.MainActivity"
     tools:ignore="MergeRootFrame" >
 
     <LinearLayout
