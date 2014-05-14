@@ -7,13 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ItemLoadoutActiveHero implements Serializable {
-    private Map<ItemWearableType, ItemWearableActiveHero> itemLoadoutFallenHero = new HashMap<ItemWearableType, ItemWearableActiveHero>();
+    private Map<ItemWearableType, ItemWearableActiveHero> itemLoadoutActiveHero = new HashMap<ItemWearableType, ItemWearableActiveHero>();
 
-    public ItemWearable getItemFallenHero(ItemWearableType itemWearableType) {
-        return itemLoadoutFallenHero.get(itemWearableType);
+    public ItemWearable getItemActiveHero(ItemWearableType itemWearableType) {
+        return itemLoadoutActiveHero.get(itemWearableType);
     }
 
-    public void setItemFallenHero(ItemWearableType itemWearableType, ItemWearableActiveHero itemWearable) {
-        itemLoadoutFallenHero.put(itemWearableType, itemWearable);
+    public void setItemActiveHero(ItemWearableType itemWearableType, ItemWearableActiveHero itemWearable) {
+        itemLoadoutActiveHero.put(itemWearableType, itemWearable);
     }
 }

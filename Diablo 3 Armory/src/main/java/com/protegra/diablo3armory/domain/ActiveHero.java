@@ -1,6 +1,7 @@
 package com.protegra.diablo3armory.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class ActiveHero extends Hero {
     private int paragonLevel;
@@ -10,6 +11,8 @@ public class ActiveHero extends Hero {
     private ActProgression progression;
     private ItemLoadoutActiveHero itemLoadoutActiveHero;
     private Stats stats;
+    private List<ActiveSkill> activeSkills;
+    private List<Skill> passiveSkills;
 
     public int getParagonLevel() {
         return paragonLevel;
@@ -66,4 +69,12 @@ public class ActiveHero extends Hero {
     public void setStats(Stats stats) {
         this.stats = stats;
     }
+
+    public List<Skill> getPassiveSkills() { return passiveSkills; }
+
+    public void setPassiveSkills(List<Skill> passiveSkills) { this.passiveSkills = passiveSkills; }
+
+    public List<ActiveSkill> getActiveSkills() { return activeSkills; }
+
+    public void setActiveSkills(List<ActiveSkill> activeSkills) { this.activeSkills = activeSkills; }
 }
