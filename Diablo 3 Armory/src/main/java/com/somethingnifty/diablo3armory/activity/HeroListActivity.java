@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.somethingnifty.diablo3armory.R;
 import com.somethingnifty.diablo3armory.activity.handlers.heroListActivityHandlers.HeroArrayAdapter;
@@ -75,6 +74,10 @@ public class HeroListActivity extends ListActivity
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        Toast.makeText(this.getBaseContext(), "click", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this.getBaseContext(), "click", Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(this, HeroDetailsActivity.class);
+        //intent.putExtra(activity.getResources().getString(R.string.career_profile_search), profile);
+        this.startActivity(intent);
     }
 }
