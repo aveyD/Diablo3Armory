@@ -1,18 +1,8 @@
 package com.somethingnifty.diablo3armory.domain;
 
 public class ActiveSkill extends Skill {
-    private Skill skill;
+    private String categorySlug;
     private Rune rune;
-
-    public Skill getSkill()
-    {
-        return skill;
-    }
-
-    public void setSkill(Skill skill)
-    {
-        this.skill = skill;
-    }
 
     public Rune getRune()
     {
@@ -23,4 +13,8 @@ public class ActiveSkill extends Skill {
     {
         this.rune = rune;
     }
+
+    public String getCategorySlug() { return categorySlug; }
+
+    public void setCategorySlug(String categorySlug) { this.categorySlug = categorySlug; }
 }

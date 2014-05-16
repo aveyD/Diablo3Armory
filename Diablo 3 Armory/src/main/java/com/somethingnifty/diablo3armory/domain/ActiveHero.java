@@ -12,7 +12,7 @@ public class ActiveHero extends Hero {
     private ItemLoadoutActiveHero itemLoadoutActiveHero;
     private Stats stats;
     private List<ActiveSkill> activeSkills;
-    private List<Skill> passiveSkills;
+    private List<PassiveSkill> passiveSkills;
 
     public int getParagonLevel() {
         return paragonLevel;
@@ -70,9 +70,9 @@ public class ActiveHero extends Hero {
         this.stats = stats;
     }
 
-    public List<Skill> getPassiveSkills() { return passiveSkills; }
+    public List<PassiveSkill> getPassiveSkills() { return passiveSkills; }
 
-    public void setPassiveSkills(List<Skill> passiveSkills) { this.passiveSkills = passiveSkills; }
+    public void setPassiveSkills(List<PassiveSkill> passiveSkills) { this.passiveSkills = passiveSkills; }
 
     public List<ActiveSkill> getActiveSkills() { return activeSkills; }
 
