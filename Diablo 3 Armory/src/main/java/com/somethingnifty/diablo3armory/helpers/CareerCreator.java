@@ -31,8 +31,6 @@ import java.util.Map;
 
 public class CareerCreator {
 
-    private static final long TIME_MULTIPLER = 1000;
-
     public CareerProfile createCareer(JSONObject object) throws JSONException {
 
         CareerProfile careerProfile = new CareerProfile();
@@ -43,7 +41,7 @@ public class CareerCreator {
         ActiveHero lastHeroPlayed = getLastHeroPlayed(object.getLong("lastHeroPlayed"), activeHeroes);
         careerProfile.setLastHeroPlayed(lastHeroPlayed);
 
-        Date lastUpdated = getDate(object.getLong("lastUpdated"));
+        Date lastUpdated = DateUtil.getDate(object.getLong("lastUpdated"));
         careerProfile.setLastUpdated(lastUpdated);
 
         Kills kills = getKills(object.getJSONObject("kills"));
@@ -82,7 +80,7 @@ public class CareerCreator {
             hero.setId(id);
             hero.setLevel(json.getInt("level"));
             hero.setName(json.getString("name"));
-            hero.setLastUpdated(getDate(json.getLong("last-updated")));
+            hero.setLastUpdated(DateUtil.getDate(json.getLong("last-updated")));
             hero.setHeroType(HeroType.getHeroClass(json.getString("class")));
             hero.setGender(Gender.getGender(json.getInt("gender")));
             hero.setParagonLevel(json.getInt("paragonLevel"));
@@ -93,13 +91,6 @@ public class CareerCreator {
         }
 
         return heroesMap;
-    }
-
-    private Date getDate(Long longDate) throws JSONException {
-        Date date = new Date();
-        date.setTime(longDate * TIME_MULTIPLER);
-
-        return date;
     }
 
     private ActiveHero getLastHeroPlayed(Long lastHeroPlayedId, Map<Long, ActiveHero> heroes) {
@@ -254,7 +245,7 @@ public class CareerCreator {
         death.setKiller(deathJson.getInt("killer"));
         death.setLocation(deathJson.getInt("location"));
 
-        Date date = getDate(deathJson.getLong("time"));
+        Date date = DateUtil.getDate(deathJson.getLong("time"));
         death.setTime(date);
 
         hero.setDeath(death);
