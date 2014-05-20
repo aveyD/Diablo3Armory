@@ -1,1 +1,2 @@
 include ':Diablo 3 Armory'
+include ':library:PagerSlidingTabStrip'

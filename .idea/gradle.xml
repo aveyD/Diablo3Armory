@@ -9,6 +9,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Diablo 3 Armory" />
+            <option value="$PROJECT_DIR$/library" />
+            <option value="$PROJECT_DIR$/library/PagerSlidingTabStrip" />
           </set>
         </option>
       </GradleProjectSettings>

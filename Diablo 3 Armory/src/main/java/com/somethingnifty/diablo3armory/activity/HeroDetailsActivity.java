@@ -6,12 +6,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.TypedValue;
+
+import com.astuetz.PagerSlidingTabStrip;
 import com.somethingnifty.diablo3armory.R;
 import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.StatsScreenFragment;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
 
 public class HeroDetailsActivity extends FragmentActivity {
-    private FragmentPagerAdapter adapterViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -21,9 +23,16 @@ public class HeroDetailsActivity extends FragmentActivity {
 //        Intent intent = getIntent();
 //        CareerProfile profile = (CareerProfile) intent.getSerializableExtra(getResources().getString(R.string.career_profile_search));
 
+        FragmentPagerAdapter adapterViewPager = new HeroDetailsAdapter(getSupportFragmentManager(), new ActiveHero());
+
         ViewPager vPager = (ViewPager) findViewById(R.id.hero_details_view_pager);
-        adapterViewPager = new HeroDetailsAdapter(getSupportFragmentManager(), new ActiveHero());
         vPager.setAdapter(adapterViewPager);
+
+        final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+        vPager.setPageMargin(pageMargin);
+
+        PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.hero_details_pager_tab_strip);
+        tabStrip.setViewPager(vPager);
     }
 
     public static class HeroDetailsAdapter extends FragmentPagerAdapter{
