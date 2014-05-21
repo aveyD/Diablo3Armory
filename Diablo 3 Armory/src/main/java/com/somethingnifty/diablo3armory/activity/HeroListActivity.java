@@ -7,51 +7,77 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.somethingnifty.diablo3armory.R;
 import com.somethingnifty.diablo3armory.activity.handlers.heroListActivityHandlers.HeroArrayAdapter;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
 import com.somethingnifty.diablo3armory.domain.CareerProfile;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class HeroListActivity extends ListActivity
 {
+    private static final String CACHE_KEY = "careerProfile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hero_list);
 
-//        testIntentPassing();
-        testListStuff();
-    }
-
-    // TODO: this isn't working yet
-    private void testListStuff() {
-        Intent intent = getIntent();
-        CareerProfile profile = (CareerProfile) intent.getSerializableExtra(getResources().getString(R.string.career_profile_search));
-        List<ActiveHero> activeHeroes = new ArrayList<ActiveHero>(profile.getActiveHeroes().values());
+        List<ActiveHero> activeHeroes = null;
+        try {
+            activeHeroes = getActiveHeroes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         HeroArrayAdapter adapter = new HeroArrayAdapter(this, activeHeroes);
         setListAdapter(adapter);
     }
 
-    //TODO: Stub for testing intent passing of serializable object
-    private void testIntentPassing() {
+    private List<ActiveHero> getActiveHeroes() throws IOException, ClassNotFoundException {
         Intent intent = getIntent();
         CareerProfile profile = (CareerProfile) intent.getSerializableExtra(getResources().getString(R.string.career_profile_search));
 
-        TextView view = (TextView) findViewById(R.id.hero_name);
+        List<ActiveHero> activeHeroes;
+        if (profile != null) {
+            activeHeroes = new ArrayList<ActiveHero>(profile.getActiveHeroes().values());
 
-        String heroString = "";
-        for (Map.Entry<Long, ActiveHero> entry: profile.getActiveHeroes().entrySet()){
-            heroString += entry.getValue().getName() + " - " + entry.getKey() + "\n";
+            cacheCareerProfile(profile);
+        }
+        else {
+            profile = readCareerProfileFromCache();
+
+            activeHeroes = new ArrayList<ActiveHero>(profile.getActiveHeroes().values());
         }
 
-        view.setText(heroString);
+        return activeHeroes;
+    }
+
+    private void cacheCareerProfile(CareerProfile profile) throws IOException {
+        FileOutputStream fos = this.openFileOutput(CACHE_KEY, MODE_PRIVATE);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(profile);
+
+        oos.close();
+        fos.close();
+    }
+
+    private CareerProfile readCareerProfileFromCache() throws IOException, ClassNotFoundException {
+        FileInputStream fis = this.openFileInput(CACHE_KEY);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+
+        ois.close();
+        fis.close();
+
+        return (CareerProfile) ois.readObject();
     }
 
     @Override

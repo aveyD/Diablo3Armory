@@ -4,9 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.TypedValue;
+import android.view.MenuItem;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.somethingnifty.diablo3armory.R;
@@ -28,11 +29,19 @@ public class HeroDetailsActivity extends FragmentActivity {
         ViewPager vPager = (ViewPager) findViewById(R.id.hero_details_view_pager);
         vPager.setAdapter(adapterViewPager);
 
-        final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
-        vPager.setPageMargin(pageMargin);
-
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.hero_details_pager_tab_strip);
         tabStrip.setViewPager(vPager);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public static class HeroDetailsAdapter extends FragmentPagerAdapter{
