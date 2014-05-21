@@ -30,16 +30,20 @@ public class HeroListActivity extends ListActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hero_list);
 
-        List<ActiveHero> activeHeroes = null;
+        loadHeroList();
+    }
+
+    private void loadHeroList() {
         try {
-            activeHeroes = getActiveHeroes();
+            List<ActiveHero> activeHeroes = getActiveHeroes();
+
+            HeroArrayAdapter adapter = new HeroArrayAdapter(this, activeHeroes);
+            setListAdapter(adapter);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        HeroArrayAdapter adapter = new HeroArrayAdapter(this, activeHeroes);
-        setListAdapter(adapter);
     }
 
     private List<ActiveHero> getActiveHeroes() throws IOException, ClassNotFoundException {
@@ -74,10 +78,12 @@ public class HeroListActivity extends ListActivity
         FileInputStream fis = this.openFileInput(CACHE_KEY);
         ObjectInputStream ois = new ObjectInputStream(fis);
 
+        CareerProfile profile =  (CareerProfile) ois.readObject();
+
         ois.close();
         fis.close();
 
-        return (CareerProfile) ois.readObject();
+        return profile;
     }
 
     @Override

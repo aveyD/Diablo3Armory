@@ -4,10 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.somethingnifty.diablo3armory.R;
@@ -33,19 +31,7 @@ public class HeroDetailsActivity extends FragmentActivity {
         tabStrip.setViewPager(vPager);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     public static class HeroDetailsAdapter extends FragmentPagerAdapter{
-
         private static final int NUM_OF_HERO_DETAIL_SCREENS = 5;
 
         private ActiveHero activeHero;
@@ -84,5 +70,4 @@ public class HeroDetailsActivity extends FragmentActivity {
             return "screen #" + position;
         }
     }
-
 }
