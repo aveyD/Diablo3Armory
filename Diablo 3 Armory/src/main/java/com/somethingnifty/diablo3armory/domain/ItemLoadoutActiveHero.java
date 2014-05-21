@@ -13,7 +13,7 @@ public class ItemLoadoutActiveHero implements Serializable {
         return itemLoadoutActiveHero.get(itemWearableType);
     }
 
-    public void setItemActiveHero(ItemWearableType itemWearableType, ItemWearableActiveHero itemWearable) {
+    public void addItemActiveHero(ItemWearableType itemWearableType, ItemWearableActiveHero itemWearable) {
         itemLoadoutActiveHero.put(itemWearableType, itemWearable);
     }
 }
