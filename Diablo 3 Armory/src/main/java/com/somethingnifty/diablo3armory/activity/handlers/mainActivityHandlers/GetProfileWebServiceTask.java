@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.somethingnifty.diablo3armory.R;
+import com.somethingnifty.diablo3armory.activity.HeroListActivity;
+import com.somethingnifty.diablo3armory.activity.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +28,12 @@ public class GetProfileWebServiceTask extends AsyncTask <String, Integer, JSONOb
     private ProgressBar progress;
 
     public GetProfileWebServiceTask(Activity activity) {
-        this.progress = (ProgressBar) activity.findViewById(R.id.search_hero_progressbar);
+        if (activity instanceof MainActivity) {
+            this.progress = (ProgressBar) activity.findViewById(R.id.search_hero_progressbar);
+        }
+        else if (activity instanceof HeroListActivity) {
+            this.progress = (ProgressBar) activity.findViewById(R.id.hero_item_progressbar);
+        }
     }
 
     @Override

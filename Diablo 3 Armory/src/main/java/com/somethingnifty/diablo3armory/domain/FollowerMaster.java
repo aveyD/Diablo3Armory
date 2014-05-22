@@ -13,7 +13,7 @@ public class FollowerMaster implements Serializable{
         return followersByFollowerType.get(followerType);
     }
 
-    public void setFollower(FollowerType followerType, Follower follower){
+    public void addFollower(FollowerType followerType, Follower follower){
         followersByFollowerType.put(followerType, follower);
     }
 }

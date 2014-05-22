@@ -2,6 +2,7 @@ package com.somethingnifty.diablo3armory.activity;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,8 +11,11 @@ import android.widget.ListView;
 
 import com.somethingnifty.diablo3armory.R;
 import com.somethingnifty.diablo3armory.activity.handlers.heroListActivityHandlers.HeroArrayAdapter;
+import com.somethingnifty.diablo3armory.activity.handlers.heroListActivityHandlers.HeroListItemHandler;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
 import com.somethingnifty.diablo3armory.domain.CareerProfile;
+
+import org.json.JSONException;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -20,10 +24,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class HeroListActivity extends ListActivity
 {
     private static final String CACHE_KEY = "careerProfile";
+    private static final String PREF_FILE_NAME = "myPrefs";
+    private static final String CACHE_DOMAIN = "domain";
+    private static final String CACHE_BATTLE_TAG = "battleTag";
+    private static final String CACHE_HERO_ID = "heroId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,13 +112,33 @@ public class HeroListActivity extends ListActivity
     }
 
     @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
+    protected void onListItemClick(ListView listView, View view, int position, long id) {
+        super.onListItemClick(listView, view, position, id);
 
-//        Toast.makeText(this.getBaseContext(), "click", Toast.LENGTH_LONG).show();
+        HeroListItemHandler handler = getHeroListItemHandler();
 
-        Intent intent = new Intent(this, HeroDetailsActivity.class);
-        //intent.putExtra(activity.getResources().getString(R.string.career_profile_search), profile);
-        this.startActivity(intent);
+        SharedPreferences settings = getSharedPreferences(PREF_FILE_NAME, MODE_PRIVATE);
+        String domain = settings.getString(CACHE_DOMAIN, "");
+        String battleTag = settings.getString(CACHE_BATTLE_TAG, "");
+        String heroId = ((ActiveHero)listView.getItemAtPosition(position)).getId().toString();
+
+        // TODO: don't throw stack trace, but method can't throw exceptions
+        try {
+            handler.getHero(domain, battleTag, heroId);
+        }
+        catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //For mocking purposes
+    HeroListItemHandler getHeroListItemHandler() {
+        return new HeroListItemHandler(this);
     }
 }

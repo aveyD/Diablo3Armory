@@ -1,7 +1,6 @@
 package com.somethingnifty.diablo3armory.helpers;
 
 import com.somethingnifty.diablo3armory.domain.Act;
-import com.somethingnifty.diablo3armory.domain.ActProgression;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
 import com.somethingnifty.diablo3armory.domain.ActiveSkill;
 import com.somethingnifty.diablo3armory.domain.CraftedBy;
@@ -9,10 +8,8 @@ import com.somethingnifty.diablo3armory.domain.Follower;
 import com.somethingnifty.diablo3armory.domain.FollowerMaster;
 import com.somethingnifty.diablo3armory.domain.FollowerStats;
 import com.somethingnifty.diablo3armory.domain.HeroProgression;
-import com.somethingnifty.diablo3armory.domain.Item;
 import com.somethingnifty.diablo3armory.domain.ItemLoadoutActiveHero;
 import com.somethingnifty.diablo3armory.domain.ItemLoadoutFollower;
-import com.somethingnifty.diablo3armory.domain.ItemWearable;
 import com.somethingnifty.diablo3armory.domain.ItemWearableActiveHero;
 import com.somethingnifty.diablo3armory.domain.PassiveSkill;
 import com.somethingnifty.diablo3armory.domain.Quest;
@@ -79,10 +76,13 @@ public class HeroCreator
         JSONArray activeJson = skillsJson.getJSONArray("active");
 
         for (int i = 0; i < activeJson.length(); i++) {
-            JSONObject skillJson = activeJson.getJSONObject(i);
+            JSONObject skillJson = activeJson.getJSONObject(i).getJSONObject("skill");
 
-            Skill skill = new Skill();
+            ActiveSkill skill = new ActiveSkill();
+            getCommonSkill(skill, skillJson);
             skill.setSlug(skillJson.getString("slug"));
+
+            skills.add(skill);
         }
 
         return skills;
@@ -93,7 +93,7 @@ public class HeroCreator
         JSONArray passiveJson = skillsJson.getJSONArray("passive");
 
         for (int i = 0; i < passiveJson.length(); i++) {
-            JSONObject json = passiveJson.getJSONObject(i);
+            JSONObject json = passiveJson.getJSONObject(i).getJSONObject("skill");
 
             PassiveSkill skill = new PassiveSkill();
             getCommonSkill(skill, json);
@@ -145,19 +145,27 @@ public class HeroCreator
     }
 
     private RandomAffix getRandomAffix(JSONArray randomAffixes) {
+        RandomAffix randomAffix = new RandomAffix();
+
         // TODO: finish random affixes parsing
-        return null;
+
+        return randomAffix;
     }
 
     private List<CraftedBy> getCraftedBy(JSONArray craftedBy) {
+        List<CraftedBy> craftedByList = new ArrayList<CraftedBy>();
+
         // TODO: finish crafted by parsing
-        return null;
+
+        return craftedByList;
     }
 
-    private FollowerMaster getFollowerMaster(JSONObject followerJson) throws JSONException {
+    private FollowerMaster getFollowerMaster(JSONObject followerMasterJson) throws JSONException {
         FollowerMaster followerMaster = new FollowerMaster();
 
         for (FollowerType followerType : FollowerType.ALL) {
+            JSONObject followerJson = followerMasterJson.getJSONObject(followerType.getValue());
+
             Follower follower = new Follower();
             follower.setSlug(followerJson.getString("slug"));
             follower.setLevel(followerJson.getInt("level"));
@@ -165,7 +173,7 @@ public class HeroCreator
             follower.setStats(getFollowerStats(followerJson.getJSONObject("stats")));
             follower.setSkills(getFollowerSkills(followerJson.getJSONArray("skills")));
 
-            followerMaster.setFollower(followerType, follower);
+            followerMaster.addFollower(followerType, follower);
         }
         return followerMaster;
     }
@@ -174,8 +182,19 @@ public class HeroCreator
         ItemLoadoutFollower itemLoadoutFollower = new ItemLoadoutFollower();
 
         for (FollowerItemWearableType followerItemWearableType : FollowerItemWearableType.ALL) {
-            JSONObject itemJson = itemsJson.getJSONObject(followerItemWearableType.getValue());
-            itemLoadoutFollower.addItemFollower(followerItemWearableType, getItem(itemJson));
+            boolean found = true;
+            try {
+                itemsJson.getJSONObject(followerItemWearableType.getValue());
+            } catch (JSONException e) {
+                found = false;
+            }
+            if (found) {
+                JSONObject itemJson = itemsJson.getJSONObject(followerItemWearableType.getValue());
+                itemLoadoutFollower.addItemFollower(followerItemWearableType, getItem(itemJson));
+            }
+            else {
+                itemLoadoutFollower.addItemFollower(followerItemWearableType, null);
+            }
         }
 
         return itemLoadoutFollower;
@@ -194,9 +213,8 @@ public class HeroCreator
     private List<Skill> getFollowerSkills(JSONArray skillsJson) throws JSONException {
         List<Skill> followerSkills = new ArrayList<Skill>();
 
-        for (int i = 0; i < skillsJson.length(); i++)
-        {
-            JSONObject json = skillsJson.getJSONObject(i);
+        for (int i = 0; i < skillsJson.length(); i++) {
+            JSONObject json = skillsJson.getJSONObject(i).getJSONObject("skill");
 
             Skill skill = new Skill();
             getCommonSkill(skill, json);

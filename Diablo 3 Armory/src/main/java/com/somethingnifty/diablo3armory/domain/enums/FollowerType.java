@@ -16,7 +16,7 @@ public enum FollowerType {
         this.value = value;
     }
 
-    public String getvalue(){
+    public String getValue(){
         return value;
     }
 }

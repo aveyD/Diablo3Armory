@@ -18,6 +18,7 @@ import com.somethingnifty.diablo3armory.activity.handlers.EventHandler;
 import com.somethingnifty.diablo3armory.domain.CareerProfile;
 import com.somethingnifty.diablo3armory.helpers.BattletagUtil;
 import com.somethingnifty.diablo3armory.helpers.CareerCreator;
+import com.somethingnifty.diablo3armory.helpers.HelperUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,7 +40,7 @@ public class SearchHeroButtonHandler extends EventHandler {
         battleTag = BattletagUtil.formatBattletagForWebService(battleTag);
 
         if (BattletagUtil.isValidWebserviceBattletagFormat(battleTag)) {
-            if (isNetworkAvailable()) {
+            if (HelperUtil.isNetworkAvailable(activity)) {
                 String selectedRegionUrl = getRegionUrl((RadioGroup) findViewById(R.id.regions_radio_group));
                 getCareer(selectedRegionUrl, battleTag);
             }
@@ -51,15 +52,6 @@ public class SearchHeroButtonHandler extends EventHandler {
         {
             displayInvalidBattletagFormatAlert();
         }
-    }
-
-    public boolean isNetworkAvailable() {
-        ConnectivityManager cm = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-
-        // if no network is available networkInfo will be null
-        // otherwise check if we are connected
-        return networkInfo != null && networkInfo.isConnected();
     }
 
     private String getRegionUrl(RadioGroup regionsRadioGroup) {
