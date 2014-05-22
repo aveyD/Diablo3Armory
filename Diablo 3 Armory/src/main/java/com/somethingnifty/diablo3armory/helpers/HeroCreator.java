@@ -76,12 +76,13 @@ public class HeroCreator
         JSONArray activeJson = skillsJson.getJSONArray("active");
 
         for (int i = 0; i < activeJson.length(); i++) {
-            JSONObject skillJson = activeJson.getJSONObject(i).getJSONObject("skill");
-
             ActiveSkill skill = new ActiveSkill();
-            getCommonSkill(skill, skillJson);
-            skill.setSlug(skillJson.getString("slug"));
 
+            if (isValidJsonObject(activeJson.getJSONObject(i), "skill")) {
+                JSONObject skillJson = activeJson.getJSONObject(i).getJSONObject("skill");
+                getCommonSkill(skill, skillJson);
+                skill.setSlug(skillJson.getString("slug"));
+            }
             skills.add(skill);
         }
 
@@ -93,12 +94,13 @@ public class HeroCreator
         JSONArray passiveJson = skillsJson.getJSONArray("passive");
 
         for (int i = 0; i < passiveJson.length(); i++) {
-            JSONObject json = passiveJson.getJSONObject(i).getJSONObject("skill");
-
             PassiveSkill skill = new PassiveSkill();
-            getCommonSkill(skill, json);
-            skill.setFlavor(json.getString("flavor"));
 
+            if (isValidJsonObject(passiveJson.getJSONObject(i), "skill")) {
+                JSONObject json = passiveJson.getJSONObject(i).getJSONObject("skill");
+                getCommonSkill(skill, json);
+                skill.setFlavor(json.getString("flavor"));
+            }
             passiveSkills.add(skill);
         }
 
@@ -119,8 +121,11 @@ public class HeroCreator
         ItemLoadoutActiveHero itemLoadout = new ItemLoadoutActiveHero();
 
         for (ItemWearableType itemWearableType : ItemWearableType.ALL) {
-            JSONObject itemJson = items.getJSONObject(itemWearableType.getValue());
-            itemLoadout.addItemActiveHero(itemWearableType, getItem(itemJson));
+
+            if (isValidJsonObject(items, itemWearableType.getValue())) {
+                JSONObject itemJson = items.getJSONObject(itemWearableType.getValue());
+                itemLoadout.addItemActiveHero(itemWearableType, getItem(itemJson));
+            }
         }
 
         return itemLoadout;
@@ -164,16 +169,19 @@ public class HeroCreator
         FollowerMaster followerMaster = new FollowerMaster();
 
         for (FollowerType followerType : FollowerType.ALL) {
-            JSONObject followerJson = followerMasterJson.getJSONObject(followerType.getValue());
 
-            Follower follower = new Follower();
-            follower.setSlug(followerJson.getString("slug"));
-            follower.setLevel(followerJson.getInt("level"));
-            follower.setItemLoadoutFollower(getFollowerItemsLoadout(followerJson.getJSONObject("items")));
-            follower.setStats(getFollowerStats(followerJson.getJSONObject("stats")));
-            follower.setSkills(getFollowerSkills(followerJson.getJSONArray("skills")));
+            if (isValidJsonObject(followerMasterJson, followerType.getValue())) {
+                JSONObject followerJson = followerMasterJson.getJSONObject(followerType.getValue());
 
-            followerMaster.addFollower(followerType, follower);
+                Follower follower = new Follower();
+                follower.setSlug(followerJson.getString("slug"));
+                follower.setLevel(followerJson.getInt("level"));
+                follower.setItemLoadoutFollower(getFollowerItemsLoadout(followerJson.getJSONObject("items")));
+                follower.setStats(getFollowerStats(followerJson.getJSONObject("stats")));
+                follower.setSkills(getFollowerSkills(followerJson.getJSONArray("skills")));
+
+                followerMaster.addFollower(followerType, follower);
+            }
         }
         return followerMaster;
     }
@@ -182,13 +190,7 @@ public class HeroCreator
         ItemLoadoutFollower itemLoadoutFollower = new ItemLoadoutFollower();
 
         for (FollowerItemWearableType followerItemWearableType : FollowerItemWearableType.ALL) {
-            boolean found = true;
-            try {
-                itemsJson.getJSONObject(followerItemWearableType.getValue());
-            } catch (JSONException e) {
-                found = false;
-            }
-            if (found) {
+            if (isValidJsonObject(itemsJson, followerItemWearableType.getValue())) {
                 JSONObject itemJson = itemsJson.getJSONObject(followerItemWearableType.getValue());
                 itemLoadoutFollower.addItemFollower(followerItemWearableType, getItem(itemJson));
             }
@@ -214,11 +216,12 @@ public class HeroCreator
         List<Skill> followerSkills = new ArrayList<Skill>();
 
         for (int i = 0; i < skillsJson.length(); i++) {
-            JSONObject json = skillsJson.getJSONObject(i).getJSONObject("skill");
-
             Skill skill = new Skill();
-            getCommonSkill(skill, json);
 
+            if (isValidJsonObject(skillsJson.getJSONObject(i), "skill")) {
+                JSONObject json = skillsJson.getJSONObject(i).getJSONObject("skill");
+                getCommonSkill(skill, json);
+            }
             followerSkills.add(skill);
         }
         return followerSkills;
@@ -291,5 +294,16 @@ public class HeroCreator
         }
 
         return completedQuests;
+    }
+
+    private boolean isValidJsonObject(JSONObject json, String value) {
+        boolean valid = true;
+        try {
+            json.getJSONObject(value);
+        }
+        catch (JSONException e) {
+            valid = false;
+        }
+        return valid;
     }
 }
