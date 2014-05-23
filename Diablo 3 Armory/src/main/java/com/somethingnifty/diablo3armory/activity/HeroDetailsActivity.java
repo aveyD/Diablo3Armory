@@ -1,28 +1,18 @@
 package com.somethingnifty.diablo3armory.activity;
 
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.somethingnifty.diablo3armory.R;
+import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.FollowerScreenFragment;
 import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.StatsScreenFragment;
-import com.somethingnifty.diablo3armory.activity.handlers.mainActivityHandlers.GetProfileWebServiceTask;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
-import com.somethingnifty.diablo3armory.domain.CareerProfile;
-import com.somethingnifty.diablo3armory.helpers.CareerCreator;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 public class HeroDetailsActivity extends FragmentActivity {
 
@@ -36,7 +26,7 @@ public class HeroDetailsActivity extends FragmentActivity {
 
         this.setTitle(hero.getName());
 
-        FragmentPagerAdapter adapterViewPager = new HeroDetailsAdapter(getSupportFragmentManager(), new ActiveHero());
+        FragmentPagerAdapter adapterViewPager = new HeroDetailsAdapter(getSupportFragmentManager(), hero);
 
         ViewPager vPager = (ViewPager) findViewById(R.id.hero_details_view_pager);
         vPager.setAdapter(adapterViewPager);
@@ -66,7 +56,7 @@ public class HeroDetailsActivity extends FragmentActivity {
                 case 2:
                     return StatsScreenFragment.newInstance(activeHero);
                 case 3:
-                    return StatsScreenFragment.newInstance(activeHero);
+                    return FollowerScreenFragment.newInstance(activeHero);
                 case 4:
                     return StatsScreenFragment.newInstance(activeHero);
                 default:

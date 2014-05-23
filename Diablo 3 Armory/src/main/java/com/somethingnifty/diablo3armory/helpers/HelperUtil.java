@@ -5,10 +5,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import org.json.JSONException;
-
-import java.util.Date;
-
 public class HelperUtil
 {
     public static boolean isNetworkAvailable(Activity activity) {

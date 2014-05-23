@@ -1,22 +1,22 @@
 package com.somethingnifty.diablo3armory.helpers;
 
 import com.somethingnifty.diablo3armory.domain.ActProgression;
-import com.somethingnifty.diablo3armory.domain.enums.ActType;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
 import com.somethingnifty.diablo3armory.domain.CareerProfile;
 import com.somethingnifty.diablo3armory.domain.CraftedBy;
 import com.somethingnifty.diablo3armory.domain.Death;
 import com.somethingnifty.diablo3armory.domain.FallenHero;
-import com.somethingnifty.diablo3armory.domain.enums.Gender;
-import com.somethingnifty.diablo3armory.domain.enums.HeroType;
 import com.somethingnifty.diablo3armory.domain.Item;
 import com.somethingnifty.diablo3armory.domain.ItemLoadoutFallenHero;
 import com.somethingnifty.diablo3armory.domain.ItemWearable;
-import com.somethingnifty.diablo3armory.domain.enums.ItemWearableType;
 import com.somethingnifty.diablo3armory.domain.Kills;
 import com.somethingnifty.diablo3armory.domain.RandomAffix;
 import com.somethingnifty.diablo3armory.domain.Reagent;
 import com.somethingnifty.diablo3armory.domain.TimePlayed;
+import com.somethingnifty.diablo3armory.domain.enums.ActType;
+import com.somethingnifty.diablo3armory.domain.enums.Gender;
+import com.somethingnifty.diablo3armory.domain.enums.HeroType;
+import com.somethingnifty.diablo3armory.domain.enums.ItemWearableType;
 import com.somethingnifty.diablo3armory.domain.enums.KillType;
 
 import org.json.JSONArray;

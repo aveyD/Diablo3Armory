@@ -2,9 +2,14 @@ package com.somethingnifty.diablo3armory.domain.enums;
 
 import java.util.EnumSet;
 
-
-import static com.somethingnifty.diablo3armory.domain.enums.HeroType.*;
-import static com.somethingnifty.diablo3armory.domain.enums.Gender.*;
+import static com.somethingnifty.diablo3armory.domain.enums.Gender.FEMALE;
+import static com.somethingnifty.diablo3armory.domain.enums.Gender.MALE;
+import static com.somethingnifty.diablo3armory.domain.enums.HeroType.BARBARIAN;
+import static com.somethingnifty.diablo3armory.domain.enums.HeroType.CRUSADER;
+import static com.somethingnifty.diablo3armory.domain.enums.HeroType.DEMON_HUNTER;
+import static com.somethingnifty.diablo3armory.domain.enums.HeroType.MONK;
+import static com.somethingnifty.diablo3armory.domain.enums.HeroType.WITCH_DOCTOR;
+import static com.somethingnifty.diablo3armory.domain.enums.HeroType.WIZARD;
 
 public enum HeroGenderType {
     BARBARIAN_MALE(BARBARIAN, MALE, "ic_barb_male"),

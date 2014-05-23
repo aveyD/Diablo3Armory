@@ -1,7 +1,6 @@
 package com.somethingnifty.diablo3armory.domain;
 
 import com.somethingnifty.diablo3armory.domain.enums.FollowerItemWearableType;
-import com.somethingnifty.diablo3armory.domain.enums.ItemWearableType;
 
 import java.io.Serializable;
 import java.util.HashMap;
