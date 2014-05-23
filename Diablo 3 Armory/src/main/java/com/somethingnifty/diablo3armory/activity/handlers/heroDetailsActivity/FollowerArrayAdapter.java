@@ -22,6 +22,11 @@ public class FollowerArrayAdapter extends ArrayAdapter<FollowerAndType>
     public FollowerArrayAdapter(Activity context, List<FollowerAndType> list) {
         super(context, R.layout.follower_row, list);
         this.context = context;
+
+        if (list.isEmpty()) {
+            list.add(new FollowerAndType(null, null));
+        }
+
         this.list = list;
     }
 
@@ -43,9 +48,18 @@ public class FollowerArrayAdapter extends ArrayAdapter<FollowerAndType>
             view = convertView;
         }
         ViewHolder holder = (ViewHolder) view.getTag();
-        holder.followerTypeIcon.setImageResource(getFollowerTypeIcon(position));
 
-        String type = list.get(position).getFollowerType().toString();
+        if (list.get(position).getFollowerType() != null) {
+            holder.followerTypeIcon.setImageResource(getFollowerTypeIcon(position));
+        }
+
+        String type;
+        if (list.get(position).getFollowerType() == null) {
+            type = "No Followers Found";
+        }
+        else {
+            type = list.get(position).getFollowerType().toString();
+        }
         holder.followerType.setText(type);
 
         return view;
