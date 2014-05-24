@@ -8,17 +8,18 @@ import android.view.ViewGroup;
 
 import com.somethingnifty.diablo3armory.R;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
+import com.somethingnifty.diablo3armory.domain.Stats;
 
-public class StatsScreenFragment extends Fragment {
+public class AttributeScreenFragment extends Fragment {
     private static final String ACTIVE_HERO_BUNDLE_ENTRY = "activeHero";
 
     protected ActiveHero activeHero;
 
-    public static StatsScreenFragment newInstance(ActiveHero activeHero) {
+    public static AttributeScreenFragment newInstance(ActiveHero activeHero) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(ACTIVE_HERO_BUNDLE_ENTRY, activeHero);
 
-        StatsScreenFragment fragment = new StatsScreenFragment();
+        AttributeScreenFragment fragment = new AttributeScreenFragment();
         fragment.setArguments(bundle);
 
         return fragment;
@@ -33,9 +34,9 @@ public class StatsScreenFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_stats_screen, container, false);
+        View view = inflater.inflate(R.layout.fragment_attribute_screen, container, false);
 
-        //do stuff here
+        Stats stats = activeHero.getStats();
 
         return view;
     }

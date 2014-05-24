@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<resources>
+    <string name="life_string">Life</string>
+    <string name="armor_string">Armor</string>
+    <string name="strength_string">Strength</string>
+    <string name="dexterity_string">Dexterity</string>
+    <string name="vitality_string">Vitality</string>
+    <string name="intelligence_string">Intelligence</string>
+    <string name="physical_resist_string">Physical Resist</string>
+    <string name="cold_resist_string">Cold Resist</string>
+    <string name="fire_resist_string">Fire Resist</string>
+    <string name="lightning_resist_string">Lightning Resist</string>
+    <string name="poison_resist_string">Poison Resist</string>
+    <string name="arcane_resist_string">Arcane Resist</string>
+    <string name="block_amount_string">Block Amount</string>
+    <string name="block_amount_min_string">Block Amount Min</string>
+    <string name="block_amount_max_string">Block Amount Max</string>
+    <string name="primary_resource_string">Primary Resource</string>
+    <string name="secondary_resource_string">Secondary Resource</string>
+    <string name="mana_resource_string">Mana</string>
+    <string name="fury_resource_string">Fury</string>
+    <string name="spirit_resource_string">Spirit</string>
+    <string name="hatred_resource_string">Hatred</string>
+    <string name="discipline_resource_string">Discipline</string>
+    <string name="wrath_resource_string">Wrath</string>
+    <string name="arcane_power_resource_string">Arcane Power</string>
+    <string name="crit_damage_string">Critical Hit Damage</string>
+    <string name="block_chance_string">Block Chance</string>
+    <string name="damage_string">Damage</string>
+    <string name="attack_speed_string">Attack Sped Increase</string>
+    <string name="damage_increase_string">Damage Increase</string>
+    <string name="crit_chance_string">Critical Hit Chance</string>
+    <string name="damage_reduction_string">Damage Reduction</string>
+    <string name="thorns_string">Thorns</string>
+    <string name="life_steal_string">Life Steal</string>
+    <string name="life_per_kill_string">Life per Kill</string>
+    <string name="gold_find_string">Gold Find</string>
+    <string name="magic_find_string">Magic Find</string>
+    <string name="life_on_hit_string">Life per Hit</string>
+</resources>
