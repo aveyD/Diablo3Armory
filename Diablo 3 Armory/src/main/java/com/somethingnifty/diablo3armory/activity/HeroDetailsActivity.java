@@ -10,7 +10,7 @@ import android.support.v4.view.ViewPager;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.somethingnifty.diablo3armory.R;
-import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.AttributeScreenFragment;
+import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.AttributesScreenFragment;
 import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.EquipmentScreenFragment;
 import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.FollowerScreenFragment;
 import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.HeroProgressionScreenFragment;
@@ -110,7 +110,7 @@ public class HeroDetailsActivity extends FragmentActivity {
                 case 1:
                     return SkillsScreenFragment.newInstance(activeHero);
                 case 2:
-                    return AttributeScreenFragment.newInstance(activeHero);
+                    return AttributesScreenFragment.newInstance(activeHero);
                 case 3:
                     return FollowerScreenFragment.newInstance(activeHero);
                 case 4:
