@@ -1,34 +1,21 @@
 package com.somethingnifty.diablo3armory.activity.handlers.heroListActivityHandlers;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.somethingnifty.diablo3armory.R;
 import com.somethingnifty.diablo3armory.activity.HeroDetailsActivity;
-import com.somethingnifty.diablo3armory.activity.HeroListActivity;
 import com.somethingnifty.diablo3armory.activity.handlers.EventHandler;
 import com.somethingnifty.diablo3armory.activity.handlers.mainActivityHandlers.GetProfileWebServiceTask;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
-import com.somethingnifty.diablo3armory.domain.CareerProfile;
-import com.somethingnifty.diablo3armory.helpers.BattletagUtil;
-import com.somethingnifty.diablo3armory.helpers.CareerCreator;
 import com.somethingnifty.diablo3armory.helpers.HelperUtil;
 import com.somethingnifty.diablo3armory.helpers.HeroCreator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 public class HeroListItemHandler extends EventHandler {
@@ -51,8 +38,7 @@ public class HeroListItemHandler extends EventHandler {
 
                 startHeroDetailsActivity(hero);
             }
-            else
-            {
+            else {
                 Toast.makeText(activity, profileName + " hero [" + heroId + "] not found!", Toast.LENGTH_LONG).show();
             }
         }

@@ -1,16 +1,20 @@
 package com.somethingnifty.diablo3armory.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.somethingnifty.diablo3armory.R;
-import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.AttributeScreenFragment;
+import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.EquipmentScreenFragment;
+import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.FollowerScreenFragment;
+import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.HeroProgressionScreenFragment;
+import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.SkillsScreenFragment;
+import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.StatsScreenFragment;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
 
 public class HeroDetailsActivity extends FragmentActivity {
@@ -25,7 +29,7 @@ public class HeroDetailsActivity extends FragmentActivity {
 
         this.setTitle(hero.getName());
 
-        FragmentPagerAdapter adapterViewPager = new HeroDetailsAdapter(getSupportFragmentManager(), new ActiveHero());
+        FragmentPagerAdapter adapterViewPager = new HeroDetailsAdapter(getSupportFragmentManager(), hero);
 
         ViewPager vPager = (ViewPager) findViewById(R.id.hero_details_view_pager);
         vPager.setAdapter(adapterViewPager);
@@ -49,15 +53,15 @@ public class HeroDetailsActivity extends FragmentActivity {
         public Fragment getItem(int position) {
             switch(position){
                 case 0:
-                    return AttributeScreenFragment.newInstance(activeHero);
+                    return EquipmentScreenFragment.newInstance(activeHero);
                 case 1:
-                    return AttributeScreenFragment.newInstance(activeHero);
+                    return SkillsScreenFragment.newInstance(activeHero);
                 case 2:
-                    return AttributeScreenFragment.newInstance(activeHero);
+                    return StatsScreenFragment.newInstance(activeHero);
                 case 3:
-                    return AttributeScreenFragment.newInstance(activeHero);
+                    return FollowerScreenFragment.newInstance(activeHero);
                 case 4:
-                    return AttributeScreenFragment.newInstance(activeHero);
+                    return HeroProgressionScreenFragment.newInstance(activeHero);
                 default:
                     return null;
             }
@@ -69,8 +73,29 @@ public class HeroDetailsActivity extends FragmentActivity {
         }
 
         @Override
-        public CharSequence getPageTitle(int position){
-            return "screen #" + position;
+        public CharSequence getPageTitle(int position) {
+            String pageTitle = "";
+            switch(position) {
+                case 0:
+                    pageTitle = "Equipment";
+                    break;
+                case 1:
+                    pageTitle = "Skills";
+                    break;
+                case 2:
+                    pageTitle = "Stats";
+                    break;
+                case 3:
+                    pageTitle = "Followers";
+                    break;
+                case 4:
+                    pageTitle = "Progression";
+                    break;
+                default:
+                    break;
+            }
+
+            return pageTitle;
         }
     }
 }

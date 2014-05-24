@@ -16,4 +16,8 @@ public class FollowerMaster implements Serializable{
     public void addFollower(FollowerType followerType, Follower follower){
         followersByFollowerType.put(followerType, follower);
     }
+
+    public boolean isEmpty() {
+        return followersByFollowerType.isEmpty();
+    }
 }

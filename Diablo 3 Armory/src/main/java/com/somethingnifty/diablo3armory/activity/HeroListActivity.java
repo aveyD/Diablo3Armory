@@ -32,7 +32,6 @@ public class HeroListActivity extends ListActivity
     private static final String PREF_FILE_NAME = "myPrefs";
     private static final String CACHE_DOMAIN = "domain";
     private static final String CACHE_BATTLE_TAG = "battleTag";
-    private static final String CACHE_HERO_ID = "heroId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
