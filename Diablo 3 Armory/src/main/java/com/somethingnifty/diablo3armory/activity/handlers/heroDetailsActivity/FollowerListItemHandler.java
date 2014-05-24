@@ -17,7 +17,9 @@ public class FollowerListItemHandler extends EventHandler {
     }
 
     public void getFollower(FollowerType type, Follower follower) {
-        startFollowerDetailsActivity(type, follower);
+        if (type != null && follower != null) {
+            startFollowerDetailsActivity(type, follower);
+        }
     }
 
     private void startFollowerDetailsActivity(FollowerType type, Follower follower) {
