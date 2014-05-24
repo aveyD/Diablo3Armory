@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.somethingnifty.diablo3armory.R;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
@@ -68,10 +67,20 @@ public class FollowerScreenFragment extends ListFragment
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id)
+    public void onListItemClick(ListView listView, View view, int position, long id)
     {
-        super.onListItemClick(l, v, position, id);
+        super.onListItemClick(listView, view, position, id);
 
-        Toast.makeText(getActivity(), "click", Toast.LENGTH_LONG).show();
+        FollowerListItemHandler handler = getFollowerListItemHandler();
+
+        FollowerType type = ((FollowerAndType)listView.getItemAtPosition(position)).getFollowerType();
+        Follower follower = ((FollowerAndType)listView.getItemAtPosition(position)).getFollower();
+
+        handler.getFollower(type, follower);
+    }
+
+    //For mocking purposes
+    FollowerListItemHandler getFollowerListItemHandler() {
+        return new FollowerListItemHandler(this.getActivity());
     }
 }

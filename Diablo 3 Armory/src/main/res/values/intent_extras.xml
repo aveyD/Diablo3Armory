@@ -3,4 +3,6 @@
 <resources>
     <string name="career_profile_search">careerProfileSearch</string>
     <string name="hero_profile">heroProfile</string>
+    <string name="follower_type">followerType</string>
+    <string name="follower">follower</string>
 </resources>

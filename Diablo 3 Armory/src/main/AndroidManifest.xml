@@ -40,6 +40,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.somethingnifty.diablo3armory.activity.HeroListActivity" />
         </activity>
+        <activity
+            android:name=".activity.FollowerDetailsActivity"
+            android:label="@string/title_activity_follower_details"
+            android:parentActivityName="com.somethingnifty.diablo3armory.activity.HeroDetailsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.somethingnifty.diablo3armory.activity.HeroDetailsActivity" />
+        </activity>
     </application>
 
 </manifest>

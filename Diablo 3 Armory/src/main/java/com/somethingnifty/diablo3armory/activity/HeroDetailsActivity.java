@@ -10,22 +10,39 @@ import android.support.v4.view.ViewPager;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.somethingnifty.diablo3armory.R;
+import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.AttributeScreenFragment;
 import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.EquipmentScreenFragment;
 import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.FollowerScreenFragment;
 import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.HeroProgressionScreenFragment;
 import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.SkillsScreenFragment;
-import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.StatsScreenFragment;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 public class HeroDetailsActivity extends FragmentActivity {
+
+    private static final String CACHE_KEY = "activeHero";
+    private static final String PREF_FILE_NAME = "myPrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hero_details);
 
-        Intent intent = getIntent();
-        ActiveHero hero = (ActiveHero) intent.getSerializableExtra(getResources().getString(R.string.hero_profile));
+        ActiveHero hero = null;
+        try {
+            hero = getActiveHero();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         this.setTitle(hero.getName());
 
@@ -36,6 +53,42 @@ public class HeroDetailsActivity extends FragmentActivity {
 
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.hero_details_pager_tab_strip);
         tabStrip.setViewPager(vPager);
+    }
+
+    private ActiveHero getActiveHero() throws IOException, ClassNotFoundException {
+        Intent intent = getIntent();
+        ActiveHero hero = (ActiveHero) intent.getSerializableExtra(getResources().getString(R.string.hero_profile));
+
+        if (hero != null) {
+            cacheActiveHero(hero);
+        }
+        else {
+            hero = readActiveHeroFromCache();
+        }
+
+        return hero;
+    }
+
+    private void cacheActiveHero(ActiveHero hero) throws IOException
+    {
+        FileOutputStream fos = this.openFileOutput(CACHE_KEY, MODE_PRIVATE);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(hero);
+
+        oos.close();
+        fos.close();
+    }
+
+    private ActiveHero readActiveHeroFromCache() throws IOException, ClassNotFoundException {
+        FileInputStream fis = this.openFileInput(CACHE_KEY);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+
+        ActiveHero hero = (ActiveHero) ois.readObject();
+
+        ois.close();
+        fis.close();
+
+        return hero;
     }
 
     public static class HeroDetailsAdapter extends FragmentPagerAdapter{
@@ -57,7 +110,7 @@ public class HeroDetailsActivity extends FragmentActivity {
                 case 1:
                     return SkillsScreenFragment.newInstance(activeHero);
                 case 2:
-                    return StatsScreenFragment.newInstance(activeHero);
+                    return AttributeScreenFragment.newInstance(activeHero);
                 case 3:
                     return FollowerScreenFragment.newInstance(activeHero);
                 case 4:
