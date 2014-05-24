@@ -10,7 +10,10 @@ import android.support.v4.view.ViewPager;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.somethingnifty.diablo3armory.R;
+import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.EquipmentScreenFragment;
 import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.FollowerScreenFragment;
+import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.HeroProgressionScreenFragment;
+import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.SkillsScreenFragment;
 import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.StatsScreenFragment;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
 
@@ -50,15 +53,15 @@ public class HeroDetailsActivity extends FragmentActivity {
         public Fragment getItem(int position) {
             switch(position){
                 case 0:
-                    return StatsScreenFragment.newInstance(activeHero);
+                    return EquipmentScreenFragment.newInstance(activeHero);
                 case 1:
-                    return StatsScreenFragment.newInstance(activeHero);
+                    return SkillsScreenFragment.newInstance(activeHero);
                 case 2:
                     return StatsScreenFragment.newInstance(activeHero);
                 case 3:
                     return FollowerScreenFragment.newInstance(activeHero);
                 case 4:
-                    return StatsScreenFragment.newInstance(activeHero);
+                    return HeroProgressionScreenFragment.newInstance(activeHero);
                 default:
                     return null;
             }
@@ -70,8 +73,29 @@ public class HeroDetailsActivity extends FragmentActivity {
         }
 
         @Override
-        public CharSequence getPageTitle(int position){
-            return "screen #" + position;
+        public CharSequence getPageTitle(int position) {
+            String pageTitle = "";
+            switch(position) {
+                case 0:
+                    pageTitle = "Equipment";
+                    break;
+                case 1:
+                    pageTitle = "Skills";
+                    break;
+                case 2:
+                    pageTitle = "Stats";
+                    break;
+                case 3:
+                    pageTitle = "Followers";
+                    break;
+                case 4:
+                    pageTitle = "Progression";
+                    break;
+                default:
+                    break;
+            }
+
+            return pageTitle;
         }
     }
 }
