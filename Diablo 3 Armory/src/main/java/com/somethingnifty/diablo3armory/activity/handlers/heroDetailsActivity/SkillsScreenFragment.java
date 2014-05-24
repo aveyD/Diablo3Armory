@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 
 import com.somethingnifty.diablo3armory.R;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
+import com.somethingnifty.diablo3armory.domain.Skill;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SkillsScreenFragment extends ListFragment
 {
@@ -30,6 +34,18 @@ public class SkillsScreenFragment extends ListFragment
         super.onCreate(savedInstanceState);
 
         activeHero = (ActiveHero) getArguments().getSerializable(ACTIVE_HERO_BUNDLE_ENTRY);
+
+        SkillsArrayAdapter adapter = new SkillsArrayAdapter(this.getActivity(), getSkills(activeHero));
+        setListAdapter(adapter);
+    }
+
+    private List<Skill> getSkills(ActiveHero hero) {
+        List<Skill> skills = new ArrayList<Skill>();
+
+        skills.addAll(hero.getActiveSkills());
+        skills.addAll(hero.getPassiveSkills());
+
+        return skills;
     }
 
     @Override

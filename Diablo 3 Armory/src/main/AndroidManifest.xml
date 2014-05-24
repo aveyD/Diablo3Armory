@@ -35,6 +35,8 @@
         <activity
             android:name=".activity.HeroDetailsActivity"
             android:label="@string/title_activity_hero_details"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
             android:parentActivityName="com.somethingnifty.diablo3armory.activity.HeroListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -43,6 +45,8 @@
         <activity
             android:name=".activity.FollowerDetailsActivity"
             android:label="@string/title_activity_follower_details"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
             android:parentActivityName="com.somethingnifty.diablo3armory.activity.HeroDetailsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

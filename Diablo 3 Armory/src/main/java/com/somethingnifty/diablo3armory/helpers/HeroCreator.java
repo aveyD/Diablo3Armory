@@ -14,6 +14,7 @@ import com.somethingnifty.diablo3armory.domain.ItemWearableActiveHero;
 import com.somethingnifty.diablo3armory.domain.PassiveSkill;
 import com.somethingnifty.diablo3armory.domain.Quest;
 import com.somethingnifty.diablo3armory.domain.RandomAffix;
+import com.somethingnifty.diablo3armory.domain.Rune;
 import com.somethingnifty.diablo3armory.domain.Skill;
 import com.somethingnifty.diablo3armory.domain.Stats;
 import com.somethingnifty.diablo3armory.domain.enums.ActType;
@@ -76,17 +77,36 @@ public class HeroCreator
         JSONArray activeJson = skillsJson.getJSONArray("active");
 
         for (int i = 0; i < activeJson.length(); i++) {
-            ActiveSkill skill = new ActiveSkill();
-
             if (isValidJsonObject(activeJson.getJSONObject(i), "skill")) {
+                ActiveSkill skill = new ActiveSkill();
                 JSONObject skillJson = activeJson.getJSONObject(i).getJSONObject("skill");
                 getCommonSkill(skill, skillJson);
                 skill.setSlug(skillJson.getString("slug"));
-            }
-            skills.add(skill);
-        }
 
+                if (isValidJsonObject(activeJson.getJSONObject(i), "rune")) {
+                    JSONObject runeJson = activeJson.getJSONObject(i).getJSONObject("rune");
+                    skill.setRune(getRune(runeJson));
+                }
+                skills.add(skill);
+            }
+        }
         return skills;
+    }
+
+    private Rune getRune(JSONObject runeJson) throws JSONException {
+        Rune rune = new Rune();
+
+        rune.setSlug(runeJson.getString("slug"));
+        rune.setType(runeJson.getString("type"));
+        rune.setName(runeJson.getString("name"));
+        rune.setLevel(runeJson.getInt("level"));
+        rune.setDescription(runeJson.getString("description"));
+        rune.setSimpleDescription(runeJson.getString("simpleDescription"));
+        rune.setTooltipParams(runeJson.getString("tooltipParams"));
+        rune.setSkillCalcId(runeJson.getString("skillCalcId"));
+        rune.setOrder(runeJson.getInt("order"));
+
+        return rune;
     }
 
     private List<PassiveSkill> getPassiveSkills(JSONObject skillsJson) throws JSONException {
@@ -94,16 +114,17 @@ public class HeroCreator
         JSONArray passiveJson = skillsJson.getJSONArray("passive");
 
         for (int i = 0; i < passiveJson.length(); i++) {
-            PassiveSkill skill = new PassiveSkill();
 
             if (isValidJsonObject(passiveJson.getJSONObject(i), "skill")) {
+                PassiveSkill skill = new PassiveSkill();
+
                 JSONObject json = passiveJson.getJSONObject(i).getJSONObject("skill");
                 getCommonSkill(skill, json);
                 skill.setFlavor(json.getString("flavor"));
-            }
-            passiveSkills.add(skill);
-        }
 
+                passiveSkills.add(skill);
+            }
+        }
         return passiveSkills;
     }
 
