@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Diablo 3 Armory/Diablo 3 Armory.iml" filepath="$PROJECT_DIR$/Diablo 3 Armory/Diablo 3 Armory.iml" />
       <module fileurl="file://$PROJECT_DIR$/Diablo3Armory.iml" filepath="$PROJECT_DIR$/Diablo3Armory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Diablo3Armory.iml" filepath="$PROJECT_DIR$/Diablo3Armory.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/PagerSlidingTabStrip/PagerSlidingTabStrip.iml" filepath="$PROJECT_DIR$/library/PagerSlidingTabStrip/PagerSlidingTabStrip.iml" />
     </modules>
   </component>

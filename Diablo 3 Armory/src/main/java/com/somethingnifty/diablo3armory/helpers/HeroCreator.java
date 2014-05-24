@@ -243,7 +243,7 @@ public class HeroCreator
         stats.setStat(StatIntegerType.COLD_RESIST, statsJson.getInt("coldResist"));
         stats.setStat(StatIntegerType.LIGHTNING_RESIST, statsJson.getInt("lightningResist"));
         stats.setStat(StatIntegerType.POISON_RESIST, statsJson.getInt("poisonResist"));
-        stats.setStat(StatIntegerType.ARCANE_RESIST, statsJson.getInt("arcaneResist"));
+        stats.setStat(StatIntegerType.ARCANE_HOLY_RESIST, statsJson.getInt("arcaneResist"));
         stats.setStat(StatDoubleType.CRIT_DAMAGE, statsJson.getDouble("critDamage"));
         stats.setStat(StatDoubleType.BLOCK_CHANCE, statsJson.getDouble("blockChance"));
         stats.setStat(StatIntegerType.BLOCK_AMOUNT_MIN, statsJson.getInt("blockAmountMin"));

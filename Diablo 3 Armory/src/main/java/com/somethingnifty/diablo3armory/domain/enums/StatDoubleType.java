@@ -4,19 +4,19 @@ import java.util.EnumSet;
 
 public enum StatDoubleType {
 
-    CRIT_DAMAGE("critDamage", "crit_damage_string"),
-    BLOCK_CHANCE("blockChance", "block_chance_string"),
-    DAMAGE("damage", "damage_string"),
-    ATTACK_SPEED("attackSpeed", "attack_speed_string"),
-    DAMAGE_INCREASE("damageIncrease", "damage_increase_string"),
-    CRIT_CHANCE("critChance", "crit_chance_string"),
-    DAMAGE_REDUCTION("damageReduction", "damage_reduction_string"),
-    THORNS("thorns", "thorn_string"),
-    LIFE_STEAL("lifeSteal", "life_steal_string"),
-    LIFE_PER_KILL("lifePerKill", "life_per_kill_string"),
-    GOLD_FIND("goldFind", "gold_find_string"),
-    MAGIC_FIND("magicFind", "magic_find_string"),
-    LIFE_ON_HIT("lifeOnHit", "life_on_hit_string");
+    CRIT_DAMAGE("critDamage", "crit_damage_value"),
+    BLOCK_CHANCE("blockChance", "block_chance_value"),
+    DAMAGE("damage", "damage_value"),
+    ATTACK_SPEED("attackSpeed", "attack_speed_value"),
+    DAMAGE_INCREASE("damageIncrease", "damage_increase_value"),
+    CRIT_CHANCE("critChance", "crit_chance_value"),
+    DAMAGE_REDUCTION("damageReduction", "damage_reduction_value"),
+    THORNS("thorns", "thorns_value"),
+    LIFE_STEAL("lifeSteal", "life_steal_value"),
+    LIFE_PER_KILL("lifePerKill", "life_per_kill_value"),
+    GOLD_FIND("goldFind", "gold_find_value"),
+    MAGIC_FIND("magicFind", "magic_find_value"),
+    LIFE_ON_HIT("lifeOnHit", "life_on_hit_value");
 
     public static final EnumSet<StatDoubleType> ALL = EnumSet.allOf(StatDoubleType.class);
 

@@ -10,11 +10,11 @@ import android.support.v4.view.ViewPager;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.somethingnifty.diablo3armory.R;
+import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.AttributesScreenFragment;
 import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.EquipmentScreenFragment;
 import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.FollowerScreenFragment;
 import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.HeroProgressionScreenFragment;
 import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.SkillsScreenFragment;
-import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.StatsScreenFragment;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
 
 public class HeroDetailsActivity extends FragmentActivity {
@@ -26,8 +26,6 @@ public class HeroDetailsActivity extends FragmentActivity {
 
         Intent intent = getIntent();
         ActiveHero hero = (ActiveHero) intent.getSerializableExtra(getResources().getString(R.string.hero_profile));
-
-        this.setTitle(hero.getName());
 
         FragmentPagerAdapter adapterViewPager = new HeroDetailsAdapter(getSupportFragmentManager(), hero);
 
@@ -57,7 +55,7 @@ public class HeroDetailsActivity extends FragmentActivity {
                 case 1:
                     return SkillsScreenFragment.newInstance(activeHero);
                 case 2:
-                    return StatsScreenFragment.newInstance(activeHero);
+                    return AttributesScreenFragment.newInstance(activeHero);
                 case 3:
                     return FollowerScreenFragment.newInstance(activeHero);
                 case 4:
@@ -83,7 +81,7 @@ public class HeroDetailsActivity extends FragmentActivity {
                     pageTitle = "Skills";
                     break;
                 case 2:
-                    pageTitle = "Stats";
+                    pageTitle = "Attributes";
                     break;
                 case 3:
                     pageTitle = "Followers";
