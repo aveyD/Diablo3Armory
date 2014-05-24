@@ -28,8 +28,8 @@ import java.util.concurrent.ExecutionException;
 
 public class HeroListActivity extends ListActivity
 {
-    private static final String CACHE_KEY = "careerProfile";
     private static final String PREF_FILE_NAME = "myPrefs";
+    private static final String CACHE_PROFILE = "careerProfile";
     private static final String CACHE_DOMAIN = "domain";
     private static final String CACHE_BATTLE_TAG = "battleTag";
 
@@ -74,7 +74,7 @@ public class HeroListActivity extends ListActivity
     }
 
     private void cacheCareerProfile(CareerProfile profile) throws IOException {
-        FileOutputStream fos = this.openFileOutput(CACHE_KEY, MODE_PRIVATE);
+        FileOutputStream fos = this.openFileOutput(CACHE_PROFILE, MODE_PRIVATE);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(profile);
 
@@ -83,7 +83,7 @@ public class HeroListActivity extends ListActivity
     }
 
     private CareerProfile readCareerProfileFromCache() throws IOException, ClassNotFoundException {
-        FileInputStream fis = this.openFileInput(CACHE_KEY);
+        FileInputStream fis = this.openFileInput(CACHE_PROFILE);
         ObjectInputStream ois = new ObjectInputStream(fis);
 
         CareerProfile profile =  (CareerProfile) ois.readObject();

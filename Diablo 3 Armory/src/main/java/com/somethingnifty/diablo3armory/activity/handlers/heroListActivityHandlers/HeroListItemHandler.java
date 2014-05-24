@@ -10,7 +10,8 @@ import com.somethingnifty.diablo3armory.activity.HeroDetailsActivity;
 import com.somethingnifty.diablo3armory.activity.handlers.EventHandler;
 import com.somethingnifty.diablo3armory.activity.handlers.mainActivityHandlers.GetProfileWebServiceTask;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
-import com.somethingnifty.diablo3armory.helpers.HelperUtil;
+import com.somethingnifty.diablo3armory.helpers.BattletagUtil;
+import com.somethingnifty.diablo3armory.helpers.NetworkUtil;
 import com.somethingnifty.diablo3armory.helpers.HeroCreator;
 
 import org.json.JSONException;
@@ -25,10 +26,11 @@ public class HeroListItemHandler extends EventHandler {
         super(activity);
     }
 
-    public void getHero(String domain, String profileName, String heroId) throws ExecutionException, InterruptedException, JSONException
+    public void getHero(String domain, String battleTag, String heroId) throws ExecutionException, InterruptedException, JSONException
     {
-        if (HelperUtil.isNetworkAvailable(activity)) {
-            String url = domain + "/api/d3/profile/" +  profileName + "/hero/" + heroId;
+        if (NetworkUtil.isNetworkAvailable(activity)) {
+            battleTag = BattletagUtil.formatBattletagForWebService(battleTag);
+            String url = domain + "/api/d3/profile/" +  battleTag + "/hero/" + heroId;
 
             JSONObject result = getHeroProfile(url);
 
@@ -39,7 +41,7 @@ public class HeroListItemHandler extends EventHandler {
                 startHeroDetailsActivity(hero);
             }
             else {
-                Toast.makeText(activity, profileName + " hero [" + heroId + "] not found!", Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, battleTag + " hero [" + heroId + "] not found!", Toast.LENGTH_LONG).show();
             }
         }
         else{

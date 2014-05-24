@@ -14,8 +14,8 @@
     <string name="fire_resist_string">Fire Resist</string>
     <string name="lightning_resist_string">Lightning Resist</string>
     <string name="poison_resist_string">Poison Resist</string>
-    <string name="arcane_resist_string">Arcane Resist</string>
-    <string name="block_amount_string">Block Amount</string>
+    <string name="arcane_holy_resist_string">Arcane/Holy Resist</string>
+    <string name="block_amount_string">Block Amount (Min - Max)</string>
     <string name="block_amount_min_string">Block Amount Min</string>
     <string name="block_amount_max_string">Block Amount Max</string>
     <string name="primary_resource_string">Primary Resource</string>
@@ -30,7 +30,7 @@
     <string name="crit_damage_string">Critical Hit Damage</string>
     <string name="block_chance_string">Block Chance</string>
     <string name="damage_string">Damage</string>
-    <string name="attack_speed_string">Attack Sped Increase</string>
+    <string name="attack_speed_string">Attacks Per Second</string>
     <string name="damage_increase_string">Damage Increase</string>
     <string name="crit_chance_string">Critical Hit Chance</string>
     <string name="damage_reduction_string">Damage Reduction</string>
@@ -40,4 +40,10 @@
     <string name="gold_find_string">Gold Find</string>
     <string name="magic_find_string">Magic Find</string>
     <string name="life_on_hit_string">Life per Hit</string>
+    <string name="base_header_string">Base</string>
+    <string name="offense_header_string">Offense</string>
+    <string name="defense_header_string">Defense</string>
+    <string name="life_header_string">Life</string>
+    <string name="resource_header_string">Resource</string>
+    <string name="adventure_header_string">Adventure</string>
 </resources>

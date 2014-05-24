@@ -15,7 +15,7 @@ import com.somethingnifty.diablo3armory.activity.handlers.EventHandler;
 import com.somethingnifty.diablo3armory.domain.CareerProfile;
 import com.somethingnifty.diablo3armory.helpers.BattletagUtil;
 import com.somethingnifty.diablo3armory.helpers.CareerCreator;
-import com.somethingnifty.diablo3armory.helpers.HelperUtil;
+import com.somethingnifty.diablo3armory.helpers.NetworkUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +37,7 @@ public class SearchHeroButtonHandler extends EventHandler {
         battleTag = BattletagUtil.formatBattletagForWebService(battleTag);
 
         if (BattletagUtil.isValidWebserviceBattletagFormat(battleTag)) {
-            if (HelperUtil.isNetworkAvailable(activity)) {
+            if (NetworkUtil.isNetworkAvailable(activity)) {
                 String selectedRegionUrl = getRegionUrl((RadioGroup) findViewById(R.id.regions_radio_group));
                 getCareer(selectedRegionUrl, battleTag);
             }

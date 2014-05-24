@@ -37,7 +37,7 @@
         android:layout_toRightOf="@id/hero_name"
         android:gravity="center_vertical"
         android:text="(Paragon Level)"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:paddingLeft="10sp"
         android:textColor="@color/paragon_blue"/>
 
