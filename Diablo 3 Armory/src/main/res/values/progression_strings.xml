@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="actOne">Act 1</string>
+    <string name="actTwo">Act 2</string>
+    <string name="actThree">Act 3</string>
+    <string name="actFour">Act 4</string>
+    <string name="actFive">Act 5</string>
+</resources>
