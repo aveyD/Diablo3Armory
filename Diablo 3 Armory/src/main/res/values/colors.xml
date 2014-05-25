@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="paragon_blue">#0099cc</color>
-    <color name="hardcore_red">#E60101</color>
+    <color name="red">#E60101</color>
+    <color name="green">#01E601</color>
     <color name="horizontal_rule_grey">#808080</color>
 </resources>
