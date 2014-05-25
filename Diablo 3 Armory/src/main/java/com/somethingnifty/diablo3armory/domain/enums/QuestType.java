@@ -89,4 +89,8 @@ public enum QuestType {
     public String getSlug(){
         return slug;
     }
+
+    public String getQuestName(){
+        return questName;
+    }
 }

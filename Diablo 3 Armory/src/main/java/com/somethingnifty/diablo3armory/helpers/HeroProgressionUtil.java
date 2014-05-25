@@ -10,8 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public final class HeroProgressionUtil {
     private HeroProgressionUtil(){
@@ -28,7 +28,7 @@ public final class HeroProgressionUtil {
 
             act.setActType(actType);
             act.setCompleted(json.getBoolean("completed"));
-            act.setQuestCompletionByQuestType(getCompletedQuests(actType, json.getJSONArray("completedQuests")));
+            act.setQuestCompletionByQuestType(getQuests(actType, json.getJSONArray("completedQuests")));
 
             actProgression.addAct(act);
         }
@@ -36,9 +36,10 @@ public final class HeroProgressionUtil {
         return actProgression;
     }
 
-    private static Map<QuestType, Boolean> getCompletedQuests(ActType actType, JSONArray completedQuestsJson) throws JSONException {
-        Map<QuestType, Boolean> questsCompletedByQuestType = new HashMap<QuestType, Boolean>();
+    private static Map<QuestType, Boolean> getQuests(ActType actType, JSONArray completedQuestsJson) throws JSONException {
+        Map<QuestType, Boolean> questsCompletedByQuestType = new TreeMap<QuestType, Boolean>();
         EnumSet<QuestType> quests = getQuestsToProcess(actType);
+
 
         for (QuestType questType : quests){
             Boolean isCompleted = isQuestCompleted(completedQuestsJson, questType);
