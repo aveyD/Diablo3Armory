@@ -22,6 +22,7 @@ import com.somethingnifty.diablo3armory.domain.enums.FollowerType;
 import com.somethingnifty.diablo3armory.domain.enums.Gender;
 import com.somethingnifty.diablo3armory.domain.enums.HeroType;
 import com.somethingnifty.diablo3armory.domain.enums.ItemWearableType;
+import com.somethingnifty.diablo3armory.domain.enums.QuestType;
 import com.somethingnifty.diablo3armory.domain.enums.StatDoubleType;
 import com.somethingnifty.diablo3armory.domain.enums.StatIntegerType;
 
@@ -30,7 +31,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HeroCreator
 {
@@ -63,7 +67,7 @@ public class HeroCreator
 
         hero.setEliteKills(heroJson.getJSONObject("kills").getInt("elites"));
 
-        hero.setProgression(getHeroProgression(heroJson.getJSONObject("progression")));
+        hero.setProgression(HeroProgressionUtil.getHeroProgression(heroJson.getJSONObject("progression")));
 
         hero.setDead(heroJson.getBoolean("dead"));
         hero.setLastUpdated(DateUtil.getDate(heroJson.getLong("last-updated")));
@@ -261,39 +265,6 @@ public class HeroCreator
         stats.setStat(StatIntegerType.SECONDARY_RESOURCE, statsJson.getInt("secondaryResource"));
 
         return stats;
-    }
-
-    private HeroProgression getHeroProgression(JSONObject progressionJson) throws JSONException {
-        HeroProgression actProgression = new HeroProgression();
-
-        for (ActType actType : ActType.ALL) {
-            JSONObject json = progressionJson.getJSONObject(actType.getValue());
-
-            Act act = new Act();
-
-            act.setCompleted(json.getBoolean("completed"));
-            act.setCompletedQuests(getCompletedQuests(json.getJSONArray("completedQuests")));
-
-            actProgression.addAct(act);
-        }
-
-        return actProgression;
-    }
-
-    private List<Quest> getCompletedQuests(JSONArray completedQuestsJson) throws JSONException {
-        List<Quest> completedQuests = new ArrayList<Quest>();
-
-        for (int i = 0; i < completedQuestsJson.length(); i++) {
-            JSONObject json = completedQuestsJson.getJSONObject(i);
-
-            Quest quest = new Quest();
-            quest.setSlug(json.getString("slug"));
-            quest.setName(json.getString("name"));
-
-            completedQuests.add(quest);
-        }
-
-        return completedQuests;
     }
 
     private boolean isValidJsonObject(JSONObject json, String value) {
