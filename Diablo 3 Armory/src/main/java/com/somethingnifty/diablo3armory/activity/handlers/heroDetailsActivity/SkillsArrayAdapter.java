@@ -28,7 +28,7 @@ public class SkillsArrayAdapter extends ArrayAdapter<Skill>
     private final ImageDownloader imageDownloader = new ImageDownloader();
 
     public SkillsArrayAdapter(Activity context, List<Skill> list) {
-        super(context, R.layout.follower_row, list);
+        super(context, R.layout.skill_row, list);
         this.context = context;
         this.list = list;
     }
@@ -81,6 +81,9 @@ public class SkillsArrayAdapter extends ArrayAdapter<Skill>
             holder.runeName.setText(runeName);
         }
         else if (list.get(position) instanceof PassiveSkill) {
+            holder.runeName.setVisibility(View.GONE);
+        }
+        else {
             holder.runeName.setVisibility(View.GONE);
         }
 

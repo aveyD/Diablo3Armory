@@ -241,13 +241,13 @@ public class HeroCreator
         List<Skill> followerSkills = new ArrayList<Skill>();
 
         for (int i = 0; i < skillsJson.length(); i++) {
-            Skill skill = new Skill();
 
             if (isValidJsonObject(skillsJson.getJSONObject(i), "skill")) {
+                Skill skill = new Skill();
                 JSONObject json = skillsJson.getJSONObject(i).getJSONObject("skill");
                 getCommonSkill(skill, json);
+                followerSkills.add(skill);
             }
-            followerSkills.add(skill);
         }
         return followerSkills;
     }

@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/follower_details_view_pager"
-        android:layout_below="@+id/hero_details_pager_tab_strip"
+        android:layout_below="@+id/follower_details_pager_tab_strip"
         tools:context="com.somethingnifty.diablo3armory.activity.FollowerDetailsActivity" />
 
 </RelativeLayout>
