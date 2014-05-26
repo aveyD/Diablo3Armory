@@ -1,10 +1,6 @@
 package com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +14,6 @@ import com.somethingnifty.diablo3armory.domain.PassiveSkill;
 import com.somethingnifty.diablo3armory.domain.Skill;
 import com.somethingnifty.diablo3armory.helpers.ImageDownloader;
 
-import java.io.InputStream;
 import java.util.List;
 
 public class SkillsArrayAdapter extends ArrayAdapter<Skill>

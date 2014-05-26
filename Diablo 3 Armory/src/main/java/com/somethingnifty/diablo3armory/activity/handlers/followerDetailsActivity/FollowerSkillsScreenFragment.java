@@ -5,9 +5,11 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.somethingnifty.diablo3armory.R;
 import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.SkillsArrayAdapter;
+import com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity.SkillsListItemHandler;
 import com.somethingnifty.diablo3armory.domain.Follower;
 import com.somethingnifty.diablo3armory.domain.Skill;
 
@@ -53,5 +55,19 @@ public class FollowerSkillsScreenFragment extends ListFragment
         //do stuff here
 
         return view;
+    }
+
+    @Override
+    public void onListItemClick(ListView listView, View view, int position, long id) {
+        super.onListItemClick(listView, view, position, id);
+
+        SkillsListItemHandler handler = getSkillsListItemHandler();
+
+        handler.getSkill((Skill)listView.getItemAtPosition(position));
+    }
+
+    //For mocking purposes
+    SkillsListItemHandler getSkillsListItemHandler() {
+        return new SkillsListItemHandler(this.getActivity());
     }
 }

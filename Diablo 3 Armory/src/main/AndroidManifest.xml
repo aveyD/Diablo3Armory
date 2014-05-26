@@ -52,6 +52,26 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.somethingnifty.diablo3armory.activity.HeroDetailsActivity" />
         </activity>
+        <activity
+            android:name=".activity.FollowerSkillDetailsActivity"
+            android:label="@string/title_activity_skill_details"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.somethingnifty.diablo3armory.activity.FollowerDetailsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.somethingnifty.diablo3armory.activity.FollowerDetailsActivity" />
+        </activity>
+        <activity
+            android:name=".activity.SkillDetailsActivity"
+            android:label="@string/title_activity_skill_details"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:parentActivityName="com.somethingnifty.diablo3armory.activity.HeroDetailsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.somethingnifty.diablo3armory.activity.HeroDetailsActivity" />
+        </activity>
     </application>
 
 </manifest>

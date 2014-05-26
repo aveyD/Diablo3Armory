@@ -5,7 +5,6 @@ import com.somethingnifty.diablo3armory.domain.enums.QuestType;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Act implements Serializable {

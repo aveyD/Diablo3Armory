@@ -11,8 +11,8 @@ import com.somethingnifty.diablo3armory.activity.handlers.EventHandler;
 import com.somethingnifty.diablo3armory.activity.handlers.mainActivityHandlers.GetProfileWebServiceTask;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
 import com.somethingnifty.diablo3armory.helpers.BattletagUtil;
-import com.somethingnifty.diablo3armory.helpers.NetworkUtil;
 import com.somethingnifty.diablo3armory.helpers.HeroCreator;
+import com.somethingnifty.diablo3armory.helpers.NetworkUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,29 +1,24 @@
 package com.somethingnifty.diablo3armory.helpers;
 
-import com.somethingnifty.diablo3armory.domain.Act;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
 import com.somethingnifty.diablo3armory.domain.ActiveSkill;
 import com.somethingnifty.diablo3armory.domain.CraftedBy;
 import com.somethingnifty.diablo3armory.domain.Follower;
 import com.somethingnifty.diablo3armory.domain.FollowerMaster;
 import com.somethingnifty.diablo3armory.domain.FollowerStats;
-import com.somethingnifty.diablo3armory.domain.HeroProgression;
 import com.somethingnifty.diablo3armory.domain.ItemLoadoutActiveHero;
 import com.somethingnifty.diablo3armory.domain.ItemLoadoutFollower;
 import com.somethingnifty.diablo3armory.domain.ItemWearableActiveHero;
 import com.somethingnifty.diablo3armory.domain.PassiveSkill;
-import com.somethingnifty.diablo3armory.domain.Quest;
 import com.somethingnifty.diablo3armory.domain.RandomAffix;
 import com.somethingnifty.diablo3armory.domain.Rune;
 import com.somethingnifty.diablo3armory.domain.Skill;
 import com.somethingnifty.diablo3armory.domain.Stats;
-import com.somethingnifty.diablo3armory.domain.enums.ActType;
 import com.somethingnifty.diablo3armory.domain.enums.FollowerItemWearableType;
 import com.somethingnifty.diablo3armory.domain.enums.FollowerType;
 import com.somethingnifty.diablo3armory.domain.enums.Gender;
 import com.somethingnifty.diablo3armory.domain.enums.HeroType;
 import com.somethingnifty.diablo3armory.domain.enums.ItemWearableType;
-import com.somethingnifty.diablo3armory.domain.enums.QuestType;
 import com.somethingnifty.diablo3armory.domain.enums.StatDoubleType;
 import com.somethingnifty.diablo3armory.domain.enums.StatIntegerType;
 
@@ -32,10 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class HeroCreator
 {

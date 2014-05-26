@@ -5,4 +5,5 @@
     <string name="hero_profile">heroProfile</string>
     <string name="follower_type">followerType</string>
     <string name="follower">follower</string>
+    <string name="skill">skill</string>
 </resources>
