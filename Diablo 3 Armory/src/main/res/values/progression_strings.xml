@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="actOne">Act 1</string>
-    <string name="actTwo">Act 2</string>
-    <string name="actThree">Act 3</string>
-    <string name="actFour">Act 4</string>
-    <string name="actFive">Act 5</string>
+    <string name="act_one">Act 1</string>
+    <string name="act_two">Act 2</string>
+    <string name="act_three">Act 3</string>
+    <string name="act_four">Act 4</string>
+    <string name="act_five">Act 5</string>
+
+    <string name="progression_completed_header">Completed</string>
+    <string name="progression_not_completed_header">Not Completed</string>
+
+    <string name="progression_completed_quest">"\u2713"</string>
+    <string name="progression_not_completed_quest">X</string>
 </resources>
