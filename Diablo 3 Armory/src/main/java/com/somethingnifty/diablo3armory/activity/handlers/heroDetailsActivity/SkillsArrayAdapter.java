@@ -16,6 +16,7 @@ import com.somethingnifty.diablo3armory.R;
 import com.somethingnifty.diablo3armory.domain.ActiveSkill;
 import com.somethingnifty.diablo3armory.domain.PassiveSkill;
 import com.somethingnifty.diablo3armory.domain.Skill;
+import com.somethingnifty.diablo3armory.helpers.ImageDownloader;
 
 import java.io.InputStream;
 import java.util.List;
@@ -24,6 +25,7 @@ public class SkillsArrayAdapter extends ArrayAdapter<Skill>
 {
     private final List<Skill> list;
     private final Activity context;
+    private final ImageDownloader imageDownloader = new ImageDownloader();
 
     public SkillsArrayAdapter(Activity context, List<Skill> list) {
         super(context, R.layout.follower_row, list);
@@ -59,7 +61,7 @@ public class SkillsArrayAdapter extends ArrayAdapter<Skill>
             String png = ".png";
             String iconUrl = iconDomain + icon + png;
 
-            new DownloadImageTask(holder.skillIcon).execute(iconUrl);
+            imageDownloader.download(iconUrl, holder.skillIcon);
         }
 
         String skillName = "";
@@ -83,31 +85,5 @@ public class SkillsArrayAdapter extends ArrayAdapter<Skill>
         }
 
         return view;
-    }
-
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap>
-    {
-        ImageView bmImage;
-
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urlDisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urlDisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
     }
 }
