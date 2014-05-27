@@ -12,7 +12,7 @@ public enum QuestType {
     ACT_ONE_QUEST_SEVEN(ActType.ACT1, 7, "the-doom-in-wortham", "The Doom in Wortham"),
     ACT_ONE_QUEST_EIGHT(ActType.ACT1, 8, "trailing-the-coven", "Trailing the Coven"),
     ACT_ONE_QUEST_NINE(ActType.ACT1, 9, "the-imprisoned-angel", "The Imprisoned Angel"),
-    ACT_ONE_QUEST_TEN(ActType.ACT1, 10, "return-to-new-tristram", "Return to New Tristam"),
+    ACT_ONE_QUEST_TEN(ActType.ACT1, 10, "return-to-new-tristram", "Return to New Tristram"),
 
     ACT_TWO_QUEST_ONE(ActType.ACT2, 1, "shadows-in-the-desert", "Shadows in the Desert"),
     ACT_TWO_QUEST_TWO(ActType.ACT2, 2, "the-road-to-alcarnus", "The Road to Alcarnus"),

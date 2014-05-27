@@ -3,6 +3,7 @@ package com.somethingnifty.diablo3armory.helpers;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.support.v4.app.FragmentActivity;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -80,7 +81,7 @@ public class FragmentScreenPopulator {
         TextView headerText = new TextView(activity);
         headerText.setLayoutParams(headerTextParams);
         headerText.setTypeface(null, Typeface.BOLD);
-        headerText.setTextSize(resources.getDimension(R.dimen.info_header_text_size));
+        headerText.setTextSize(TypedValue.COMPLEX_UNIT_SP, resources.getDimension(R.dimen.info_header_text_size));
 
         headerText.setText(act.getActType().getToString());
 
