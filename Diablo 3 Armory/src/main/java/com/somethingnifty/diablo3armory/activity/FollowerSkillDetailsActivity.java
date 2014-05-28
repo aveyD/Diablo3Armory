@@ -59,8 +59,7 @@ public class FollowerSkillDetailsActivity extends FragmentActivity {
         }
 
         @Override
-        protected void onPostExecute(String result){
-
+        protected void onPostExecute(String result) {
             result = result.replace("—", "-");
 
             if (result.equals("")) {
