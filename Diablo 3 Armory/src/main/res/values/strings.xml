@@ -29,4 +29,5 @@
     <string name="title_activity_equipment_screen_fragment">EquipmentScreenFragment</string>
     <string name="title_activity_follower_equipment_details">FollowerEquipmentDetailsActivity</string>
 
+    <string name="no_item_equipped">No item equipped</string>
 </resources>

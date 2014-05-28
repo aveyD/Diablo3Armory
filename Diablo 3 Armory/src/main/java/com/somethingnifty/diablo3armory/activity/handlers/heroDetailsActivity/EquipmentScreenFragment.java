@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.somethingnifty.diablo3armory.R;
 import com.somethingnifty.diablo3armory.activity.EquipmentDetailsActivity;
@@ -60,9 +61,14 @@ public class EquipmentScreenFragment extends ListFragment
         Map.Entry<ItemWearableType, ItemWearableEquippable> entry = (Map.Entry<ItemWearableType, ItemWearableEquippable>) listView.getItemAtPosition(position);
         ItemWearableEquippable item = entry.getValue();
 
-        Intent intent = new Intent(this.getActivity(), EquipmentDetailsActivity.class);
-        intent.putExtra(getResources().getString(R.string.equipment_details_load), item);
+        if (item != null) {
+            Intent intent = new Intent(this.getActivity(), EquipmentDetailsActivity.class);
+            intent.putExtra(getResources().getString(R.string.equipment_details_load), item);
 
-        this.getActivity().startActivity(intent);
+            this.getActivity().startActivity(intent);
+        }
+        else {
+            Toast.makeText(this.getActivity(), getResources().getString(R.string.no_item_equipped), Toast.LENGTH_SHORT).show();
+        }
     }
 }

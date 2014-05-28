@@ -142,6 +142,9 @@ public class HeroCreator
                 JSONObject itemJson = items.getJSONObject(itemWearableType.getValue());
                 itemLoadout.addItem(itemWearableType, getItem(itemJson));
             }
+            else {
+                itemLoadout.addItem(itemWearableType, null);
+            }
         }
 
         return itemLoadout;

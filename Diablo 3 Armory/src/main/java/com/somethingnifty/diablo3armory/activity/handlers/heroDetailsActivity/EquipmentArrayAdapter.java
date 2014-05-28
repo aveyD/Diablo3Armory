@@ -44,15 +44,21 @@ public class EquipmentArrayAdapter extends ArrayAdapter<Map.Entry<ItemWearableTy
         ItemWearableType itemWearableType = entry.getKey();
         ItemWearableEquippable item = entry.getValue();
 
-        TextView textView = (TextView) view.findViewById(R.id.item_name);
-        textView.setText(item.getName());
-
-        textView = (TextView) view.findViewById(R.id.item_type);
+        TextView textView = (TextView) view.findViewById(R.id.item_type);
         textView.setText(itemWearableType.getToString());
 
-        ImageView icon = (ImageView) view.findViewById(R.id.equipment_row_icon);
-        imageDownloader.download(getIconUrl(item), icon);
-        icon.setBackgroundResource(item.getDisplayColor().getColorId());
+        if (entry.getValue() != null) {
+            textView = (TextView) view.findViewById(R.id.item_name);
+            textView.setText(item.getName());
+
+            ImageView icon = (ImageView) view.findViewById(R.id.equipment_row_icon);
+            imageDownloader.download(getIconUrl(item), icon);
+            icon.setBackgroundResource(item.getDisplayColor().getColorId());
+        }
+        else {
+            textView = (TextView) view.findViewById(R.id.item_name);
+            textView.setText(context.getResources().getString(R.string.no_item_equipped));
+        }
 
         return view;
     }

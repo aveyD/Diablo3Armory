@@ -9,5 +9,8 @@
     <dimen name="horizontal_bar_content_height">1dip</dimen>
     <dimen name="horizontal_bar_margin">10dip</dimen>
 
+    <dimen name="horizontal_bar_equipment_margin">3dip</dimen>
+    <dimen name="equipment_header_text_size">18sp</dimen>
+
     </resources>
  

@@ -4,6 +4,7 @@ import java.util.EnumSet;
 
 public enum ItemWearableType {
 
+    SPECIAL("special", "Special"),
     HEAD("head", "Head"),
     SHOULDERS("shoulders", "Shoulders"),
     TORSO("torso", "Torso"),
@@ -16,8 +17,7 @@ public enum ItemWearableType {
     LEFT_FINGER("leftFinger", "Left Finger"),
     RIGHT_FINGER("rightFinger", "Right Finger"),
     MAIN_HAND("mainHand", "Main Hand"),
-    OFFHAND("offHand", "Off hand"),
-    SPECIAL("special", "Special");
+    OFFHAND("offHand", "Off hand");
 
     public static final EnumSet<ItemWearableType> ALL_HERO_ITEMS = EnumSet.range(HEAD, OFFHAND);
     public static final EnumSet<ItemWearableType> ALL_FOLLOWER_ITEMS = EnumSet.of(SPECIAL, NECK, LEFT_FINGER, RIGHT_FINGER, MAIN_HAND);
