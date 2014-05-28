@@ -76,6 +76,8 @@ public class SkillDetailsActivity extends FragmentActivity {
         @Override
         protected void onPostExecute(String result){
 
+            result = result.replace("—", "-");
+
             if (result.equals("")) {
                 Log.d("Skill Details", "Body result text is empty.");
             }
