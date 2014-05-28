@@ -9,20 +9,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.somethingnifty.diablo3armory.R;
-import com.somethingnifty.diablo3armory.domain.ItemWearableActiveHero;
+import com.somethingnifty.diablo3armory.domain.ItemWearableEquippable;
 import com.somethingnifty.diablo3armory.domain.enums.ItemWearableType;
 import com.somethingnifty.diablo3armory.helpers.ImageDownloader;
 
 import java.util.List;
 import java.util.Map;
 
-public class EquipmentArrayAdapter extends ArrayAdapter<Map.Entry<ItemWearableType, ItemWearableActiveHero>> {
+public class EquipmentArrayAdapter extends ArrayAdapter<Map.Entry<ItemWearableType, ItemWearableEquippable>> {
     private final ImageDownloader imageDownloader = new ImageDownloader();
 
-    private List<Map.Entry<ItemWearableType, ItemWearableActiveHero>> items;
+    private List<Map.Entry<ItemWearableType, ItemWearableEquippable>> items;
     private Activity context;
 
-    public EquipmentArrayAdapter(Activity context, List<Map.Entry<ItemWearableType, ItemWearableActiveHero>> items) {
+    public EquipmentArrayAdapter(Activity context, List<Map.Entry<ItemWearableType, ItemWearableEquippable>> items) {
         super(context, R.layout.equipment_row, items);
 
         this.items = items;
@@ -40,9 +40,9 @@ public class EquipmentArrayAdapter extends ArrayAdapter<Map.Entry<ItemWearableTy
             view = convertView;
         }
 
-        Map.Entry<ItemWearableType, ItemWearableActiveHero> entry = items.get(position);
+        Map.Entry<ItemWearableType, ItemWearableEquippable> entry = items.get(position);
         ItemWearableType itemWearableType = entry.getKey();
-        ItemWearableActiveHero item = entry.getValue();
+        ItemWearableEquippable item = entry.getValue();
 
         TextView textView = (TextView) view.findViewById(R.id.item_name);
         textView.setText(item.getName());
@@ -54,16 +54,10 @@ public class EquipmentArrayAdapter extends ArrayAdapter<Map.Entry<ItemWearableTy
         imageDownloader.download(getIconUrl(item), icon);
         icon.setBackgroundResource(item.getDisplayColor().getColorId());
 
-//        ImageView backgroundImage = (ImageView) view.findViewById(R.id.equipment_row_icon_background);
-//        imageDownloader.download("http://us.battle.net/d3/static/images/item/icon-bgs/" + item.getDisplayColor().value + ".png", backgroundImage);
-
-
-        // String iconItemDomain = "http://media.blizzard.com/d3/icons/items/large/";
-
         return view;
     }
 
-    private String getIconUrl(ItemWearableActiveHero item) {
+    private String getIconUrl(ItemWearableEquippable item) {
         String iconDomain = "http://media.blizzard.com/d3/icons/items/large/";
         String icon = item.getIcon();
         String png = ".png";

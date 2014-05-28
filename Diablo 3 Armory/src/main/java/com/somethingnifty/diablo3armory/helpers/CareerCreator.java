@@ -149,7 +149,7 @@ public class CareerCreator {
 
         ItemLoadoutFallenHero itemLoadoutFallenHero = new ItemLoadoutFallenHero();
 
-        for (ItemWearableType itemWearableType : ItemWearableType.ALL){
+        for (ItemWearableType itemWearableType : ItemWearableType.ALL_HERO_ITEMS){
             JSONObject itemJson = itemLoadoutJson.getJSONObject(itemWearableType.getValue());
             ItemWearable itemWearable = getItemWearableFallenHero(itemJson);
 

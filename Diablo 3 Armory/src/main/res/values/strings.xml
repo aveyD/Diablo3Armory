@@ -26,4 +26,7 @@
     <string name="title_activity_skill_details">Skill Details</string>
     <string name="hello_world">Hello world!</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_equipment_screen_fragment">EquipmentScreenFragment</string>
+    <string name="title_activity_follower_equipment_details">FollowerEquipmentDetailsActivity</string>
+
 </resources>

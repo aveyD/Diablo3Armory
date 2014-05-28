@@ -16,9 +16,11 @@ public enum ItemWearableType {
     LEFT_FINGER("leftFinger", "Left Finger"),
     RIGHT_FINGER("rightFinger", "Right Finger"),
     MAIN_HAND("mainHand", "Main Hand"),
-    OFFHAND("offHand", "Off hand");
+    OFFHAND("offHand", "Off hand"),
+    SPECIAL("special", "Special");
 
-    public static final EnumSet<ItemWearableType> ALL = EnumSet.allOf(ItemWearableType.class);
+    public static final EnumSet<ItemWearableType> ALL_HERO_ITEMS = EnumSet.range(HEAD, OFFHAND);
+    public static final EnumSet<ItemWearableType> ALL_FOLLOWER_ITEMS = EnumSet.of(NECK, LEFT_FINGER, RIGHT_FINGER, MAIN_HAND, SPECIAL);
 
     private String value;
     private String toString;

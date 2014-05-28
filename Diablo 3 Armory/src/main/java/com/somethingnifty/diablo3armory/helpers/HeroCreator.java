@@ -6,20 +6,18 @@ import com.somethingnifty.diablo3armory.domain.CraftedBy;
 import com.somethingnifty.diablo3armory.domain.Follower;
 import com.somethingnifty.diablo3armory.domain.FollowerMaster;
 import com.somethingnifty.diablo3armory.domain.FollowerStats;
-import com.somethingnifty.diablo3armory.domain.ItemLoadoutActiveHero;
-import com.somethingnifty.diablo3armory.domain.ItemLoadoutFollower;
-import com.somethingnifty.diablo3armory.domain.ItemWearableActiveHero;
+import com.somethingnifty.diablo3armory.domain.ItemLoadout;
+import com.somethingnifty.diablo3armory.domain.ItemWearableEquippable;
 import com.somethingnifty.diablo3armory.domain.PassiveSkill;
 import com.somethingnifty.diablo3armory.domain.RandomAffix;
 import com.somethingnifty.diablo3armory.domain.Rune;
 import com.somethingnifty.diablo3armory.domain.Skill;
 import com.somethingnifty.diablo3armory.domain.Stats;
 import com.somethingnifty.diablo3armory.domain.enums.ColorType;
-import com.somethingnifty.diablo3armory.domain.enums.FollowerItemWearableType;
+import com.somethingnifty.diablo3armory.domain.enums.ItemWearableType;
 import com.somethingnifty.diablo3armory.domain.enums.FollowerType;
 import com.somethingnifty.diablo3armory.domain.enums.Gender;
 import com.somethingnifty.diablo3armory.domain.enums.HeroType;
-import com.somethingnifty.diablo3armory.domain.enums.ItemWearableType;
 import com.somethingnifty.diablo3armory.domain.enums.StatDoubleType;
 import com.somethingnifty.diablo3armory.domain.enums.StatIntegerType;
 
@@ -51,7 +49,7 @@ public class HeroCreator
         List<PassiveSkill> passiveSkills = getPassiveSkills(heroJson.getJSONObject("skills"));
         hero.setPassiveSkills(passiveSkills);
 
-        ItemLoadoutActiveHero items = getItems(heroJson.getJSONObject("items"));
+        ItemLoadout items = getItems(heroJson.getJSONObject("items"));
         hero.setItemLoadoutActiveHero(items);
 
         FollowerMaster followerMaster = getFollowerMaster(heroJson.getJSONObject("followers"));
@@ -135,22 +133,22 @@ public class HeroCreator
         skill.setSkillCalcId(json.getString("skillCalcId"));
     }
 
-    private ItemLoadoutActiveHero getItems(JSONObject items) throws JSONException {
-        ItemLoadoutActiveHero itemLoadout = new ItemLoadoutActiveHero();
+    private ItemLoadout getItems(JSONObject items) throws JSONException {
+        ItemLoadout itemLoadout = new ItemLoadout();
 
-        for (ItemWearableType itemWearableType : ItemWearableType.ALL) {
+        for (ItemWearableType itemWearableType : ItemWearableType.ALL_HERO_ITEMS) {
 
             if (isValidJsonObject(items, itemWearableType.getValue())) {
                 JSONObject itemJson = items.getJSONObject(itemWearableType.getValue());
-                itemLoadout.addItemActiveHero(itemWearableType, getItem(itemJson));
+                itemLoadout.addItem(itemWearableType, getItem(itemJson));
             }
         }
 
         return itemLoadout;
     }
 
-    private ItemWearableActiveHero getItem(JSONObject itemJson) throws JSONException {
-        ItemWearableActiveHero item = new ItemWearableActiveHero();
+    private ItemWearableEquippable getItem(JSONObject itemJson) throws JSONException {
+        ItemWearableEquippable item = new ItemWearableEquippable();
         item.setId(itemJson.getString("id"));
         item.setName(itemJson.getString("name"));
         item.setIcon(itemJson.getString("icon"));
@@ -194,7 +192,7 @@ public class HeroCreator
                 Follower follower = new Follower();
                 follower.setSlug(followerJson.getString("slug"));
                 follower.setLevel(followerJson.getInt("level"));
-                follower.setItemLoadoutFollower(getFollowerItemsLoadout(followerJson.getJSONObject("items")));
+                follower.setItemLoadout(getFollowerItemsLoadout(followerJson.getJSONObject("items")));
                 follower.setStats(getFollowerStats(followerJson.getJSONObject("stats")));
                 follower.setSkills(getFollowerSkills(followerJson.getJSONArray("skills")));
 
@@ -204,16 +202,16 @@ public class HeroCreator
         return followerMaster;
     }
 
-    private ItemLoadoutFollower getFollowerItemsLoadout(JSONObject itemsJson) throws JSONException {
-        ItemLoadoutFollower itemLoadoutFollower = new ItemLoadoutFollower();
+    private ItemLoadout getFollowerItemsLoadout(JSONObject itemsJson) throws JSONException {
+        ItemLoadout itemLoadoutFollower = new ItemLoadout();
 
-        for (FollowerItemWearableType followerItemWearableType : FollowerItemWearableType.ALL) {
-            if (isValidJsonObject(itemsJson, followerItemWearableType.getValue())) {
-                JSONObject itemJson = itemsJson.getJSONObject(followerItemWearableType.getValue());
-                itemLoadoutFollower.addItemFollower(followerItemWearableType, getItem(itemJson));
+        for (ItemWearableType itemWearableType : ItemWearableType.ALL_FOLLOWER_ITEMS) {
+            if (isValidJsonObject(itemsJson, itemWearableType.getValue())) {
+                JSONObject itemJson = itemsJson.getJSONObject(itemWearableType.getValue());
+                itemLoadoutFollower.addItem(itemWearableType, getItem(itemJson));
             }
             else {
-                itemLoadoutFollower.addItemFollower(followerItemWearableType, null);
+                itemLoadoutFollower.addItem(itemWearableType, null);
             }
         }
 

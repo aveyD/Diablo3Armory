@@ -33,40 +33,56 @@
                 android:value="MainActivity" />
         </activity>
         <activity
-            android:name=".activity.HeroDetailsActivity"
-            android:label="@string/title_activity_hero_details"
+            android:name="com.somethingnifty.diablo3armory.activity.HeroDetailsActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:parentActivityName="com.somethingnifty.diablo3armory.activity.HeroListActivity" >
+            android:label="@string/title_activity_hero_details"
+            android:parentActivityName="com.somethingnifty.diablo3armory.activity.HeroListActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.somethingnifty.diablo3armory.activity.HeroListActivity" />
         </activity>
         <activity
-            android:name=".activity.FollowerDetailsActivity"
-            android:label="@string/title_activity_follower_details"
+            android:name="com.somethingnifty.diablo3armory.activity.FollowerDetailsActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
+            android:label="@string/title_activity_follower_details"
+            android:parentActivityName="com.somethingnifty.diablo3armory.activity.HeroDetailsActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.somethingnifty.diablo3armory.activity.HeroDetailsActivity" />
+        </activity>
+        <activity
+            android:name="com.somethingnifty.diablo3armory.activity.FollowerSkillDetailsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_skill_details"
+            android:parentActivityName="com.somethingnifty.diablo3armory.activity.FollowerDetailsActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.somethingnifty.diablo3armory.activity.FollowerDetailsActivity" />
+        </activity>
+        <activity
+            android:name="com.somethingnifty.diablo3armory.activity.SkillDetailsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_skill_details"
+            android:parentActivityName="com.somethingnifty.diablo3armory.activity.HeroDetailsActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.somethingnifty.diablo3armory.activity.HeroDetailsActivity" />
+        </activity>
+        <activity
+            android:name="com.somethingnifty.diablo3armory.activity.EquipmentDetailsActivity"
+            android:label="@string/title_activity_equipment_screen_fragment"
             android:parentActivityName="com.somethingnifty.diablo3armory.activity.HeroDetailsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.somethingnifty.diablo3armory.activity.HeroDetailsActivity" />
         </activity>
         <activity
-            android:name=".activity.FollowerSkillDetailsActivity"
-            android:label="@string/title_activity_skill_details"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:parentActivityName="com.somethingnifty.diablo3armory.activity.FollowerDetailsActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.somethingnifty.diablo3armory.activity.FollowerDetailsActivity" />
-        </activity>
-        <activity
-            android:name=".activity.SkillDetailsActivity"
-            android:label="@string/title_activity_skill_details"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
+            android:name="com.somethingnifty.diablo3armory.activity.FollowerEquipmentDetailsActivity"
+            android:label="@string/title_activity_follower_equipment_details"
             android:parentActivityName="com.somethingnifty.diablo3armory.activity.HeroDetailsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

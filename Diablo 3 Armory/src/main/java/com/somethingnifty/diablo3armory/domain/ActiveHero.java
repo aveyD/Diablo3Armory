@@ -9,7 +9,7 @@ public class ActiveHero extends Hero {
     private Date lastUpdated;
     private FollowerMaster followerMaster;
     private HeroProgression progression;
-    private ItemLoadoutActiveHero itemLoadoutActiveHero;
+    private ItemLoadout itemLoadoutActiveHero;
     private Stats stats;
     private List<ActiveSkill> activeSkills;
     private List<PassiveSkill> passiveSkills;
@@ -54,11 +54,11 @@ public class ActiveHero extends Hero {
         this.progression = progression;
     }
 
-    public ItemLoadoutActiveHero getItemLoadoutActiveHero() {
+    public ItemLoadout getItemLoadoutActiveHero() {
         return itemLoadoutActiveHero;
     }
 
-    public void setItemLoadoutActiveHero(ItemLoadoutActiveHero itemLoadoutActiveHero) {
+    public void setItemLoadoutActiveHero(ItemLoadout itemLoadoutActiveHero) {
         this.itemLoadoutActiveHero = itemLoadoutActiveHero;
     }
 

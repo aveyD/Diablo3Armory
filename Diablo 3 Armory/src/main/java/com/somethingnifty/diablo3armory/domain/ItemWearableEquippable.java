@@ -1,6 +1,6 @@
 package com.somethingnifty.diablo3armory.domain;
 
-public class ItemWearableActiveHero extends ItemWearable {
+public class ItemWearableEquippable extends ItemWearable {
     // advanced item info
     private int requiredLevel;
     private int itemLevel;

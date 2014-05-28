@@ -1,17 +1,18 @@
 package com.somethingnifty.diablo3armory.activity.handlers.heroDetailsActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.somethingnifty.diablo3armory.R;
+import com.somethingnifty.diablo3armory.activity.EquipmentDetailsActivity;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
-import com.somethingnifty.diablo3armory.domain.ItemLoadoutActiveHero;
-import com.somethingnifty.diablo3armory.domain.ItemWearableActiveHero;
+import com.somethingnifty.diablo3armory.domain.ItemLoadout;
+import com.somethingnifty.diablo3armory.domain.ItemWearableEquippable;
 import com.somethingnifty.diablo3armory.domain.enums.ItemWearableType;
 
 import java.util.ArrayList;
@@ -40,9 +41,9 @@ public class EquipmentScreenFragment extends ListFragment
 
         activeHero = (ActiveHero) getArguments().getSerializable(ACTIVE_HERO_BUNDLE_ENTRY);
 
-        ItemLoadoutActiveHero loadout = activeHero.getItemLoadoutActiveHero();
+        ItemLoadout loadout = activeHero.getItemLoadoutActiveHero();
 
-        List<Map.Entry<ItemWearableType, ItemWearableActiveHero>> items = new ArrayList<Map.Entry<ItemWearableType, ItemWearableActiveHero>>();
+        List<Map.Entry<ItemWearableType, ItemWearableEquippable>> items = new ArrayList<Map.Entry<ItemWearableType, ItemWearableEquippable>>();
         items.addAll(loadout.getItemTypeByItem());
 
         EquipmentArrayAdapter adapter = new EquipmentArrayAdapter(this.getActivity(), items);
@@ -51,17 +52,17 @@ public class EquipmentScreenFragment extends ListFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_equipment_screen, container, false);
-
-        return view;
+        return inflater.inflate(R.layout.fragment_equipment_screen, container, false);
     }
 
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
-        Map.Entry<ItemWearableType, ItemWearableActiveHero> entry = (Map.Entry<ItemWearableType, ItemWearableActiveHero>) listView.getItemAtPosition(position);
-        ItemWearableType itemWearableType = entry.getKey();
-        ItemWearableActiveHero item = entry.getValue();
+        Map.Entry<ItemWearableType, ItemWearableEquippable> entry = (Map.Entry<ItemWearableType, ItemWearableEquippable>) listView.getItemAtPosition(position);
+        ItemWearableEquippable item = entry.getValue();
 
-        Toast.makeText(this.getActivity(), item.getName(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this.getActivity(), EquipmentDetailsActivity.class);
+        intent.putExtra(getResources().getString(R.string.equipment_details_load), item);
+
+        this.getActivity().startActivity(intent);
     }
 }
