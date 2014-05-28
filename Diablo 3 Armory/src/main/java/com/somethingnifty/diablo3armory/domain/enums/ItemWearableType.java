@@ -20,7 +20,7 @@ public enum ItemWearableType {
     SPECIAL("special", "Special");
 
     public static final EnumSet<ItemWearableType> ALL_HERO_ITEMS = EnumSet.range(HEAD, OFFHAND);
-    public static final EnumSet<ItemWearableType> ALL_FOLLOWER_ITEMS = EnumSet.of(NECK, LEFT_FINGER, RIGHT_FINGER, MAIN_HAND, SPECIAL);
+    public static final EnumSet<ItemWearableType> ALL_FOLLOWER_ITEMS = EnumSet.of(SPECIAL, NECK, LEFT_FINGER, RIGHT_FINGER, MAIN_HAND);
 
     private String value;
     private String toString;
