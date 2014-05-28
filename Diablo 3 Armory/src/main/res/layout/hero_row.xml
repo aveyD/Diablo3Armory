@@ -64,6 +64,6 @@
         android:text="Hardcore"
         android:textSize="18sp"
         android:paddingLeft="5sp"
-        android:textColor="@color/red"/>
+        android:textColor="@color/paragon_red"/>
 
 </RelativeLayout>

@@ -14,6 +14,7 @@ import com.somethingnifty.diablo3armory.domain.RandomAffix;
 import com.somethingnifty.diablo3armory.domain.Reagent;
 import com.somethingnifty.diablo3armory.domain.TimePlayed;
 import com.somethingnifty.diablo3armory.domain.enums.ActType;
+import com.somethingnifty.diablo3armory.domain.enums.ColorType;
 import com.somethingnifty.diablo3armory.domain.enums.Gender;
 import com.somethingnifty.diablo3armory.domain.enums.HeroType;
 import com.somethingnifty.diablo3armory.domain.enums.ItemWearableType;
@@ -172,7 +173,7 @@ public class CareerCreator {
         item.setId(itemJson.getString("id"));
         item.setIcon(itemJson.getString("icon"));
         item.setTooltipParams(itemJson.getString("tooltipParams"));
-        item.setDisplayColor(itemJson.getString("displayColor"));
+        item.setDisplayColor(ColorType.getColorType(itemJson.getString("displayColor")));
         item.setName(itemJson.getString("name"));
     }
 
