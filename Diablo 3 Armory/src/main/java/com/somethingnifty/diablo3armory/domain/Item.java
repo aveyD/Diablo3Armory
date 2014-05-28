@@ -1,12 +1,14 @@
 package com.somethingnifty.diablo3armory.domain;
 
+import com.somethingnifty.diablo3armory.domain.enums.ColorType;
+
 import java.io.Serializable;
 
 public class Item implements Serializable {
     private String id;
     private String name;
     private String icon;
-    private String displayColor;
+    private ColorType displayColor;
     private String tooltipParams;
 
     public String getId() {
@@ -33,11 +35,11 @@ public class Item implements Serializable {
         this.icon = icon;
     }
 
-    public String getDisplayColor() {
+    public ColorType getDisplayColor() {
         return displayColor;
     }
 
-    public void setDisplayColor(String displayColor) {
+    public void setDisplayColor(ColorType displayColor) {
         this.displayColor = displayColor;
     }
 

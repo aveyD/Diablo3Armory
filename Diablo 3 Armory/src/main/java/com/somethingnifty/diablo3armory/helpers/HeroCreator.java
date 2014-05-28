@@ -14,6 +14,7 @@ import com.somethingnifty.diablo3armory.domain.RandomAffix;
 import com.somethingnifty.diablo3armory.domain.Rune;
 import com.somethingnifty.diablo3armory.domain.Skill;
 import com.somethingnifty.diablo3armory.domain.Stats;
+import com.somethingnifty.diablo3armory.domain.enums.ColorType;
 import com.somethingnifty.diablo3armory.domain.enums.FollowerItemWearableType;
 import com.somethingnifty.diablo3armory.domain.enums.FollowerType;
 import com.somethingnifty.diablo3armory.domain.enums.Gender;
@@ -153,7 +154,7 @@ public class HeroCreator
         item.setId(itemJson.getString("id"));
         item.setName(itemJson.getString("name"));
         item.setIcon(itemJson.getString("icon"));
-        item.setDisplayColor(itemJson.getString("displayColor"));
+        item.setDisplayColor(ColorType.getColorType(itemJson.getString("displayColor")));
         item.setTooltipParams(itemJson.getString("tooltipParams"));
         item.setRandomAffix(getRandomAffix(itemJson.getJSONArray("randomAffixes")));
 

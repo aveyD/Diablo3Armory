@@ -137,8 +137,8 @@ public class FragmentScreenPopulator {
 
 
         int questCompletedColor = isQuestCompleted
-                                    ? resources.getColor(R.color.green)
-                                    : resources.getColor(R.color.red);
+                                    ? resources.getColor(R.color.progression_green)
+                                    : resources.getColor(R.color.paragon_red);
         completedText.setTextColor(questCompletedColor);
 
         String questCompletedString = isQuestCompleted
