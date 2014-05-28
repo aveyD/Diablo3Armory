@@ -54,6 +54,10 @@ public class EquipmentArrayAdapter extends ArrayAdapter<Map.Entry<ItemWearableTy
         imageDownloader.download(getIconUrl(item), icon);
         icon.setBackgroundResource(item.getDisplayColor().getColorId());
 
+//        ImageView backgroundImage = (ImageView) view.findViewById(R.id.equipment_row_icon_background);
+//        imageDownloader.download("http://us.battle.net/d3/static/images/item/icon-bgs/" + item.getDisplayColor().value + ".png", backgroundImage);
+
+
         // String iconItemDomain = "http://media.blizzard.com/d3/icons/items/large/";
 
         return view;
