@@ -6,4 +6,5 @@
     <string name="follower_type">followerType</string>
     <string name="follower">follower</string>
     <string name="skill">skill</string>
+    <string name="rune">rune</string>
 </resources>
