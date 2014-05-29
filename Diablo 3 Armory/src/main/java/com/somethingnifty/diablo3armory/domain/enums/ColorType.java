@@ -5,12 +5,12 @@ import com.somethingnifty.diablo3armory.R;
 import java.util.EnumSet;
 
 public enum ColorType {
-    WHITE("white", R.color.white),
-    BROWN("brown", R.color.Brown),
-    BLUE("blue", R.color.blue),
-    YELLOW("yellow", R.color.yellow),
-    ORANGE("orange", R.color.Orange),
-    GREEN("green", R.color.green);
+    WHITE("white", R.drawable.color_white),
+    BROWN("brown", R.drawable.color_brown),
+    BLUE("blue", R.drawable.color_blue),
+    YELLOW("yellow", R.drawable.color_yellow),
+    ORANGE("orange", R.drawable.color_orange),
+    GREEN("green", R.drawable.color_green);
 
     public static final EnumSet<ColorType> ALL = EnumSet.allOf(ColorType.class);
 

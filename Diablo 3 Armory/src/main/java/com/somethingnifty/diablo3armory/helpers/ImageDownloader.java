@@ -248,8 +248,7 @@ public class ImageDownloader {
      * We use a hard and a soft cache. A soft reference cache is too aggressively cleared by the
      * Garbage Collector.
      */
-
-    private static final int HARD_CACHE_CAPACITY = 20;
+    private static final int HARD_CACHE_CAPACITY = 60;
     private static final int DELAY_BEFORE_PURGE = 10 * 1000; // in milliseconds
 
     // Hard cache, with a fixed maximum capacity and a life duration
@@ -336,7 +335,7 @@ public class ImageDownloader {
      * Allow a new delay before the automatic cache clear is done.
      */
     private void resetPurgeTimer() {
-        purgeHandler.removeCallbacks(purger);
-        purgeHandler.postDelayed(purger, DELAY_BEFORE_PURGE);
+//        purgeHandler.removeCallbacks(purger);
+//        purgeHandler.postDelayed(purger, DELAY_BEFORE_PURGE);
     }
 }
