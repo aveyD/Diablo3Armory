@@ -2,6 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center">
+
+        <ProgressBar
+            android:id="@+id/skill_details_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            style="@android:style/Widget.ProgressBar"/>
+    </LinearLayout>
+
     <WebView  xmlns:android="http://schemas.android.com/apk/res/android"
           android:id="@+id/skill_web_view"
           android:layout_width="fill_parent"

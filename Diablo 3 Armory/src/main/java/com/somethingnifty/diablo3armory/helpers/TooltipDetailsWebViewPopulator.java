@@ -2,7 +2,9 @@ package com.somethingnifty.diablo3armory.helpers;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 
 import com.somethingnifty.diablo3armory.domain.TooltipWebView;
 
@@ -21,14 +23,26 @@ public class TooltipDetailsWebViewPopulator {
 
     }
 
-    public void populateTooltipWebview(WebView webView, String tooltipParams){
+    public void populateTooltipWebview(WebView webView, ProgressBar progressBar, String tooltipParams){
         TooltipWebView tooltipWebView = new TooltipWebView(webView, URL_PREFIX + tooltipParams);
 
-        TooltipDetailsDownloader downloader = new TooltipDetailsDownloader();
+        TooltipDetailsDownloader downloader = new TooltipDetailsDownloader(progressBar);
         downloader.execute(tooltipWebView);
     }
 
     private class TooltipDetailsDownloader extends AsyncTask<TooltipWebView, Void, TooltipWebView> {
+
+        private ProgressBar progressBar;
+
+        public TooltipDetailsDownloader(ProgressBar progressBar){
+            this.progressBar = progressBar;
+        }
+
+        @Override
+        protected void onPreExecute(){
+            progressBar.setVisibility(View.VISIBLE);
+            super.onPreExecute();
+        }
 
         @Override
         protected TooltipWebView doInBackground(TooltipWebView... tooltipWebViews) {
@@ -79,6 +93,8 @@ public class TooltipDetailsWebViewPopulator {
             String customHtml = head + result + foot;
 
             webView.loadData(customHtml, "text/html", "UTF-8");
+
+            progressBar.setVisibility(View.GONE);
         }
     }
 }

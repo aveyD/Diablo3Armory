@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 
 import com.somethingnifty.diablo3armory.R;
 import com.somethingnifty.diablo3armory.domain.Rune;
@@ -26,13 +27,14 @@ public class SkillDetailsActivity extends Activity {
         this.setTitle(title);
 
         TooltipDetailsWebViewPopulator populator = new TooltipDetailsWebViewPopulator();
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.skill_details_progressbar);
 
         WebView webView = (WebView) findViewById(R.id.skill_web_view);
-        populator.populateTooltipWebview(webView, skill.getTooltipUrl());
+        populator.populateTooltipWebview(webView, progressBar, skill.getTooltipUrl());
 
         if (rune != null) {
             webView = (WebView) findViewById(R.id.rune_web_view);
-            populator.populateTooltipWebview(webView, rune.getTooltipParams());
+            populator.populateTooltipWebview(webView, progressBar, rune.getTooltipParams());
         }
     }
 }

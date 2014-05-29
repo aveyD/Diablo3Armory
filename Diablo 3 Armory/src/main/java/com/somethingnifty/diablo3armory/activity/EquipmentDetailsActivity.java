@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 
 import com.somethingnifty.diablo3armory.R;
 import com.somethingnifty.diablo3armory.domain.Item;
@@ -24,9 +25,10 @@ public class EquipmentDetailsActivity extends ActionBarActivity {
         this.setTitle(item.getName());
 
         WebView myWebView = (WebView) findViewById(R.id.follower_equipment_web_view);
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.hero_equipment_details_progressbar);
 
         TooltipDetailsWebViewPopulator populator = new TooltipDetailsWebViewPopulator();
-        populator.populateTooltipWebview(myWebView, item.getTooltipParams());
+        populator.populateTooltipWebview(myWebView, progressBar, item.getTooltipParams());
     }
 
     @Override

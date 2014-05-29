@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 
 import com.somethingnifty.diablo3armory.R;
 import com.somethingnifty.diablo3armory.domain.Skill;
@@ -22,8 +23,9 @@ public class FollowerSkillDetailsActivity extends Activity {
         this.setTitle(skill.getName());
 
         WebView myWebView = (WebView) findViewById(R.id.skill_web_view);
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.skill_details_progressbar);
 
         TooltipDetailsWebViewPopulator populator = new TooltipDetailsWebViewPopulator();
-        populator.populateTooltipWebview(myWebView, skill.getTooltipUrl());
+        populator.populateTooltipWebview(myWebView, progressBar, skill.getTooltipUrl());
     }
 }
