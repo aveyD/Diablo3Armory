@@ -157,7 +157,8 @@ public class HeroCreator
         item.setIcon(itemJson.getString("icon"));
         item.setDisplayColor(ColorType.getColorType(itemJson.getString("displayColor")));
         item.setTooltipParams(itemJson.getString("tooltipParams"));
-        item.setRandomAffix(getRandomAffix(itemJson.getJSONArray("randomAffixes")));
+//        item.setRandomAffix(getRandomAffix(itemJson.getJSONArray("randomAffixes")));
+        // random affixes were removed from the blizzard api...
 
         if (!itemJson.isNull("recipe")) {
             // TODO: finish recipe parsing
