@@ -3,14 +3,12 @@ package com.somethingnifty.diablo3armory.helpers;
 import com.somethingnifty.diablo3armory.domain.ActProgression;
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
 import com.somethingnifty.diablo3armory.domain.CareerProfile;
-import com.somethingnifty.diablo3armory.domain.CraftedBy;
 import com.somethingnifty.diablo3armory.domain.Death;
 import com.somethingnifty.diablo3armory.domain.FallenHero;
 import com.somethingnifty.diablo3armory.domain.Item;
 import com.somethingnifty.diablo3armory.domain.ItemLoadoutFallenHero;
 import com.somethingnifty.diablo3armory.domain.ItemWearable;
 import com.somethingnifty.diablo3armory.domain.Kills;
-import com.somethingnifty.diablo3armory.domain.RandomAffix;
 import com.somethingnifty.diablo3armory.domain.Reagent;
 import com.somethingnifty.diablo3armory.domain.TimePlayed;
 import com.somethingnifty.diablo3armory.domain.enums.ActType;
@@ -163,8 +161,6 @@ public class CareerCreator {
         ItemWearable item = new ItemWearable();
 
         setItemFields(itemJson, item);
-        setCraftedBy(item, itemJson.getJSONArray("craftedBy"));
-        setRandomAffixes(item, itemJson.getJSONArray("randomAffixes"));
 
         return item;
     }
@@ -177,28 +173,7 @@ public class CareerCreator {
         item.setName(itemJson.getString("name"));
     }
 
-    private void setCraftedBy(ItemWearable item, JSONArray craftedByJson) throws JSONException {
-        List<CraftedBy> craftedByList = new ArrayList<CraftedBy>();
-
-        for (int i = 0; i < craftedByJson.length(); i++){
-            JSONObject currObject = craftedByJson.getJSONObject(i);
-
-            CraftedBy craftedBy = new CraftedBy();
-
-            craftedBy.setId(currObject.getString("id"));
-            craftedBy.setSlug("slug");
-            setReagents(craftedBy, currObject.getJSONArray("reagents"));
-            craftedBy.setCost(currObject.getLong("cost"));
-            setItemProduced(craftedBy, currObject.getJSONObject("itemProduced"));
-            craftedBy.setName(currObject.getString("name"));
-
-            craftedByList.add(craftedBy);
-        }
-
-        item.setCraftedByList(craftedByList);
-    }
-
-    private void setReagents(CraftedBy craftedBy, JSONArray reagentsJson) throws JSONException {
+    private void setReagents(JSONArray reagentsJson) throws JSONException {
         List<Reagent> reagents = new ArrayList<Reagent>();
 
         for (int i = 0; i < reagentsJson.length(); i++) {
@@ -211,8 +186,6 @@ public class CareerCreator {
 
             reagents.add(reagent);
         }
-
-        craftedBy.setReagents(reagents);
     }
 
     private void setReagentItem(Reagent reagent, JSONObject itemJson) throws JSONException {
@@ -223,21 +196,10 @@ public class CareerCreator {
         reagent.setReagentItem(item);
     }
 
-    private void setItemProduced(CraftedBy craftedBy, JSONObject itemJson) throws JSONException {
+    private void setItemProduced(JSONObject itemJson) throws JSONException {
         Item item = new Item();
 
         setItemFields(itemJson, item);
-
-        craftedBy.setItemProduced(item);
-    }
-
-    private void setRandomAffixes(Item item, JSONArray randomAffixesJson) throws JSONException {
-        List<RandomAffix> randomAffixes = new ArrayList<RandomAffix>();
-
-        //TODO: Need to figure out what to parse for random affixes
-        for (int i = 0; i < randomAffixesJson.length(); i++) {
-            JSONObject currObject = randomAffixesJson.getJSONObject(i);
-        }
     }
 
     private void setDeath(FallenHero hero, JSONObject deathJson) throws JSONException {

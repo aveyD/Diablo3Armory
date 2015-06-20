@@ -2,14 +2,12 @@ package com.somethingnifty.diablo3armory.helpers;
 
 import com.somethingnifty.diablo3armory.domain.ActiveHero;
 import com.somethingnifty.diablo3armory.domain.ActiveSkill;
-import com.somethingnifty.diablo3armory.domain.CraftedBy;
 import com.somethingnifty.diablo3armory.domain.Follower;
 import com.somethingnifty.diablo3armory.domain.FollowerMaster;
 import com.somethingnifty.diablo3armory.domain.FollowerStats;
 import com.somethingnifty.diablo3armory.domain.ItemLoadout;
 import com.somethingnifty.diablo3armory.domain.ItemWearableEquippable;
 import com.somethingnifty.diablo3armory.domain.PassiveSkill;
-import com.somethingnifty.diablo3armory.domain.RandomAffix;
 import com.somethingnifty.diablo3armory.domain.Rune;
 import com.somethingnifty.diablo3armory.domain.Skill;
 import com.somethingnifty.diablo3armory.domain.Stats;
@@ -157,32 +155,12 @@ public class HeroCreator
         item.setIcon(itemJson.getString("icon"));
         item.setDisplayColor(ColorType.getColorType(itemJson.getString("displayColor")));
         item.setTooltipParams(itemJson.getString("tooltipParams"));
-//        item.setRandomAffix(getRandomAffix(itemJson.getJSONArray("randomAffixes")));
-        // random affixes were removed from the blizzard api...
 
         if (!itemJson.isNull("recipe")) {
             // TODO: finish recipe parsing
         }
 
-        item.setCraftedByList(getCraftedBy(itemJson.getJSONArray("craftedBy")));
-
         return item;
-    }
-
-    private RandomAffix getRandomAffix(JSONArray randomAffixes) {
-        RandomAffix randomAffix = new RandomAffix();
-
-        // TODO: finish random affixes parsing
-
-        return randomAffix;
-    }
-
-    private List<CraftedBy> getCraftedBy(JSONArray craftedBy) {
-        List<CraftedBy> craftedByList = new ArrayList<CraftedBy>();
-
-        // TODO: finish crafted by parsing
-
-        return craftedByList;
     }
 
     private FollowerMaster getFollowerMaster(JSONObject followerMasterJson) throws JSONException {
